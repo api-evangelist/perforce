@@ -1,0 +1,78 @@
+name: Perforce
+description: Perforce Software provides enterprise-scale development tools, including version control, application lifecycle management, agile planning, and static analysis solutions for development teams.
+image: https://www.perforce.com/sites/default/files/perforce-logo.png
+url: https://www.perforce.com
+created: '2024-01-01'
+modified: '2024-01-01'
+specificationVersion: '0.18'
+apis:
+- name: Perforce Helix Core API
+  description: REST API for Helix Core version control system, providing programmatic access to repository operations, file management, and versioning capabilities.
+  image: https://www.perforce.com/sites/default/files/helix-core-icon.png
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Version Control
+  - Source Control
+  - DevOps
+  - SCM
+  properties:
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: OpenAPI
+    url: https://api.perforce.com/helix-core/openapi.json
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: Swagger
+    url: https://api.perforce.com/helix-core/swagger
+- name: Perforce Helix Swarm API
+  description: REST API for Helix Swarm code review and collaboration platform, enabling automated code review workflows and team collaboration.
+  image: https://www.perforce.com/sites/default/files/helix-swarm-icon.png
+  humanURL: https://www.perforce.com/products/helix-swarm
+  baseURL: https://swarm.example.com/api/v10
+  tags:
+  - Code Review
+  - Collaboration
+  - Workflow
+  properties:
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: API Reference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+- name: Perforce Hansoft API
+  description: API for Hansoft agile project management, providing access to project planning, tracking, and reporting capabilities.
+  image: https://www.perforce.com/sites/default/files/hansoft-icon.png
+  humanURL: https://www.perforce.com/products/hansoft
+  baseURL: https://hansoft.example.com/api
+  tags:
+  - Agile
+  - Project Management
+  - Planning
+  properties:
+  - type: Documentation
+    url: https://www.perforce.com/manuals/hansoft-sdk/
+  - type: SDK
+    url: https://www.perforce.com/downloads/hansoft-sdk
+common:
+- type: Portal
+  url: https://www.perforce.com/support/developers
+- type: Getting Started
+  url: https://www.perforce.com/support/self-service-resources
+- type: Blog
+  url: https://www.perforce.com/blog
+- type: Support
+  url: https://www.perforce.com/support
+- type: Status
+  url: https://status.perforce.com
+- type: Terms of Service
+  url: https://www.perforce.com/terms-use
+- type: Privacy Policy
+  url: https://www.perforce.com/privacy-policy
+- type: Contact
+  url: https://www.perforce.com/contact-us
+maintainers:
+- FN: API Evangelist
+  email: info@apievangelist.com
+  url: https://apievangelist.com
