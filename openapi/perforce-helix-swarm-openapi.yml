@@ -1,0 +1,1837 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm API
+  version: '9'
+  description: |-
+    REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+    access to code reviews, changelists, comments, activity streams, and project
+    management. Helix Swarm enables collaborative code review workflows
+    integrated with Helix Core version control.
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+    API versions older than v9 are no longer supported. Version v11 extends
+    the API but does not yet cover all features, so v9 is recommended for
+    full functionality.
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html
+servers:
+  - url: '{scheme}://{host}/api/v9'
+    description: Helix Swarm server instance
+    variables:
+      scheme:
+        default: https
+        enum:
+          - https
+          - http
+        description: The protocol scheme.
+      host:
+        default: swarm.example.com
+        description: The hostname of your Helix Swarm instance.
+tags:
+  - name: Reviews
+    description: Endpoints for managing code reviews.
+  - name: Changes
+    description: Endpoints for inspecting changelists and their relationships.
+  - name: Comments
+    description: Endpoints for managing review and changelist comments.
+  - name: Activity
+    description: Endpoints for viewing and creating activity stream entries.
+  - name: Projects
+    description: Endpoints for managing Swarm projects.
+  - name: Version
+    description: Endpoints for retrieving Swarm server version information.
+security:
+  - basicAuth: []
+paths:
+  /version:
+    get:
+      operationId: getVersion
+      summary: Get server version
+      description: >-
+        Retrieves the installed Helix Swarm version, release year, and available
+        API versions.
+      tags:
+        - Version
+      responses:
+        '200':
+          description: Server version information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: The installed Swarm version string.
+                  year:
+                    type: string
+                    description: The release year of the installed version.
+                  apiVersions:
+                    type: array
+                    items:
+                      type: integer
+                    description: List of supported API version numbers.
+
+  /reviews/:
+    get:
+      operationId: listReviews
+      summary: List reviews
+      description: >-
+        Retrieves a list of code reviews, with optional filtering by author,
+        state, project, participants, keywords, and other criteria.
+      tags:
+        - Reviews
+      parameters:
+        - name: after
+          in: query
+          description: A review ID to seek past for pagination.
+          schema:
+            type: integer
+        - name: max
+          in: query
+          description: Maximum number of reviews to return. Defaults to 1000.
+          schema:
+            type: integer
+            default: 1000
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+        - name: author[]
+          in: query
+          description: Filter reviews by one or more authors.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+        - name: change[]
+          in: query
+          description: Filter reviews by one or more changelist IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+          explode: true
+        - name: hasReviewers
+          in: query
+          description: Filter by whether reviewers are assigned.
+          schema:
+            type: boolean
+        - name: ids[]
+          in: query
+          description: Fetch specific reviews by their IDs.
+          schema:
+            type: array
+            items:
+              type: integer
+          explode: true
+        - name: keywords
+          in: query
+          description: Keywords to search for in reviews.
+          schema:
+            type: string
+        - name: participants[]
+          in: query
+          description: Filter reviews by one or more participants.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+        - name: project[]
+          in: query
+          description: Filter reviews by one or more projects.
+          schema:
+            type: array
+            items:
+              type: string
+          explode: true
+        - name: state[]
+          in: query
+          description: >-
+            Filter reviews by state. Valid values include needsReview,
+            needsRevision, approved, archived, and rejected.
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - needsReview
+                - needsRevision
+                - approved
+                - archived
+                - rejected
+          explode: true
+        - name: passesTests
+          in: query
+          description: Filter reviews by whether tests have passed.
+          schema:
+            type: boolean
+        - name: notUpdatedSince
+          in: query
+          description: Filter reviews not updated since the given date (YYYY-mm-dd).
+          schema:
+            type: string
+            format: date
+        - name: hasVoted
+          in: query
+          description: Filter reviews by vote direction.
+          schema:
+            type: string
+            enum:
+              - up
+              - down
+        - name: myComments
+          in: query
+          description: Filter reviews that the authenticated user has commented on.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A list of reviews.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last review in the result set for pagination.
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  totalCount:
+                    type: integer
+                    description: Total number of reviews matching the query.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createReview
+      summary: Create a review
+      description: >-
+        Creates a new code review from a submitted or pending changelist.
+      tags:
+        - Reviews
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - change
+              properties:
+                change:
+                  type: integer
+                  description: The changelist ID to create the review from.
+                description:
+                  type: string
+                  description: The review description.
+                reviewers:
+                  type: array
+                  items:
+                    type: string
+                  description: List of reviewer usernames.
+                requiredReviewers:
+                  type: array
+                  items:
+                    type: string
+                  description: List of required reviewer usernames.
+                reviewerGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      required:
+                        type: boolean
+                  description: Reviewer groups with optional required flag.
+      responses:
+        '200':
+          description: The newly created review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /reviews/{id}:
+    get:
+      operationId: getReview
+      summary: Get review details
+      description: >-
+        Retrieves detailed information for a specific code review, including
+        versions, participants, and reviewer groups.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Review details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateReview
+      summary: Update review description
+      description: >-
+        Updates a review's description or author.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                  description: The new author username for the review.
+                description:
+                  type: string
+                  description: The new description for the review.
+      responses:
+        '200':
+          description: The updated review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/transitions:
+    get:
+      operationId: getReviewTransitions
+      summary: Get review transitions
+      description: >-
+        Retrieves the available state transitions for a review, optionally
+        considering assumed up-voters.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+        - name: upVoters
+          in: query
+          description: Comma-separated list of users assumed to have voted up.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Available state transitions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transitions:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: >-
+                      Map of transition identifiers to their display labels.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/state/:
+    patch:
+      operationId: transitionReviewState
+      summary: Transition review state
+      description: >-
+        Transitions a review to a new state such as approved, rejected,
+        needsReview, needsRevision, or archived. Optionally triggers commit
+        on approval.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - state
+              properties:
+                state:
+                  type: string
+                  enum:
+                    - needsReview
+                    - needsRevision
+                    - approved
+                    - archived
+                    - rejected
+                  description: The target state for the review.
+                description:
+                  type: string
+                  description: An optional comment for the state transition.
+                commit:
+                  type: boolean
+                  description: If true, triggers an approve-and-commit workflow.
+                wait:
+                  type: boolean
+                  description: If true, waits for the commit to complete before responding.
+                jobs[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Job IDs to attach on commit.
+                fixStatus:
+                  type: string
+                  description: The fix status to apply to attached jobs.
+      responses:
+        '200':
+          description: The review with updated state.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/changes/:
+    post:
+      operationId: addChangeToReview
+      summary: Add change to review
+      description: >-
+        Adds a changelist to an existing review, either replacing or appending
+        to the current set of changes.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - change
+              properties:
+                change:
+                  type: integer
+                  description: The changelist ID to add.
+                mode:
+                  type: string
+                  enum:
+                    - replace
+                    - append
+                  default: replace
+                  description: >-
+                    Whether to replace the current changes or append the new one.
+      responses:
+        '200':
+          description: The updated review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/vote/:
+    post:
+      operationId: setReviewVote
+      summary: Set vote on review
+      description: >-
+        Casts an up vote, down vote, or clears an existing vote on a review.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - vote
+              properties:
+                vote:
+                  type: string
+                  enum:
+                    - up
+                    - down
+                    - clear
+                  description: The vote to cast.
+                version:
+                  type: string
+                  description: The review version to associate with the vote.
+      responses:
+        '200':
+          description: Confirmation of the vote.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/cleanup:
+    post:
+      operationId: cleanupReview
+      summary: Clean up a review
+      description: >-
+        Cleans up a review's pending changelist, optionally reopening files
+        to the user's default changelist.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reopen:
+                  type: boolean
+                  description: If true, reopens files in the user's default changelist.
+      responses:
+        '200':
+          description: Cleanup confirmation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/{id}/obliterate:
+    post:
+      operationId: obliterateReview
+      summary: Obliterate a review
+      description: >-
+        Permanently removes a review and all associated data. This action
+        cannot be undone.
+      tags:
+        - Reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The review ID.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Obliteration confirmation message.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Confirmation that the review has been obliterated.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /reviews/archive/:
+    post:
+      operationId: archiveInactiveReviews
+      summary: Archive inactive reviews
+      description: >-
+        Archives reviews that have not been updated since the specified date.
+      tags:
+        - Reviews
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - notUpdatedSince
+                - description
+              properties:
+                notUpdatedSince:
+                  type: string
+                  format: date
+                  description: >-
+                    Archive reviews not updated since this date (YYYY-mm-dd).
+                description:
+                  type: string
+                  description: A comment to attach to the archived reviews.
+      responses:
+        '200':
+          description: Archive operation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  archivedCount:
+                    type: integer
+                    description: Number of reviews that were archived.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /dashboards/action:
+    get:
+      operationId: getActionDashboard
+      summary: Get action dashboard reviews
+      description: >-
+        Retrieves reviews assigned to the authenticated user's action
+        dashboard, showing reviews that require attention.
+      tags:
+        - Reviews
+      responses:
+        '200':
+          description: Action dashboard reviews.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastSeen:
+                    type: integer
+                    description: Pagination cursor.
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  totalCount:
+                    type: integer
+                    description: Total number of reviews on the dashboard.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /changes/{change}/affectsprojects:
+    get:
+      operationId: getChangeAffectsProjects
+      summary: Get projects affected by change
+      description: >-
+        Retrieves the projects and branches that are affected by a given
+        changelist.
+      tags:
+        - Changes
+      parameters:
+        - name: change
+          in: path
+          required: true
+          description: The changelist number.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Projects and branches affected by the changelist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The changelist number.
+                      projects:
+                        type: object
+                        additionalProperties:
+                          type: array
+                          items:
+                            type: string
+                        description: >-
+                          Map of project names to arrays of affected branch names.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /changes/{change}/defaultreviewers:
+    get:
+      operationId: getChangeDefaultReviewers
+      summary: Get default reviewers for change
+      description: >-
+        Retrieves the default reviewers configured for the branches and projects
+        affected by a changelist.
+      tags:
+        - Changes
+      parameters:
+        - name: change
+          in: path
+          required: true
+          description: The changelist number.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Default reviewers for the changelist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The changelist number.
+                      defaultReviewers:
+                        type: object
+                        properties:
+                          groups:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                required:
+                                  type: boolean
+                          users:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                required:
+                                  type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /changes/{id}/check:
+    get:
+      operationId: checkChange
+      summary: Check change against workflow rules
+      description: >-
+        Performs configured workflow checks on a changelist, validating it
+        against enforced, strict, or shelve rules.
+      tags:
+        - Changes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The changelist number.
+          schema:
+            type: integer
+        - name: type
+          in: query
+          required: true
+          description: The type of check to perform.
+          schema:
+            type: string
+            enum:
+              - enforced
+              - strict
+              - shelve
+      responses:
+        '200':
+          description: Check results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The overall status of the check.
+                  isValid:
+                    type: boolean
+                    description: Whether the changelist passes the check.
+                  messages:
+                    type: array
+                    items:
+                      type: string
+                    description: Descriptive messages about check results.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /comments/:
+    get:
+      operationId: listComments
+      summary: List comments
+      description: >-
+        Retrieves a list of comments, optionally filtered by topic, version,
+        task state, or archive status.
+      tags:
+        - Comments
+      parameters:
+        - name: after
+          in: query
+          description: A comment ID to seek past for pagination.
+          schema:
+            type: integer
+        - name: max
+          in: query
+          description: Maximum number of comments to return. Defaults to 100.
+          schema:
+            type: integer
+            default: 100
+        - name: topic
+          in: query
+          description: >-
+            Filter comments by topic, such as reviews/1234 for a specific review.
+          schema:
+            type: string
+        - name: context[version]
+          in: query
+          description: Filter by a specific review version.
+          schema:
+            type: integer
+        - name: ignoreArchived
+          in: query
+          description: Exclude comments on archived reviews.
+          schema:
+            type: boolean
+        - name: tasksOnly
+          in: query
+          description: Return only comments flagged as tasks.
+          schema:
+            type: boolean
+        - name: taskStates
+          in: query
+          description: >-
+            Filter by task state. Valid values include open, closed, verified,
+            and comment.
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - open
+                - closed
+                - verified
+                - comment
+          explode: true
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topic:
+                    type: string
+                    description: The topic filter applied, if any.
+                  comments:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Comment'
+                    description: >-
+                      Map of comment IDs to comment objects.
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last comment for pagination.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createComment
+      summary: Add a comment
+      description: >-
+        Creates a new comment on a topic such as a review or changelist.
+        Comments can include inline file context and task flags.
+      tags:
+        - Comments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - topic
+                - body
+              properties:
+                topic:
+                  type: string
+                  description: >-
+                    The topic to comment on, such as reviews/1234.
+                body:
+                  type: string
+                  description: The comment body text.
+                silenceNotification:
+                  type: string
+                  description: Set to suppress email notifications.
+                delayNotification:
+                  type: string
+                  description: Set to delay email notifications for batching.
+                taskState:
+                  type: string
+                  enum:
+                    - comment
+                    - open
+                  description: Whether the comment is a plain comment or an open task.
+                flags[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Flags to apply, such as closed.
+                context[file]:
+                  type: string
+                  description: The depot file path for an inline comment.
+                context[leftLine]:
+                  type: integer
+                  description: The left-side line number for an inline comment.
+                context[rightLine]:
+                  type: integer
+                  description: The right-side line number for an inline comment.
+                context[content]:
+                  type: string
+                  description: Adjacent content for context in inline comments.
+                context[version]:
+                  type: integer
+                  description: The review version for the inline comment context.
+      responses:
+        '200':
+          description: The newly created comment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /comments/{id}:
+    patch:
+      operationId: editComment
+      summary: Edit a comment
+      description: >-
+        Updates an existing comment's body, task state, or flags.
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The comment ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - body
+              properties:
+                topic:
+                  type: string
+                  description: The topic reference for the comment.
+                body:
+                  type: string
+                  description: The updated comment body text.
+                taskState:
+                  type: string
+                  enum:
+                    - comment
+                    - open
+                    - closed
+                    - verified
+                  description: The updated task state.
+                flags[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated flags for the comment.
+                silenceNotification:
+                  type: string
+                  description: Set to suppress email notifications.
+                delayNotification:
+                  type: string
+                  description: Set to delay email notifications for batching.
+      responses:
+        '200':
+          description: The updated comment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/Comment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /comments/notify:
+    post:
+      operationId: sendCommentNotification
+      summary: Send comment notification
+      description: >-
+        Sends or previews a notification for pending comments on a topic.
+      tags:
+        - Comments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - topic
+              properties:
+                topic:
+                  type: string
+                  description: The target topic for the notification.
+                preview:
+                  type: string
+                  description: >-
+                    Set to true to preview the notification without sending.
+      responses:
+        '200':
+          description: Notification result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isValid:
+                    type: boolean
+                    description: Whether the notification request is valid.
+                  message:
+                    type: string
+                    description: A descriptive message about the result.
+                  code:
+                    type: integer
+                    description: A status code for the notification.
+                  preview:
+                    type: object
+                    description: Preview data if preview was requested.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /activity:
+    get:
+      operationId: listActivity
+      summary: List activity entries
+      description: >-
+        Retrieves a list of activity entries from the activity stream,
+        optionally filtered by changelist, stream, or type.
+      tags:
+        - Activity
+      parameters:
+        - name: change
+          in: query
+          description: Filter activity by changelist ID.
+          schema:
+            type: integer
+        - name: stream
+          in: query
+          description: >-
+            Filter by activity stream name, such as user-alice,
+            review-1234, or project-myproject.
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Filter by activity type.
+          schema:
+            type: string
+            enum:
+              - change
+              - comment
+              - job
+              - review
+        - name: after
+          in: query
+          description: An activity ID to seek past for pagination.
+          schema:
+            type: integer
+        - name: max
+          in: query
+          description: Maximum number of entries to return. Defaults to 100.
+          schema:
+            type: integer
+            default: 100
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of activity entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last entry for pagination.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createActivity
+      summary: Create activity entry
+      description: >-
+        Creates a new entry in the activity stream.
+      tags:
+        - Activity
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - type
+                - user
+                - action
+                - target
+              properties:
+                type:
+                  type: string
+                  description: The activity classification type.
+                user:
+                  type: string
+                  description: The username of the user performing the action.
+                action:
+                  type: string
+                  description: A past-tense description of the activity.
+                target:
+                  type: string
+                  description: The object receiving the action.
+                topic:
+                  type: string
+                  description: An optional comment thread identifier.
+                description:
+                  type: string
+                  description: Contextual information about the activity.
+                change:
+                  type: integer
+                  description: A related changelist ID.
+                streams[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Stream names where the activity should appear.
+                link:
+                  type: string
+                  format: uri
+                  description: A URL for the activity target.
+      responses:
+        '200':
+          description: The newly created activity entry.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    $ref: '#/components/schemas/Activity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /projects/:
+    get:
+      operationId: listProjects
+      summary: List projects
+      description: >-
+        Retrieves a list of Swarm projects with their configuration,
+        branches, members, and settings.
+      tags:
+        - Projects
+      parameters:
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+        - name: workflow
+          in: query
+          description: Filter projects using a specific workflow.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createProject
+      summary: Create a project
+      description: >-
+        Creates a new Swarm project with the specified configuration.
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - name
+                - members
+              properties:
+                name:
+                  type: string
+                  description: The project name.
+                members:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of project member usernames.
+                subgroups:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of subgroup names.
+                owners:
+                  type: array
+                  items:
+                    type: string
+                  description: Array of project owner usernames.
+                description:
+                  type: string
+                  description: The project description.
+                private:
+                  type: boolean
+                  default: false
+                  description: Whether the project is private.
+      responses:
+        '200':
+          description: The newly created project.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Get project details
+      description: >-
+        Retrieves detailed information for a specific Swarm project.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project identifier.
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: Comma-separated list of fields to include in the response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateProject
+      summary: Update a project
+      description: >-
+        Updates an existing Swarm project's configuration.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Updated project name.
+                members:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated list of project members.
+                owners:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated list of project owners.
+                description:
+                  type: string
+                  description: Updated project description.
+                private:
+                  type: boolean
+                  description: Updated privacy setting.
+      responses:
+        '200':
+          description: The updated project.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteProject
+      summary: Delete a project
+      description: >-
+        Deletes a Swarm project. Only project owners or administrators
+        can perform this action.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the deleted project.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication using Perforce username and password or
+        ticket. The password can be a standard Perforce password or a
+        Swarm-generated API ticket.
+
+  schemas:
+    Review:
+      type: object
+      description: >-
+        A code review in Helix Swarm, representing a set of changes
+        under review with participants, votes, and state.
+      properties:
+        id:
+          type: integer
+          description: The unique review identifier.
+        author:
+          type: string
+          description: The username of the review author.
+        changes:
+          type: array
+          items:
+            type: integer
+          description: List of changelist IDs associated with the review.
+        commits:
+          type: array
+          items:
+            type: integer
+          description: List of committed changelist IDs.
+        commitStatus:
+          type: array
+          items:
+            type: object
+          description: Status of commit operations.
+        created:
+          type: integer
+          description: Unix timestamp when the review was created.
+        deployDetails:
+          type: array
+          items:
+            type: object
+          description: Deploy configuration details.
+        deployStatus:
+          type: string
+          description: The current deploy status.
+        description:
+          type: string
+          description: The review description.
+        groups:
+          type: array
+          items:
+            type: object
+          description: Reviewer groups assigned to the review.
+        participants:
+          type: object
+          additionalProperties:
+            type: object
+          description: >-
+            Map of participant usernames to their participation details
+            including votes and required status.
+        pending:
+          type: boolean
+          description: Whether the review has a pending changelist.
+        projects:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Map of project IDs to affected branch names.
+        roles:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Map of roles to lists of usernames.
+        state:
+          type: string
+          enum:
+            - needsReview
+            - needsRevision
+            - approved
+            - archived
+            - rejected
+          description: The current state of the review.
+        stateLabel:
+          type: string
+          description: A display-friendly label for the current state.
+        testDetails:
+          type: array
+          items:
+            type: object
+          description: Details of test runs.
+        testStatus:
+          type: string
+          description: The overall test status.
+        type:
+          type: string
+          description: The review type (default or personal).
+        updated:
+          type: integer
+          description: Unix timestamp when the review was last updated.
+        updateDate:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted date when the review was last updated.
+        versions:
+          type: array
+          items:
+            type: object
+            properties:
+              difference:
+                type: integer
+              stream:
+                type: string
+              change:
+                type: integer
+              user:
+                type: string
+              time:
+                type: integer
+              pending:
+                type: boolean
+              archiveChange:
+                type: integer
+          description: List of review version objects.
+
+    Comment:
+      type: object
+      description: >-
+        A comment on a review, changelist, or other topic in Helix Swarm.
+      properties:
+        id:
+          type: integer
+          description: The unique comment identifier.
+        attachments:
+          type: array
+          items:
+            type: object
+          description: File attachments on the comment.
+        body:
+          type: string
+          description: The comment body text.
+        context:
+          type: object
+          description: Inline context for file-level comments.
+          properties:
+            file:
+              type: string
+              description: The depot file path.
+            leftLine:
+              type: integer
+              description: The left-side line number.
+            rightLine:
+              type: integer
+              description: The right-side line number.
+            content:
+              type: string
+              description: Adjacent content for context.
+            version:
+              type: integer
+              description: The review version.
+        edited:
+          type: integer
+          description: Unix timestamp of the last edit, or null if not edited.
+        flags:
+          type: array
+          items:
+            type: string
+          description: Flags applied to the comment.
+        likes:
+          type: array
+          items:
+            type: string
+          description: Usernames of users who liked the comment.
+        taskState:
+          type: string
+          enum:
+            - comment
+            - open
+            - closed
+            - verified
+          description: The task state of the comment.
+        time:
+          type: integer
+          description: Unix timestamp when the comment was created.
+        topic:
+          type: string
+          description: The topic the comment belongs to, such as reviews/1234.
+        updated:
+          type: integer
+          description: Unix timestamp of the last update.
+        user:
+          type: string
+          description: The username of the comment author.
+
+    Activity:
+      type: object
+      description: >-
+        An entry in the Helix Swarm activity stream recording an action
+        performed by a user.
+      properties:
+        id:
+          type: integer
+          description: The unique activity entry identifier.
+        action:
+          type: string
+          description: A past-tense description of the action performed.
+        change:
+          type: integer
+          description: The related changelist ID, if applicable.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the activity occurred.
+        description:
+          type: string
+          description: Contextual information about the activity.
+        link:
+          type: string
+          format: uri
+          description: A URL linking to the activity target.
+        streams:
+          type: array
+          items:
+            type: string
+          description: The activity streams this entry appears in.
+        target:
+          type: string
+          description: The object that received the action.
+        topic:
+          type: string
+          description: An associated comment thread topic.
+        type:
+          type: string
+          description: The activity type classification.
+        user:
+          type: string
+          description: The username of the user who performed the action.
+
+    Project:
+      type: object
+      description: >-
+        A project in Helix Swarm, grouping branches, members, and
+        review settings.
+      properties:
+        id:
+          type: string
+          description: The project identifier.
+        name:
+          type: string
+          description: The project display name.
+        description:
+          type: string
+          description: The project description.
+        members:
+          type: array
+          items:
+            type: string
+          description: List of project member usernames.
+        owners:
+          type: array
+          items:
+            type: string
+          description: List of project owner usernames.
+        subgroups:
+          type: array
+          items:
+            type: string
+          description: List of associated Perforce groups.
+        branches:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              paths:
+                type: array
+                items:
+                  type: string
+              moderators:
+                type: array
+                items:
+                  type: string
+          description: Branch definitions for the project.
+        deleted:
+          type: boolean
+          description: Whether the project has been deleted.
+        deploy:
+          type: object
+          description: Deploy configuration for the project.
+        emailFlags:
+          type: object
+          description: Email notification settings.
+        jobview:
+          type: string
+          description: A Perforce jobview expression for the project.
+        minimumUpVotes:
+          type: integer
+          description: Minimum number of up votes required for approval.
+        private:
+          type: boolean
+          description: Whether the project is private.
+        retainDefaultReviewers:
+          type: boolean
+          description: Whether to retain default reviewers on review updates.
+        tests:
+          type: object
+          description: Test configuration for the project.
+        workflow:
+          type: string
+          description: The workflow identifier associated with the project.
+        defaults:
+          type: object
+          description: Default settings for the project.
+        readme:
+          type: string
+          description: The project readme content.
+
+  responses:
+    BadRequest:
+      description: >-
+        The request was malformed or missing required parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+              details:
+                type: object
+                description: Additional details about the validation error.
+    Unauthorized:
+      description: >-
+        Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    NotFound:
+      description: >-
+        The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.

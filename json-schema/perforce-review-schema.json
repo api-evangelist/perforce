@@ -1,0 +1,381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://perforce.com/schemas/swarm/review.json",
+  "title": "Perforce Helix Swarm Review",
+  "description": "A code review in Perforce Helix Swarm (P4 Code Review), representing a set of changelists under review with participants, votes, state transitions, and test/deploy status.",
+  "type": "object",
+  "required": ["id", "author", "state", "description"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The unique review identifier assigned by Swarm."
+    },
+    "author": {
+      "type": "string",
+      "description": "The Perforce username of the review author."
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "description": "List of changelist IDs associated with this review."
+    },
+    "commits": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "description": "List of committed changelist IDs resulting from this review."
+    },
+    "commitStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CommitStatus"
+      },
+      "description": "Status details for commit operations on this review."
+    },
+    "created": {
+      "type": "integer",
+      "description": "Unix timestamp when the review was created."
+    },
+    "deployDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DeployDetail"
+      },
+      "description": "Details of deployment operations triggered by this review."
+    },
+    "deployStatus": {
+      "type": ["string", "null"],
+      "description": "The current deployment status for the review."
+    },
+    "description": {
+      "type": "string",
+      "description": "The review description, typically derived from the changelist description."
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReviewerGroup"
+      },
+      "description": "Reviewer groups assigned to the review."
+    },
+    "participants": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/Participant"
+      },
+      "description": "Map of participant usernames to their participation details, including votes and required status."
+    },
+    "pending": {
+      "type": "boolean",
+      "description": "Whether the review is associated with a pending (shelved) changelist."
+    },
+    "projects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Map of Swarm project IDs to the branch names affected by this review."
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Map of role names to lists of usernames holding those roles."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["needsReview", "needsRevision", "approved", "archived", "rejected"],
+      "description": "The current state of the review in its lifecycle."
+    },
+    "stateLabel": {
+      "type": "string",
+      "description": "A human-readable label for the current state."
+    },
+    "testDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TestDetail"
+      },
+      "description": "Details of test runs executed against this review."
+    },
+    "testStatus": {
+      "type": ["string", "null"],
+      "description": "The overall test status for the review, such as pass or fail."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["default", "personal"],
+      "description": "The review type. Default reviews are standard; personal reviews are private to the author."
+    },
+    "updated": {
+      "type": "integer",
+      "description": "Unix timestamp when the review was last updated."
+    },
+    "updateDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted date-time when the review was last updated."
+    },
+    "versions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReviewVersion"
+      },
+      "description": "History of review versions, each representing an update to the shelved changelist."
+    }
+  },
+  "$defs": {
+    "Participant": {
+      "type": "object",
+      "description": "A participant in a code review, including their vote and required status.",
+      "properties": {
+        "vote": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "enum": [-1, 0, 1],
+              "description": "The vote value: 1 for up, -1 for down, 0 for no vote."
+            },
+            "version": {
+              "type": "integer",
+              "description": "The review version the vote was cast on."
+            },
+            "isStale": {
+              "type": "boolean",
+              "description": "Whether the vote is stale due to subsequent review updates."
+            }
+          },
+          "description": "The participant's vote on the review."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the participant is a required reviewer."
+        }
+      }
+    },
+    "ReviewerGroup": {
+      "type": "object",
+      "description": "A group of reviewers assigned to a review.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the reviewer group."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether at least one member of the group must approve the review."
+        },
+        "quorum": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The number of group members required to approve. Zero means all members."
+        }
+      }
+    },
+    "ReviewVersion": {
+      "type": "object",
+      "description": "A version snapshot of the review, created each time the shelved changelist is updated.",
+      "required": ["change"],
+      "properties": {
+        "difference": {
+          "type": "integer",
+          "description": "The difference type indicator."
+        },
+        "stream": {
+          "type": "string",
+          "description": "The stream path, if applicable."
+        },
+        "change": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The changelist number for this version."
+        },
+        "user": {
+          "type": "string",
+          "description": "The user who created this version."
+        },
+        "time": {
+          "type": "integer",
+          "description": "Unix timestamp when this version was created."
+        },
+        "pending": {
+          "type": "boolean",
+          "description": "Whether this version represents a pending change."
+        },
+        "archiveChange": {
+          "type": "integer",
+          "description": "The archive changelist number for this version."
+        }
+      }
+    },
+    "CommitStatus": {
+      "type": "object",
+      "description": "Status of a commit operation on the review.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The commit status value."
+        },
+        "change": {
+          "type": "integer",
+          "description": "The associated changelist number."
+        },
+        "committer": {
+          "type": "string",
+          "description": "The user who performed the commit."
+        },
+        "start": {
+          "type": "integer",
+          "description": "Unix timestamp when the commit was initiated."
+        },
+        "end": {
+          "type": "integer",
+          "description": "Unix timestamp when the commit completed."
+        }
+      }
+    },
+    "DeployDetail": {
+      "type": "object",
+      "description": "Details of a deployment triggered by the review.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The deployment status."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the deployment details or environment."
+        },
+        "error": {
+          "type": "string",
+          "description": "An error message if the deployment failed."
+        }
+      }
+    },
+    "TestDetail": {
+      "type": "object",
+      "description": "Details of a test run executed against the review.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The test run status."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the test run results."
+        },
+        "error": {
+          "type": "string",
+          "description": "An error message if the test run failed."
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "description": "A comment on a review or changelist in Helix Swarm.",
+      "required": ["id", "body", "user", "topic"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The unique comment identifier."
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "File attachments on the comment."
+        },
+        "body": {
+          "type": "string",
+          "description": "The comment body text."
+        },
+        "context": {
+          "$ref": "#/$defs/CommentContext"
+        },
+        "edited": {
+          "type": ["integer", "null"],
+          "description": "Unix timestamp of the last edit, or null if not edited."
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Flags applied to the comment."
+        },
+        "likes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Usernames of users who liked the comment."
+        },
+        "taskState": {
+          "type": "string",
+          "enum": ["comment", "open", "closed", "verified"],
+          "description": "The task state of the comment."
+        },
+        "time": {
+          "type": "integer",
+          "description": "Unix timestamp when the comment was created."
+        },
+        "topic": {
+          "type": "string",
+          "description": "The topic the comment belongs to, such as reviews/1234."
+        },
+        "updated": {
+          "type": "integer",
+          "description": "Unix timestamp of the last update."
+        },
+        "user": {
+          "type": "string",
+          "description": "The Perforce username of the comment author."
+        }
+      }
+    },
+    "CommentContext": {
+      "type": "object",
+      "description": "Inline context for a file-level comment, specifying the file, line numbers, and surrounding content.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The depot file path for the inline comment."
+        },
+        "leftLine": {
+          "type": ["integer", "null"],
+          "description": "The left-side (original) line number."
+        },
+        "rightLine": {
+          "type": ["integer", "null"],
+          "description": "The right-side (modified) line number."
+        },
+        "content": {
+          "type": "string",
+          "description": "Adjacent source code content for context."
+        },
+        "version": {
+          "type": "integer",
+          "description": "The review version this comment applies to."
+        }
+      }
+    }
+  }
+}
