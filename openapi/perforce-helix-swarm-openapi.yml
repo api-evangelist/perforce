@@ -37,16 +37,16 @@ servers:
         default: swarm.example.com
         description: The hostname of your Helix Swarm instance.
 tags:
-  - name: Reviews
-    description: Endpoints for managing code reviews.
+  - name: Activity
+    description: Endpoints for viewing and creating activity stream entries.
   - name: Changes
     description: Endpoints for inspecting changelists and their relationships.
   - name: Comments
     description: Endpoints for managing review and changelist comments.
-  - name: Activity
-    description: Endpoints for viewing and creating activity stream entries.
   - name: Projects
     description: Endpoints for managing Swarm projects.
+  - name: Reviews
+    description: Endpoints for managing code reviews.
   - name: Version
     description: Endpoints for retrieving Swarm server version information.
 security:
