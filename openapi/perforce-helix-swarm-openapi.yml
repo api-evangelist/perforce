@@ -55,7 +55,7 @@ paths:
   /version:
     get:
       operationId: getVersion
-      summary: Get server version
+      summary: Perforce Get server version
       description: >-
         Retrieves the installed Helix Swarm version, release year, and available
         API versions.
@@ -84,7 +84,7 @@ paths:
   /reviews/:
     get:
       operationId: listReviews
-      summary: List reviews
+      summary: Perforce List reviews
       description: >-
         Retrieves a list of code reviews, with optional filtering by author,
         state, project, participants, keywords, and other criteria.
@@ -219,7 +219,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createReview
-      summary: Create a review
+      summary: Perforce Create a review
       description: >-
         Creates a new code review from a submitted or pending changelist.
       tags:
@@ -277,7 +277,7 @@ paths:
   /reviews/{id}:
     get:
       operationId: getReview
-      summary: Get review details
+      summary: Perforce Get review details
       description: >-
         Retrieves detailed information for a specific code review, including
         versions, participants, and reviewer groups.
@@ -311,7 +311,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateReview
-      summary: Update review description
+      summary: Perforce Update review description
       description: >-
         Updates a review's description or author.
       tags:
@@ -356,7 +356,7 @@ paths:
   /reviews/{id}/transitions:
     get:
       operationId: getReviewTransitions
-      summary: Get review transitions
+      summary: Perforce Get review transitions
       description: >-
         Retrieves the available state transitions for a review, optionally
         considering assumed up-voters.
@@ -396,7 +396,7 @@ paths:
   /reviews/{id}/state/:
     patch:
       operationId: transitionReviewState
-      summary: Transition review state
+      summary: Perforce Transition review state
       description: >-
         Transitions a review to a new state such as approved, rejected,
         needsReview, needsRevision, or archived. Optionally triggers commit
@@ -465,7 +465,7 @@ paths:
   /reviews/{id}/changes/:
     post:
       operationId: addChangeToReview
-      summary: Add change to review
+      summary: Perforce Add change to review
       description: >-
         Adds a changelist to an existing review, either replacing or appending
         to the current set of changes.
@@ -518,7 +518,7 @@ paths:
   /reviews/{id}/vote/:
     post:
       operationId: setReviewVote
-      summary: Set vote on review
+      summary: Perforce Set vote on review
       description: >-
         Casts an up vote, down vote, or clears an existing vote on a review.
       tags:
@@ -569,7 +569,7 @@ paths:
   /reviews/{id}/cleanup:
     post:
       operationId: cleanupReview
-      summary: Clean up a review
+      summary: Perforce Clean up a review
       description: >-
         Cleans up a review's pending changelist, optionally reopening files
         to the user's default changelist.
@@ -609,7 +609,7 @@ paths:
   /reviews/{id}/obliterate:
     post:
       operationId: obliterateReview
-      summary: Obliterate a review
+      summary: Perforce Obliterate a review
       description: >-
         Permanently removes a review and all associated data. This action
         cannot be undone.
@@ -641,7 +641,7 @@ paths:
   /reviews/archive/:
     post:
       operationId: archiveInactiveReviews
-      summary: Archive inactive reviews
+      summary: Perforce Archive inactive reviews
       description: >-
         Archives reviews that have not been updated since the specified date.
       tags:
@@ -683,7 +683,7 @@ paths:
   /dashboards/action:
     get:
       operationId: getActionDashboard
-      summary: Get action dashboard reviews
+      summary: Perforce Get action dashboard reviews
       description: >-
         Retrieves reviews assigned to the authenticated user's action
         dashboard, showing reviews that require attention.
@@ -713,7 +713,7 @@ paths:
   /changes/{change}/affectsprojects:
     get:
       operationId: getChangeAffectsProjects
-      summary: Get projects affected by change
+      summary: Perforce Get projects affected by change
       description: >-
         Retrieves the projects and branches that are affected by a given
         changelist.
@@ -756,7 +756,7 @@ paths:
   /changes/{change}/defaultreviewers:
     get:
       operationId: getChangeDefaultReviewers
-      summary: Get default reviewers for change
+      summary: Perforce Get default reviewers for change
       description: >-
         Retrieves the default reviewers configured for the branches and projects
         affected by a changelist.
@@ -812,7 +812,7 @@ paths:
   /changes/{id}/check:
     get:
       operationId: checkChange
-      summary: Check change against workflow rules
+      summary: Perforce Check change against workflow rules
       description: >-
         Performs configured workflow checks on a changelist, validating it
         against enforced, strict, or shelve rules.
@@ -862,7 +862,7 @@ paths:
   /comments/:
     get:
       operationId: listComments
-      summary: List comments
+      summary: Perforce List comments
       description: >-
         Retrieves a list of comments, optionally filtered by topic, version,
         task state, or archive status.
@@ -945,7 +945,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createComment
-      summary: Add a comment
+      summary: Perforce Add a comment
       description: >-
         Creates a new comment on a topic such as a review or changelist.
         Comments can include inline file context and task flags.
@@ -1018,7 +1018,7 @@ paths:
   /comments/{id}:
     patch:
       operationId: editComment
-      summary: Edit a comment
+      summary: Perforce Edit a comment
       description: >-
         Updates an existing comment's body, task state, or flags.
       tags:
@@ -1084,7 +1084,7 @@ paths:
   /comments/notify:
     post:
       operationId: sendCommentNotification
-      summary: Send comment notification
+      summary: Perforce Send comment notification
       description: >-
         Sends or previews a notification for pending comments on a topic.
       tags:
@@ -1133,7 +1133,7 @@ paths:
   /activity:
     get:
       operationId: listActivity
-      summary: List activity entries
+      summary: Perforce List activity entries
       description: >-
         Retrieves a list of activity entries from the activity stream,
         optionally filtered by changelist, stream, or type.
@@ -1197,7 +1197,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createActivity
-      summary: Create activity entry
+      summary: Perforce Create activity entry
       description: >-
         Creates a new entry in the activity stream.
       tags:
@@ -1262,7 +1262,7 @@ paths:
   /projects/:
     get:
       operationId: listProjects
-      summary: List projects
+      summary: Perforce List projects
       description: >-
         Retrieves a list of Swarm projects with their configuration,
         branches, members, and settings.
@@ -1295,7 +1295,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createProject
-      summary: Create a project
+      summary: Perforce Create a project
       description: >-
         Creates a new Swarm project with the specified configuration.
       tags:
@@ -1353,7 +1353,7 @@ paths:
   /projects/{id}:
     get:
       operationId: getProject
-      summary: Get project details
+      summary: Perforce Get project details
       description: >-
         Retrieves detailed information for a specific Swarm project.
       tags:
@@ -1386,7 +1386,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateProject
-      summary: Update a project
+      summary: Perforce Update a project
       description: >-
         Updates an existing Swarm project's configuration.
       tags:
@@ -1442,7 +1442,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteProject
-      summary: Delete a project
+      summary: Perforce Delete a project
       description: >-
         Deletes a Swarm project. Only project owners or administrators
         can perform this action.
