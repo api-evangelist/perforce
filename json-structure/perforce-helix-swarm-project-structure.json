@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "members": {
+      "type": "array"
+    },
+    "owners": {
+      "type": "array"
+    },
+    "subgroups": {
+      "type": "array"
+    },
+    "branches": {
+      "type": "array"
+    },
+    "deleted": {
+      "type": "boolean"
+    },
+    "deploy": {
+      "type": "object"
+    },
+    "emailFlags": {
+      "type": "object"
+    },
+    "jobview": {
+      "type": "string"
+    },
+    "minimumUpVotes": {
+      "type": "integer"
+    },
+    "private": {
+      "type": "boolean"
+    },
+    "retainDefaultReviewers": {
+      "type": "boolean"
+    },
+    "tests": {
+      "type": "object"
+    },
+    "workflow": {
+      "type": "string"
+    },
+    "defaults": {
+      "type": "object"
+    },
+    "readme": {
+      "type": "string"
+    }
+  }
+}

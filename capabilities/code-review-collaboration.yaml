@@ -1,0 +1,208 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Perforce Code Review and Collaboration"
+  description: "Unified workflow for code review, commenting, and project management using Helix Swarm. Designed for development teams managing code review workflows integrated with Helix Core version control."
+  tags:
+    - Perforce
+    - Code Review
+    - Collaboration
+    - DevOps
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SWARM_USERNAME: SWARM_USERNAME
+      SWARM_PASSWORD: SWARM_PASSWORD
+
+capability:
+  consumes:
+    - import: helix-swarm
+      location: ./shared/helix-swarm.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: code-review-api
+      description: "Unified REST API for Perforce code review and collaboration."
+      resources:
+        - path: /v1/reviews
+          name: reviews
+          description: "Code reviews"
+          operations:
+            - method: GET
+              name: list-reviews
+              description: "List code reviews"
+              call: "helix-swarm.list-reviews"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-review
+              description: "Create a new code review"
+              call: "helix-swarm.create-review"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reviews/{id}
+          name: review-details
+          description: "Review details"
+          operations:
+            - method: GET
+              name: get-review
+              description: "Get review details"
+              call: "helix-swarm.get-review"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comments
+          name: comments
+          description: "Review comments"
+          operations:
+            - method: GET
+              name: list-comments
+              description: "List comments"
+              call: "helix-swarm.list-comments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/projects
+          name: projects
+          description: "Swarm projects"
+          operations:
+            - method: GET
+              name: list-projects
+              description: "List projects"
+              call: "helix-swarm.list-projects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/activity
+          name: activity
+          description: "Activity stream"
+          operations:
+            - method: GET
+              name: list-activity
+              description: "List activity entries"
+              call: "helix-swarm.list-activity"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: code-review-mcp
+      transport: http
+      description: "MCP server for AI-assisted Perforce code review and collaboration."
+      tools:
+        - name: list-reviews
+          description: "List code reviews in Helix Swarm"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "helix-swarm.list-reviews"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-review
+          description: "Get details of a specific code review"
+          hints:
+            readOnly: true
+          call: "helix-swarm.get-review"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-review
+          description: "Create a new code review from a changelist"
+          hints:
+            readOnly: false
+          call: "helix-swarm.create-review"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-review
+          description: "Update a review description or author"
+          hints:
+            readOnly: false
+          call: "helix-swarm.update-review"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: transition-review-state
+          description: "Transition a review to a new state (approve, reject, etc.)"
+          hints:
+            readOnly: false
+          call: "helix-swarm.transition-review-state"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comments
+          description: "List comments on reviews and changelists"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-comments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-comment
+          description: "Add a comment to a review or changelist"
+          hints:
+            readOnly: false
+          call: "helix-swarm.create-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: "List Swarm projects"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-project
+          description: "Get details of a specific Swarm project"
+          hints:
+            readOnly: true
+          call: "helix-swarm.get-project"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-project
+          description: "Delete a Swarm project"
+          hints:
+            destructive: true
+          call: "helix-swarm.delete-project"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-activity
+          description: "List activity stream entries"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-activity"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-version
+          description: "Get Swarm server version information"
+          hints:
+            readOnly: true
+          call: "helix-swarm.get-version"
+          outputParameters:
+            - type: object
+              mapping: "$."

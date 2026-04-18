@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Activity",
+  "type": "object",
+  "description": "An entry in the Helix Swarm activity stream recording an action performed by a user.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique activity entry identifier."
+    },
+    "action": {
+      "type": "string",
+      "description": "A past-tense description of the action performed."
+    },
+    "change": {
+      "type": "integer",
+      "description": "The related changelist ID, if applicable."
+    },
+    "date": {
+      "type": "string",
+      "description": "The date and time the activity occurred."
+    },
+    "description": {
+      "type": "string",
+      "description": "Contextual information about the activity."
+    },
+    "link": {
+      "type": "string",
+      "description": "A URL linking to the activity target."
+    },
+    "streams": {
+      "type": "array",
+      "description": "The activity streams this entry appears in."
+    },
+    "target": {
+      "type": "string",
+      "description": "The object that received the action."
+    },
+    "topic": {
+      "type": "string",
+      "description": "An associated comment thread topic."
+    },
+    "type": {
+      "type": "string",
+      "description": "The activity type classification."
+    },
+    "user": {
+      "type": "string",
+      "description": "The username of the user who performed the action."
+    }
+  }
+}

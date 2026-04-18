@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Comment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "attachments": {
+      "type": "array"
+    },
+    "body": {
+      "type": "string"
+    },
+    "context": {
+      "type": "object"
+    },
+    "edited": {
+      "type": "integer"
+    },
+    "flags": {
+      "type": "array"
+    },
+    "likes": {
+      "type": "array"
+    },
+    "taskState": {
+      "type": "string"
+    },
+    "time": {
+      "type": "integer"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "string"
+    }
+  }
+}

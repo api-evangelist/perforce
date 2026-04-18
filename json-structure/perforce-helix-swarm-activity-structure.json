@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Activity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "action": {
+      "type": "string"
+    },
+    "change": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "streams": {
+      "type": "array"
+    },
+    "target": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "user": {
+      "type": "string"
+    }
+  }
+}

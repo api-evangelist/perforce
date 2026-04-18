@@ -1,0 +1,295 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Perforce Helix Swarm API"
+  description: "REST API for Helix Swarm code review and collaboration, providing programmatic access to reviews, comments, projects, changes, and activity streams."
+  tags:
+    - Perforce
+    - Code Review
+    - Collaboration
+    - Version Control
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      SWARM_USERNAME: SWARM_USERNAME
+      SWARM_PASSWORD: SWARM_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: helix-swarm
+      baseUri: "{scheme}://{host}/api/v9"
+      description: "Perforce Helix Swarm REST API"
+      authentication:
+        type: basic
+        username: "{{SWARM_USERNAME}}"
+        password: "{{SWARM_PASSWORD}}"
+      resources:
+        - name: reviews
+          path: /reviews/
+          description: "Code reviews"
+          operations:
+            - name: list-reviews
+              method: GET
+              description: "List code reviews with optional filters"
+              inputParameters:
+                - name: max
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of reviews to return"
+                - name: keywords
+                  in: query
+                  type: string
+                  required: false
+                  description: "Keywords to search for"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-review
+              method: POST
+              description: "Create a new code review from a changelist"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  change: "{{tools.change}}"
+        - name: review-details
+          path: /reviews/{id}
+          description: "Review details and updates"
+          operations:
+            - name: get-review
+              method: GET
+              description: "Get review details"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Review ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-review
+              method: PATCH
+              description: "Update review description or author"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Review ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: review-state
+          path: /reviews/{id}/state/
+          description: "Review state transitions"
+          operations:
+            - name: transition-review-state
+              method: PATCH
+              description: "Transition a review to a new state"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Review ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: comments
+          path: /comments/
+          description: "Review and changelist comments"
+          operations:
+            - name: list-comments
+              method: GET
+              description: "List comments with optional filters"
+              inputParameters:
+                - name: topic
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by topic"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-comment
+              method: POST
+              description: "Add a comment to a topic"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  topic: "{{tools.topic}}"
+                  body: "{{tools.body}}"
+        - name: projects
+          path: /projects/
+          description: "Swarm projects"
+          operations:
+            - name: list-projects
+              method: GET
+              description: "List all Swarm projects"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-project
+              method: POST
+              description: "Create a new project"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: project-details
+          path: /projects/{id}
+          description: "Project details"
+          operations:
+            - name: get-project
+              method: GET
+              description: "Get project details"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-project
+              method: DELETE
+              description: "Delete a project"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Project ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: activity
+          path: /activity
+          description: "Activity stream"
+          operations:
+            - name: list-activity
+              method: GET
+              description: "List activity entries"
+              inputParameters:
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by activity type"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: version
+          path: /version
+          description: "Server version"
+          operations:
+            - name: get-version
+              method: GET
+              description: "Get Swarm server version"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: helix-swarm-api
+      resources:
+        - path: /v1/reviews
+          name: reviews
+          description: "Code reviews"
+          operations:
+            - method: GET
+              name: list-reviews
+              description: "List reviews"
+              call: "helix-swarm.list-reviews"
+
+    - type: mcp
+      port: 9100
+      namespace: helix-swarm-mcp
+      transport: http
+      tools:
+        - name: list-reviews
+          description: "List code reviews"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-reviews"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-review
+          description: "Get review details"
+          hints:
+            readOnly: true
+          call: "helix-swarm.get-review"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-projects
+          description: "List Swarm projects"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comments
+          description: "List comments"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-comments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-activity
+          description: "List activity stream entries"
+          hints:
+            readOnly: true
+          call: "helix-swarm.list-activity"
+          outputParameters:
+            - type: object
+              mapping: "$."

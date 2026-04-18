@@ -1,0 +1,20 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "description": "A sample description.",
+  "members": [],
+  "owners": [],
+  "subgroups": [],
+  "branches": [],
+  "deleted": true,
+  "deploy": "example_value",
+  "emailFlags": "user@example.com",
+  "jobview": "example_value",
+  "minimumUpVotes": 10,
+  "private": true,
+  "retainDefaultReviewers": true,
+  "tests": "example_value",
+  "workflow": "example_value",
+  "defaults": "example_value",
+  "readme": "example_value"
+}

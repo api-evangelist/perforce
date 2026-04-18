@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project",
+  "type": "object",
+  "description": "A project in Helix Swarm, grouping branches, members, and review settings.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The project identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "The project display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "The project description."
+    },
+    "members": {
+      "type": "array",
+      "description": "List of project member usernames."
+    },
+    "owners": {
+      "type": "array",
+      "description": "List of project owner usernames."
+    },
+    "subgroups": {
+      "type": "array",
+      "description": "List of associated Perforce groups."
+    },
+    "branches": {
+      "type": "array",
+      "description": "Branch definitions for the project."
+    },
+    "deleted": {
+      "type": "boolean",
+      "description": "Whether the project has been deleted."
+    },
+    "deploy": {
+      "type": "object",
+      "description": "Deploy configuration for the project."
+    },
+    "emailFlags": {
+      "type": "object",
+      "description": "Email notification settings."
+    },
+    "jobview": {
+      "type": "string",
+      "description": "A Perforce jobview expression for the project."
+    },
+    "minimumUpVotes": {
+      "type": "integer",
+      "description": "Minimum number of up votes required for approval."
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the project is private."
+    },
+    "retainDefaultReviewers": {
+      "type": "boolean",
+      "description": "Whether to retain default reviewers on review updates."
+    },
+    "tests": {
+      "type": "object",
+      "description": "Test configuration for the project."
+    },
+    "workflow": {
+      "type": "string",
+      "description": "The workflow identifier associated with the project."
+    },
+    "defaults": {
+      "type": "object",
+      "description": "Default settings for the project."
+    },
+    "readme": {
+      "type": "string",
+      "description": "The project readme content."
+    }
+  }
+}

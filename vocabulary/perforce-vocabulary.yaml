@@ -1,0 +1,13 @@
+name: perforce API Vocabulary
+provider: perforce
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 27
+schemas: 4
+tags:
+- Activity
+- Changes
+- Comments
+- Projects
+- Reviews
+- Version

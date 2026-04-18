@@ -24,43 +24,43 @@ externalDocs:
   description: Helix Swarm API Documentation
   url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html
 servers:
-  - url: '{scheme}://{host}/api/v9'
-    description: Helix Swarm server instance
-    variables:
-      scheme:
-        default: https
-        enum:
-          - https
-          - http
-        description: The protocol scheme.
-      host:
-        default: swarm.example.com
-        description: The hostname of your Helix Swarm instance.
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
 tags:
-  - name: Activity
-    description: Endpoints for viewing and creating activity stream entries.
-  - name: Changes
-    description: Endpoints for inspecting changelists and their relationships.
-  - name: Comments
-    description: Endpoints for managing review and changelist comments.
-  - name: Projects
-    description: Endpoints for managing Swarm projects.
-  - name: Reviews
-    description: Endpoints for managing code reviews.
-  - name: Version
-    description: Endpoints for retrieving Swarm server version information.
+- name: Activity
+  description: Endpoints for viewing and creating activity stream entries.
+- name: Changes
+  description: Endpoints for inspecting changelists and their relationships.
+- name: Comments
+  description: Endpoints for managing review and changelist comments.
+- name: Projects
+  description: Endpoints for managing Swarm projects.
+- name: Reviews
+  description: Endpoints for managing code reviews.
+- name: Version
+  description: Endpoints for retrieving Swarm server version information.
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /version:
     get:
       operationId: getVersion
-      summary: Perforce Get server version
+      summary: Perforce Get Server Version
       description: >-
         Retrieves the installed Helix Swarm version, release year, and available
         API versions.
       tags:
-        - Version
+      - Version
       responses:
         '200':
           description: Server version information.
@@ -81,122 +81,149 @@ paths:
                       type: integer
                     description: List of supported API version numbers.
 
+              examples:
+                Getversion200Example:
+                  summary: Default getVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    version: example_value
+                    year: example_value
+                    apiVersions:
+                    - 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/:
     get:
       operationId: listReviews
-      summary: Perforce List reviews
+      summary: Perforce List Reviews
       description: >-
         Retrieves a list of code reviews, with optional filtering by author,
         state, project, participants, keywords, and other criteria.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: after
-          in: query
-          description: A review ID to seek past for pagination.
-          schema:
+      - name: after
+        in: query
+        description: A review ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of reviews to return. Defaults to 1000.
+        schema:
+          type: integer
+          default: 1000
+        example: 10
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      - name: author[]
+        in: query
+        description: Filter reviews by one or more authors.
+        schema:
+          type: array
+          items:
+            type: string
+        explode: true
+        example: []
+      - name: change[]
+        in: query
+        description: Filter reviews by one or more changelist IDs.
+        schema:
+          type: array
+          items:
             type: integer
-        - name: max
-          in: query
-          description: Maximum number of reviews to return. Defaults to 1000.
-          schema:
+        explode: true
+        example: []
+      - name: hasReviewers
+        in: query
+        description: Filter by whether reviewers are assigned.
+        schema:
+          type: boolean
+        example: true
+      - name: ids[]
+        in: query
+        description: Fetch specific reviews by their IDs.
+        schema:
+          type: array
+          items:
             type: integer
-            default: 1000
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
+        explode: true
+        example: []
+      - name: keywords
+        in: query
+        description: Keywords to search for in reviews.
+        schema:
+          type: string
+        example: example_value
+      - name: participants[]
+        in: query
+        description: Filter reviews by one or more participants.
+        schema:
+          type: array
+          items:
             type: string
-        - name: author[]
-          in: query
-          description: Filter reviews by one or more authors.
-          schema:
-            type: array
-            items:
-              type: string
-          explode: true
-        - name: change[]
-          in: query
-          description: Filter reviews by one or more changelist IDs.
-          schema:
-            type: array
-            items:
-              type: integer
-          explode: true
-        - name: hasReviewers
-          in: query
-          description: Filter by whether reviewers are assigned.
-          schema:
-            type: boolean
-        - name: ids[]
-          in: query
-          description: Fetch specific reviews by their IDs.
-          schema:
-            type: array
-            items:
-              type: integer
-          explode: true
-        - name: keywords
-          in: query
-          description: Keywords to search for in reviews.
-          schema:
+        explode: true
+        example: []
+      - name: project[]
+        in: query
+        description: Filter reviews by one or more projects.
+        schema:
+          type: array
+          items:
             type: string
-        - name: participants[]
-          in: query
-          description: Filter reviews by one or more participants.
-          schema:
-            type: array
-            items:
-              type: string
-          explode: true
-        - name: project[]
-          in: query
-          description: Filter reviews by one or more projects.
-          schema:
-            type: array
-            items:
-              type: string
-          explode: true
-        - name: state[]
-          in: query
-          description: >-
-            Filter reviews by state. Valid values include needsReview,
-            needsRevision, approved, archived, and rejected.
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - needsReview
-                - needsRevision
-                - approved
-                - archived
-                - rejected
-          explode: true
-        - name: passesTests
-          in: query
-          description: Filter reviews by whether tests have passed.
-          schema:
-            type: boolean
-        - name: notUpdatedSince
-          in: query
-          description: Filter reviews not updated since the given date (YYYY-mm-dd).
-          schema:
-            type: string
-            format: date
-        - name: hasVoted
-          in: query
-          description: Filter reviews by vote direction.
-          schema:
+        explode: true
+        example: []
+      - name: state[]
+        in: query
+        description: >-
+          Filter reviews by state. Valid values include needsReview,
+          needsRevision, approved, archived, and rejected.
+        schema:
+          type: array
+          items:
             type: string
             enum:
-              - up
-              - down
-        - name: myComments
-          in: query
-          description: Filter reviews that the authenticated user has commented on.
-          schema:
-            type: boolean
+            - needsReview
+            - needsRevision
+            - approved
+            - archived
+            - rejected
+        explode: true
+        example: []
+      - name: passesTests
+        in: query
+        description: Filter reviews by whether tests have passed.
+        schema:
+          type: boolean
+        example: true
+      - name: notUpdatedSince
+        in: query
+        description: Filter reviews not updated since the given date (YYYY-mm-dd).
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: hasVoted
+        in: query
+        description: Filter reviews by vote direction.
+        schema:
+          type: string
+          enum:
+          - up
+          - down
+        example: up
+      - name: myComments
+        in: query
+        description: Filter reviews that the authenticated user has commented on.
+        schema:
+          type: boolean
+        example: true
       responses:
         '200':
           description: A list of reviews.
@@ -215,15 +242,55 @@ paths:
                   totalCount:
                     type: integer
                     description: Total number of reviews matching the query.
+              examples:
+                Listreviews200Example:
+                  summary: Default listReviews 200 response
+                  x-microcks-default: true
+                  value:
+                    lastSeen: 10
+                    reviews:
+                    - id: abc123
+                      author: example_value
+                      changes:
+                      - {}
+                      commits:
+                      - {}
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - {}
+                    totalCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createReview
-      summary: Perforce Create a review
+      summary: Perforce Create a Review
       description: >-
         Creates a new code review from a submitted or pending changelist.
       tags:
-        - Reviews
+      - Reviews
       requestBody:
         required: true
         content:
@@ -231,7 +298,7 @@ paths:
             schema:
               type: object
               required:
-                - change
+              - change
               properties:
                 change:
                   type: integer
@@ -259,6 +326,20 @@ paths:
                       required:
                         type: boolean
                   description: Reviewer groups with optional required flag.
+            examples:
+              CreatereviewRequestExample:
+                summary: Default createReview request
+                x-microcks-default: true
+                value:
+                  change: 10
+                  description: A sample description.
+                  reviewers:
+                  - example_value
+                  requiredReviewers:
+                  - example_value
+                  reviewerGroups:
+                  - name: Example Title
+                    required: true
       responses:
         '200':
           description: The newly created review.
@@ -269,32 +350,78 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Createreview200Example:
+                  summary: Default createReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}:
     get:
       operationId: getReview
-      summary: Perforce Get review details
+      summary: Perforce Get Review Details
       description: >-
         Retrieves detailed information for a specific code review, including
         versions, participants, and reviewer groups.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Review details.
@@ -305,24 +432,69 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Getreview200Example:
+                  summary: Default getReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateReview
-      summary: Perforce Update review description
+      summary: Perforce Update Review Description
       description: >-
         Updates a review's description or author.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         required: true
         content:
@@ -336,6 +508,13 @@ paths:
                 description:
                   type: string
                   description: The new description for the review.
+            examples:
+              UpdatereviewRequestExample:
+                summary: Default updateReview request
+                x-microcks-default: true
+                value:
+                  author: example_value
+                  description: A sample description.
       responses:
         '200':
           description: The updated review.
@@ -346,6 +525,47 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Updatereview200Example:
+                  summary: Default updateReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -353,27 +573,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/transitions:
     get:
       operationId: getReviewTransitions
-      summary: Perforce Get review transitions
+      summary: Perforce Get Review Transitions
       description: >-
         Retrieves the available state transitions for a review, optionally
         considering assumed up-voters.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
-        - name: upVoters
-          in: query
-          description: Comma-separated list of users assumed to have voted up.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      - name: upVoters
+        in: query
+        description: Comma-separated list of users assumed to have voted up.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Available state transitions.
@@ -388,28 +613,38 @@ paths:
                       type: string
                     description: >-
                       Map of transition identifiers to their display labels.
+              examples:
+                Getreviewtransitions200Example:
+                  summary: Default getReviewTransitions 200 response
+                  x-microcks-default: true
+                  value:
+                    transitions: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/state/:
     patch:
       operationId: transitionReviewState
-      summary: Perforce Transition review state
+      summary: Perforce Transition Review State
       description: >-
         Transitions a review to a new state such as approved, rejected,
         needsReview, needsRevision, or archived. Optionally triggers commit
         on approval.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         required: true
         content:
@@ -417,16 +652,16 @@ paths:
             schema:
               type: object
               required:
-                - state
+              - state
               properties:
                 state:
                   type: string
                   enum:
-                    - needsReview
-                    - needsRevision
-                    - approved
-                    - archived
-                    - rejected
+                  - needsReview
+                  - needsRevision
+                  - approved
+                  - archived
+                  - rejected
                   description: The target state for the review.
                 description:
                   type: string
@@ -445,6 +680,18 @@ paths:
                 fixStatus:
                   type: string
                   description: The fix status to apply to attached jobs.
+            examples:
+              TransitionreviewstateRequestExample:
+                summary: Default transitionReviewState request
+                x-microcks-default: true
+                value:
+                  state: needsReview
+                  description: A sample description.
+                  commit: true
+                  wait: true
+                  jobs[]:
+                  - example_value
+                  fixStatus: example_value
       responses:
         '200':
           description: The review with updated state.
@@ -455,6 +702,47 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Transitionreviewstate200Example:
+                  summary: Default transitionReviewState 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -462,22 +750,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/changes/:
     post:
       operationId: addChangeToReview
-      summary: Perforce Add change to review
+      summary: Perforce Add Change to Review
       description: >-
         Adds a changelist to an existing review, either replacing or appending
         to the current set of changes.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         required: true
         content:
@@ -485,7 +777,7 @@ paths:
             schema:
               type: object
               required:
-                - change
+              - change
               properties:
                 change:
                   type: integer
@@ -493,11 +785,18 @@ paths:
                 mode:
                   type: string
                   enum:
-                    - replace
-                    - append
+                  - replace
+                  - append
                   default: replace
                   description: >-
                     Whether to replace the current changes or append the new one.
+            examples:
+              AddchangetoreviewRequestExample:
+                summary: Default addChangeToReview request
+                x-microcks-default: true
+                value:
+                  change: 10
+                  mode: replace
       responses:
         '200':
           description: The updated review.
@@ -508,6 +807,47 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Addchangetoreview200Example:
+                  summary: Default addChangeToReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -515,21 +855,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/vote/:
     post:
       operationId: setReviewVote
-      summary: Perforce Set vote on review
+      summary: Perforce Set Vote on Review
       description: >-
         Casts an up vote, down vote, or clears an existing vote on a review.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         required: true
         content:
@@ -537,18 +881,25 @@ paths:
             schema:
               type: object
               required:
-                - vote
+              - vote
               properties:
                 vote:
                   type: string
                   enum:
-                    - up
-                    - down
-                    - clear
+                  - up
+                  - down
+                  - clear
                   description: The vote to cast.
                 version:
                   type: string
                   description: The review version to associate with the vote.
+            examples:
+              SetreviewvoteRequestExample:
+                summary: Default setReviewVote request
+                x-microcks-default: true
+                value:
+                  vote: up
+                  version: example_value
       responses:
         '200':
           description: Confirmation of the vote.
@@ -559,6 +910,47 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Setreviewvote200Example:
+                  summary: Default setReviewVote 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -566,22 +958,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/cleanup:
     post:
       operationId: cleanupReview
-      summary: Perforce Clean up a review
+      summary: Perforce Clean up a Review
       description: >-
         Cleans up a review's pending changelist, optionally reopening files
         to the user's default changelist.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -591,6 +987,12 @@ paths:
                 reopen:
                   type: boolean
                   description: If true, reopens files in the user's default changelist.
+            examples:
+              CleanupreviewRequestExample:
+                summary: Default cleanupReview request
+                x-microcks-default: true
+                value:
+                  reopen: true
       responses:
         '200':
           description: Cleanup confirmation.
@@ -601,27 +1003,72 @@ paths:
                 properties:
                   review:
                     $ref: '#/components/schemas/Review'
+              examples:
+                Cleanupreview200Example:
+                  summary: Default cleanupReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/{id}/obliterate:
     post:
       operationId: obliterateReview
-      summary: Perforce Obliterate a review
+      summary: Perforce Obliterate a Review
       description: >-
         Permanently removes a review and all associated data. This action
         cannot be undone.
       tags:
-        - Reviews
+      - Reviews
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The review ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
       responses:
         '200':
           description: Obliteration confirmation message.
@@ -633,19 +1080,28 @@ paths:
                   message:
                     type: string
                     description: Confirmation that the review has been obliterated.
+              examples:
+                Obliteratereview200Example:
+                  summary: Default obliterateReview 200 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reviews/archive/:
     post:
       operationId: archiveInactiveReviews
-      summary: Perforce Archive inactive reviews
+      summary: Perforce Archive Inactive Reviews
       description: >-
         Archives reviews that have not been updated since the specified date.
       tags:
-        - Reviews
+      - Reviews
       requestBody:
         required: true
         content:
@@ -653,8 +1109,8 @@ paths:
             schema:
               type: object
               required:
-                - notUpdatedSince
-                - description
+              - notUpdatedSince
+              - description
               properties:
                 notUpdatedSince:
                   type: string
@@ -664,6 +1120,13 @@ paths:
                 description:
                   type: string
                   description: A comment to attach to the archived reviews.
+            examples:
+              ArchiveinactivereviewsRequestExample:
+                summary: Default archiveInactiveReviews request
+                x-microcks-default: true
+                value:
+                  notUpdatedSince: '2026-01-15'
+                  description: A sample description.
       responses:
         '200':
           description: Archive operation result.
@@ -675,20 +1138,29 @@ paths:
                   archivedCount:
                     type: integer
                     description: Number of reviews that were archived.
+              examples:
+                Archiveinactivereviews200Example:
+                  summary: Default archiveInactiveReviews 200 response
+                  x-microcks-default: true
+                  value:
+                    archivedCount: 10
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /dashboards/action:
     get:
       operationId: getActionDashboard
-      summary: Perforce Get action dashboard reviews
+      summary: Perforce Get Action Dashboard Reviews
       description: >-
         Retrieves reviews assigned to the authenticated user's action
         dashboard, showing reviews that require attention.
       tags:
-        - Reviews
+      - Reviews
       responses:
         '200':
           description: Action dashboard reviews.
@@ -707,25 +1179,66 @@ paths:
                   totalCount:
                     type: integer
                     description: Total number of reviews on the dashboard.
+              examples:
+                Getactiondashboard200Example:
+                  summary: Default getActionDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    lastSeen: 10
+                    reviews:
+                    - id: abc123
+                      author: example_value
+                      changes:
+                      - {}
+                      commits:
+                      - {}
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - {}
+                    totalCount: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /changes/{change}/affectsprojects:
     get:
       operationId: getChangeAffectsProjects
-      summary: Perforce Get projects affected by change
+      summary: Perforce Get Projects Affected by Change
       description: >-
         Retrieves the projects and branches that are affected by a given
         changelist.
       tags:
-        - Changes
+      - Changes
       parameters:
-        - name: change
-          in: path
-          required: true
-          description: The changelist number.
-          schema:
-            type: integer
+      - name: change
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: 10
       responses:
         '200':
           description: Projects and branches affected by the changelist.
@@ -748,27 +1261,39 @@ paths:
                             type: string
                         description: >-
                           Map of project names to arrays of affected branch names.
+              examples:
+                Getchangeaffectsprojects200Example:
+                  summary: Default getChangeAffectsProjects 200 response
+                  x-microcks-default: true
+                  value:
+                    change:
+                      id: abc123
+                      projects: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /changes/{change}/defaultreviewers:
     get:
       operationId: getChangeDefaultReviewers
-      summary: Perforce Get default reviewers for change
+      summary: Perforce Get Default Reviewers for Change
       description: >-
         Retrieves the default reviewers configured for the branches and projects
         affected by a changelist.
       tags:
-        - Changes
+      - Changes
       parameters:
-        - name: change
-          in: path
-          required: true
-          description: The changelist number.
-          schema:
-            type: integer
+      - name: change
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: 10
       responses:
         '200':
           description: Default reviewers for the changelist.
@@ -804,37 +1329,56 @@ paths:
                                   type: string
                                 required:
                                   type: boolean
+              examples:
+                Getchangedefaultreviewers200Example:
+                  summary: Default getChangeDefaultReviewers 200 response
+                  x-microcks-default: true
+                  value:
+                    change:
+                      id: abc123
+                      defaultReviewers:
+                        groups:
+                        - name: Example Title
+                          required: true
+                        users:
+                        - name: Example Title
+                          required: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /changes/{id}/check:
     get:
       operationId: checkChange
-      summary: Perforce Check change against workflow rules
+      summary: Perforce Check Change Against Workflow Rules
       description: >-
         Performs configured workflow checks on a changelist, validating it
         against enforced, strict, or shelve rules.
       tags:
-        - Changes
+      - Changes
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The changelist number.
-          schema:
-            type: integer
-        - name: type
-          in: query
-          required: true
-          description: The type of check to perform.
-          schema:
-            type: string
-            enum:
-              - enforced
-              - strict
-              - shelve
+      - name: id
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: abc123
+      - name: type
+        in: query
+        required: true
+        description: The type of check to perform.
+        schema:
+          type: string
+          enum:
+          - enforced
+          - strict
+          - shelve
+        example: enforced
       responses:
         '200':
           description: Check results.
@@ -854,73 +1398,93 @@ paths:
                     items:
                       type: string
                     description: Descriptive messages about check results.
+              examples:
+                Checkchange200Example:
+                  summary: Default checkChange 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
+                    isValid: '500123'
+                    messages:
+                    - example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /comments/:
     get:
       operationId: listComments
-      summary: Perforce List comments
+      summary: Perforce List Comments
       description: >-
         Retrieves a list of comments, optionally filtered by topic, version,
         task state, or archive status.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - name: after
-          in: query
-          description: A comment ID to seek past for pagination.
-          schema:
-            type: integer
-        - name: max
-          in: query
-          description: Maximum number of comments to return. Defaults to 100.
-          schema:
-            type: integer
-            default: 100
-        - name: topic
-          in: query
-          description: >-
-            Filter comments by topic, such as reviews/1234 for a specific review.
-          schema:
+      - name: after
+        in: query
+        description: A comment ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of comments to return. Defaults to 100.
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: topic
+        in: query
+        description: >-
+          Filter comments by topic, such as reviews/1234 for a specific review.
+        schema:
+          type: string
+        example: example_value
+      - name: context[version]
+        in: query
+        description: Filter by a specific review version.
+        schema:
+          type: integer
+        example: 10
+      - name: ignoreArchived
+        in: query
+        description: Exclude comments on archived reviews.
+        schema:
+          type: boolean
+        example: true
+      - name: tasksOnly
+        in: query
+        description: Return only comments flagged as tasks.
+        schema:
+          type: boolean
+        example: true
+      - name: taskStates
+        in: query
+        description: >-
+          Filter by task state. Valid values include open, closed, verified,
+          and comment.
+        schema:
+          type: array
+          items:
             type: string
-        - name: context[version]
-          in: query
-          description: Filter by a specific review version.
-          schema:
-            type: integer
-        - name: ignoreArchived
-          in: query
-          description: Exclude comments on archived reviews.
-          schema:
-            type: boolean
-        - name: tasksOnly
-          in: query
-          description: Return only comments flagged as tasks.
-          schema:
-            type: boolean
-        - name: taskStates
-          in: query
-          description: >-
-            Filter by task state. Valid values include open, closed, verified,
-            and comment.
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - open
-                - closed
-                - verified
-                - comment
-          explode: true
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
-            type: string
+            enum:
+            - open
+            - closed
+            - verified
+            - comment
+        explode: true
+        example: []
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: A list of comments.
@@ -941,16 +1505,27 @@ paths:
                   lastSeen:
                     type: integer
                     description: The ID of the last comment for pagination.
+              examples:
+                Listcomments200Example:
+                  summary: Default listComments 200 response
+                  x-microcks-default: true
+                  value:
+                    topic: example_value
+                    comments: example_value
+                    lastSeen: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createComment
-      summary: Perforce Add a comment
+      summary: Perforce Add a Comment
       description: >-
         Creates a new comment on a topic such as a review or changelist.
         Comments can include inline file context and task flags.
       tags:
-        - Comments
+      - Comments
       requestBody:
         required: true
         content:
@@ -958,8 +1533,8 @@ paths:
             schema:
               type: object
               required:
-                - topic
-                - body
+              - topic
+              - body
               properties:
                 topic:
                   type: string
@@ -977,8 +1552,8 @@ paths:
                 taskState:
                   type: string
                   enum:
-                    - comment
-                    - open
+                  - comment
+                  - open
                   description: Whether the comment is a plain comment or an open task.
                 flags[]:
                   type: array
@@ -1000,6 +1575,23 @@ paths:
                 context[version]:
                   type: integer
                   description: The review version for the inline comment context.
+            examples:
+              CreatecommentRequestExample:
+                summary: Default createComment request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  body: example_value
+                  silenceNotification: example_value
+                  delayNotification: example_value
+                  taskState: comment
+                  flags[]:
+                  - example_value
+                  context[file]: example_value
+                  context[leftLine]: 10
+                  context[rightLine]: 10
+                  context[content]: example_value
+                  context[version]: 10
       responses:
         '200':
           description: The newly created comment.
@@ -1010,26 +1602,56 @@ paths:
                 properties:
                   comment:
                     $ref: '#/components/schemas/Comment'
+              examples:
+                Createcomment200Example:
+                  summary: Default createComment 200 response
+                  x-microcks-default: true
+                  value:
+                    comment:
+                      id: abc123
+                      attachments:
+                      - {}
+                      body: example_value
+                      context:
+                        file: example_value
+                        leftLine: 10
+                        rightLine: 10
+                        content: example_value
+                        version: 10
+                      edited: 10
+                      flags:
+                      - example_value
+                      likes:
+                      - example_value
+                      taskState: comment
+                      time: 10
+                      topic: example_value
+                      updated: 10
+                      user: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /comments/{id}:
     patch:
       operationId: editComment
-      summary: Perforce Edit a comment
+      summary: Perforce Edit a Comment
       description: >-
         Updates an existing comment's body, task state, or flags.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The comment ID.
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        description: The comment ID.
+        schema:
+          type: integer
+        example: abc123
       requestBody:
         required: true
         content:
@@ -1037,7 +1659,7 @@ paths:
             schema:
               type: object
               required:
-                - body
+              - body
               properties:
                 topic:
                   type: string
@@ -1048,10 +1670,10 @@ paths:
                 taskState:
                   type: string
                   enum:
-                    - comment
-                    - open
-                    - closed
-                    - verified
+                  - comment
+                  - open
+                  - closed
+                  - verified
                   description: The updated task state.
                 flags[]:
                   type: array
@@ -1064,6 +1686,18 @@ paths:
                 delayNotification:
                   type: string
                   description: Set to delay email notifications for batching.
+            examples:
+              EditcommentRequestExample:
+                summary: Default editComment request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  body: example_value
+                  taskState: comment
+                  flags[]:
+                  - example_value
+                  silenceNotification: example_value
+                  delayNotification: example_value
       responses:
         '200':
           description: The updated comment.
@@ -1074,6 +1708,32 @@ paths:
                 properties:
                   comment:
                     $ref: '#/components/schemas/Comment'
+              examples:
+                Editcomment200Example:
+                  summary: Default editComment 200 response
+                  x-microcks-default: true
+                  value:
+                    comment:
+                      id: abc123
+                      attachments:
+                      - {}
+                      body: example_value
+                      context:
+                        file: example_value
+                        leftLine: 10
+                        rightLine: 10
+                        content: example_value
+                        version: 10
+                      edited: 10
+                      flags:
+                      - example_value
+                      likes:
+                      - example_value
+                      taskState: comment
+                      time: 10
+                      topic: example_value
+                      updated: 10
+                      user: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -1081,14 +1741,17 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /comments/notify:
     post:
       operationId: sendCommentNotification
-      summary: Perforce Send comment notification
+      summary: Perforce Send Comment Notification
       description: >-
         Sends or previews a notification for pending comments on a topic.
       tags:
-        - Comments
+      - Comments
       requestBody:
         required: true
         content:
@@ -1096,7 +1759,7 @@ paths:
             schema:
               type: object
               required:
-                - topic
+              - topic
               properties:
                 topic:
                   type: string
@@ -1105,6 +1768,13 @@ paths:
                   type: string
                   description: >-
                     Set to true to preview the notification without sending.
+            examples:
+              SendcommentnotificationRequestExample:
+                summary: Default sendCommentNotification request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  preview: example_value
       responses:
         '200':
           description: Notification result.
@@ -1125,59 +1795,77 @@ paths:
                   preview:
                     type: object
                     description: Preview data if preview was requested.
+              examples:
+                Sendcommentnotification200Example:
+                  summary: Default sendCommentNotification 200 response
+                  x-microcks-default: true
+                  value:
+                    isValid: '500123'
+                    message: example_value
+                    code: 10
+                    preview: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /activity:
     get:
       operationId: listActivity
-      summary: Perforce List activity entries
+      summary: Perforce List Activity Entries
       description: >-
         Retrieves a list of activity entries from the activity stream,
         optionally filtered by changelist, stream, or type.
       tags:
-        - Activity
+      - Activity
       parameters:
-        - name: change
-          in: query
-          description: Filter activity by changelist ID.
-          schema:
-            type: integer
-        - name: stream
-          in: query
-          description: >-
-            Filter by activity stream name, such as user-alice,
-            review-1234, or project-myproject.
-          schema:
-            type: string
-        - name: type
-          in: query
-          description: Filter by activity type.
-          schema:
-            type: string
-            enum:
-              - change
-              - comment
-              - job
-              - review
-        - name: after
-          in: query
-          description: An activity ID to seek past for pagination.
-          schema:
-            type: integer
-        - name: max
-          in: query
-          description: Maximum number of entries to return. Defaults to 100.
-          schema:
-            type: integer
-            default: 100
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
-            type: string
+      - name: change
+        in: query
+        description: Filter activity by changelist ID.
+        schema:
+          type: integer
+        example: 10
+      - name: stream
+        in: query
+        description: >-
+          Filter by activity stream name, such as user-alice,
+          review-1234, or project-myproject.
+        schema:
+          type: string
+        example: example_value
+      - name: type
+        in: query
+        description: Filter by activity type.
+        schema:
+          type: string
+          enum:
+          - change
+          - comment
+          - job
+          - review
+        example: change
+      - name: after
+        in: query
+        description: An activity ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of entries to return. Defaults to 100.
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: A list of activity entries.
@@ -1193,15 +1881,37 @@ paths:
                   lastSeen:
                     type: integer
                     description: The ID of the last entry for pagination.
+              examples:
+                Listactivity200Example:
+                  summary: Default listActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    activity:
+                    - id: abc123
+                      action: example_value
+                      change: 10
+                      date: '2026-01-15T10:30:00Z'
+                      description: A sample description.
+                      link: https://www.example.com
+                      streams:
+                      - {}
+                      target: example_value
+                      topic: example_value
+                      type: example_value
+                      user: example_value
+                    lastSeen: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createActivity
-      summary: Perforce Create activity entry
+      summary: Perforce Create Activity Entry
       description: >-
         Creates a new entry in the activity stream.
       tags:
-        - Activity
+      - Activity
       requestBody:
         required: true
         content:
@@ -1209,10 +1919,10 @@ paths:
             schema:
               type: object
               required:
-                - type
-                - user
-                - action
-                - target
+              - type
+              - user
+              - action
+              - target
               properties:
                 type:
                   type: string
@@ -1244,6 +1954,21 @@ paths:
                   type: string
                   format: uri
                   description: A URL for the activity target.
+            examples:
+              CreateactivityRequestExample:
+                summary: Default createActivity request
+                x-microcks-default: true
+                value:
+                  type: example_value
+                  user: example_value
+                  action: example_value
+                  target: example_value
+                  topic: example_value
+                  description: A sample description.
+                  change: 10
+                  streams[]:
+                  - example_value
+                  link: https://www.example.com
       responses:
         '200':
           description: The newly created activity entry.
@@ -1254,31 +1979,54 @@ paths:
                 properties:
                   activity:
                     $ref: '#/components/schemas/Activity'
+              examples:
+                Createactivity200Example:
+                  summary: Default createActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    activity:
+                      id: abc123
+                      action: example_value
+                      change: 10
+                      date: '2026-01-15T10:30:00Z'
+                      description: A sample description.
+                      link: https://www.example.com
+                      streams:
+                      - example_value
+                      target: example_value
+                      topic: example_value
+                      type: example_value
+                      user: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /projects/:
     get:
       operationId: listProjects
-      summary: Perforce List projects
+      summary: Perforce List Projects
       description: >-
         Retrieves a list of Swarm projects with their configuration,
         branches, members, and settings.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
-            type: string
-        - name: workflow
-          in: query
-          description: Filter projects using a specific workflow.
-          schema:
-            type: string
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      - name: workflow
+        in: query
+        description: Filter projects using a specific workflow.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: A list of projects.
@@ -1291,15 +2039,46 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Project'
+              examples:
+                Listprojects200Example:
+                  summary: Default listProjects 200 response
+                  x-microcks-default: true
+                  value:
+                    projects:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      members:
+                      - {}
+                      owners:
+                      - {}
+                      subgroups:
+                      - {}
+                      branches:
+                      - {}
+                      deleted: true
+                      deploy: example_value
+                      emailFlags: user@example.com
+                      jobview: example_value
+                      minimumUpVotes: 10
+                      private: true
+                      retainDefaultReviewers: true
+                      tests: example_value
+                      workflow: example_value
+                      defaults: example_value
+                      readme: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createProject
-      summary: Perforce Create a project
+      summary: Perforce Create a Project
       description: >-
         Creates a new Swarm project with the specified configuration.
       tags:
-        - Projects
+      - Projects
       requestBody:
         required: true
         content:
@@ -1307,8 +2086,8 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - members
+              - name
+              - members
               properties:
                 name:
                   type: string
@@ -1335,6 +2114,20 @@ paths:
                   type: boolean
                   default: false
                   description: Whether the project is private.
+            examples:
+              CreateprojectRequestExample:
+                summary: Default createProject request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  members:
+                  - example_value
+                  subgroups:
+                  - example_value
+                  owners:
+                  - example_value
+                  description: A sample description.
+                  private: true
       responses:
         '200':
           description: The newly created project.
@@ -1345,31 +2138,67 @@ paths:
                 properties:
                   project:
                     $ref: '#/components/schemas/Project'
+              examples:
+                Createproject200Example:
+                  summary: Default createProject 200 response
+                  x-microcks-default: true
+                  value:
+                    project:
+                      id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      members:
+                      - example_value
+                      owners:
+                      - example_value
+                      subgroups:
+                      - example_value
+                      branches:
+                      - id: abc123
+                        name: Example Title
+                        paths: {}
+                        moderators: {}
+                      deleted: true
+                      deploy: example_value
+                      emailFlags: user@example.com
+                      jobview: example_value
+                      minimumUpVotes: 10
+                      private: true
+                      retainDefaultReviewers: true
+                      tests: example_value
+                      workflow: example_value
+                      defaults: example_value
+                      readme: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /projects/{id}:
     get:
       operationId: getProject
-      summary: Perforce Get project details
+      summary: Perforce Get Project Details
       description: >-
         Retrieves detailed information for a specific Swarm project.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The project identifier.
-          schema:
-            type: string
-        - name: fields
-          in: query
-          description: Comma-separated list of fields to include in the response.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: The project identifier.
+        schema:
+          type: string
+        example: abc123
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Project details.
@@ -1380,24 +2209,59 @@ paths:
                 properties:
                   project:
                     $ref: '#/components/schemas/Project'
+              examples:
+                Getproject200Example:
+                  summary: Default getProject 200 response
+                  x-microcks-default: true
+                  value:
+                    project:
+                      id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      members:
+                      - example_value
+                      owners:
+                      - example_value
+                      subgroups:
+                      - example_value
+                      branches:
+                      - id: abc123
+                        name: Example Title
+                        paths: {}
+                        moderators: {}
+                      deleted: true
+                      deploy: example_value
+                      emailFlags: user@example.com
+                      jobview: example_value
+                      minimumUpVotes: 10
+                      private: true
+                      retainDefaultReviewers: true
+                      tests: example_value
+                      workflow: example_value
+                      defaults: example_value
+                      readme: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateProject
-      summary: Perforce Update a project
+      summary: Perforce Update a Project
       description: >-
         Updates an existing Swarm project's configuration.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The project identifier.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: The project identifier.
+        schema:
+          type: string
+        example: abc123
       requestBody:
         required: true
         content:
@@ -1424,6 +2288,18 @@ paths:
                 private:
                   type: boolean
                   description: Updated privacy setting.
+            examples:
+              UpdateprojectRequestExample:
+                summary: Default updateProject request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  members:
+                  - example_value
+                  owners:
+                  - example_value
+                  description: A sample description.
+                  private: true
       responses:
         '200':
           description: The updated project.
@@ -1434,27 +2310,62 @@ paths:
                 properties:
                   project:
                     $ref: '#/components/schemas/Project'
+              examples:
+                Updateproject200Example:
+                  summary: Default updateProject 200 response
+                  x-microcks-default: true
+                  value:
+                    project:
+                      id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      members:
+                      - example_value
+                      owners:
+                      - example_value
+                      subgroups:
+                      - example_value
+                      branches:
+                      - id: abc123
+                        name: Example Title
+                        paths: {}
+                        moderators: {}
+                      deleted: true
+                      deploy: example_value
+                      emailFlags: user@example.com
+                      jobview: example_value
+                      minimumUpVotes: 10
+                      private: true
+                      retainDefaultReviewers: true
+                      tests: example_value
+                      workflow: example_value
+                      defaults: example_value
+                      readme: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteProject
-      summary: Perforce Delete a project
+      summary: Perforce Delete a Project
       description: >-
         Deletes a Swarm project. Only project owners or administrators
         can perform this action.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: The project identifier.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: The project identifier.
+        schema:
+          type: string
+        example: abc123
       responses:
         '200':
           description: Deletion confirmation.
@@ -1466,11 +2377,20 @@ paths:
                   id:
                     type: string
                     description: The ID of the deleted project.
+              examples:
+                Deleteproject200Example:
+                  summary: Default deleteProject 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -1491,43 +2411,53 @@ components:
         id:
           type: integer
           description: The unique review identifier.
+          example: abc123
         author:
           type: string
           description: The username of the review author.
+          example: example_value
         changes:
           type: array
           items:
             type: integer
           description: List of changelist IDs associated with the review.
+          example: []
         commits:
           type: array
           items:
             type: integer
           description: List of committed changelist IDs.
+          example: []
         commitStatus:
           type: array
           items:
             type: object
           description: Status of commit operations.
+          example: []
         created:
           type: integer
           description: Unix timestamp when the review was created.
+          example: 10
         deployDetails:
           type: array
           items:
             type: object
           description: Deploy configuration details.
+          example: []
         deployStatus:
           type: string
           description: The current deploy status.
+          example: example_value
         description:
           type: string
           description: The review description.
+          example: A sample description.
         groups:
           type: array
           items:
             type: object
           description: Reviewer groups assigned to the review.
+          example: []
         participants:
           type: object
           additionalProperties:
@@ -1535,9 +2465,11 @@ components:
           description: >-
             Map of participant usernames to their participation details
             including votes and required status.
+          example: example_value
         pending:
           type: boolean
           description: Whether the review has a pending changelist.
+          example: true
         projects:
           type: object
           additionalProperties:
@@ -1545,6 +2477,7 @@ components:
             items:
               type: string
           description: Map of project IDs to affected branch names.
+          example: example_value
         roles:
           type: object
           additionalProperties:
@@ -1552,36 +2485,44 @@ components:
             items:
               type: string
           description: Map of roles to lists of usernames.
+          example: example_value
         state:
           type: string
           enum:
-            - needsReview
-            - needsRevision
-            - approved
-            - archived
-            - rejected
+          - needsReview
+          - needsRevision
+          - approved
+          - archived
+          - rejected
           description: The current state of the review.
+          example: needsReview
         stateLabel:
           type: string
           description: A display-friendly label for the current state.
+          example: example_value
         testDetails:
           type: array
           items:
             type: object
           description: Details of test runs.
+          example: []
         testStatus:
           type: string
           description: The overall test status.
+          example: example_value
         type:
           type: string
           description: The review type (default or personal).
+          example: example_value
         updated:
           type: integer
           description: Unix timestamp when the review was last updated.
+          example: 10
         updateDate:
           type: string
           format: date-time
           description: ISO 8601 formatted date when the review was last updated.
+          example: '2026-01-15T10:30:00Z'
         versions:
           type: array
           items:
@@ -1603,6 +2544,7 @@ components:
                 type: integer
           description: List of review version objects.
 
+          example: []
     Comment:
       type: object
       description: >-
@@ -1611,14 +2553,17 @@ components:
         id:
           type: integer
           description: The unique comment identifier.
+          example: abc123
         attachments:
           type: array
           items:
             type: object
           description: File attachments on the comment.
+          example: []
         body:
           type: string
           description: The comment body text.
+          example: example_value
         context:
           type: object
           description: Inline context for file-level comments.
@@ -1638,40 +2583,49 @@ components:
             version:
               type: integer
               description: The review version.
+          example: example_value
         edited:
           type: integer
           description: Unix timestamp of the last edit, or null if not edited.
+          example: 10
         flags:
           type: array
           items:
             type: string
           description: Flags applied to the comment.
+          example: []
         likes:
           type: array
           items:
             type: string
           description: Usernames of users who liked the comment.
+          example: []
         taskState:
           type: string
           enum:
-            - comment
-            - open
-            - closed
-            - verified
+          - comment
+          - open
+          - closed
+          - verified
           description: The task state of the comment.
+          example: comment
         time:
           type: integer
           description: Unix timestamp when the comment was created.
+          example: 10
         topic:
           type: string
           description: The topic the comment belongs to, such as reviews/1234.
+          example: example_value
         updated:
           type: integer
           description: Unix timestamp of the last update.
+          example: 10
         user:
           type: string
           description: The username of the comment author.
 
+          example: example_value
     Activity:
       type: object
       description: >-
@@ -1681,41 +2635,52 @@ components:
         id:
           type: integer
           description: The unique activity entry identifier.
+          example: abc123
         action:
           type: string
           description: A past-tense description of the action performed.
+          example: example_value
         change:
           type: integer
           description: The related changelist ID, if applicable.
+          example: 10
         date:
           type: string
           format: date-time
           description: The date and time the activity occurred.
+          example: '2026-01-15T10:30:00Z'
         description:
           type: string
           description: Contextual information about the activity.
+          example: A sample description.
         link:
           type: string
           format: uri
           description: A URL linking to the activity target.
+          example: https://www.example.com
         streams:
           type: array
           items:
             type: string
           description: The activity streams this entry appears in.
+          example: []
         target:
           type: string
           description: The object that received the action.
+          example: example_value
         topic:
           type: string
           description: An associated comment thread topic.
+          example: example_value
         type:
           type: string
           description: The activity type classification.
+          example: example_value
         user:
           type: string
           description: The username of the user who performed the action.
 
+          example: example_value
     Project:
       type: object
       description: >-
@@ -1725,27 +2690,33 @@ components:
         id:
           type: string
           description: The project identifier.
+          example: abc123
         name:
           type: string
           description: The project display name.
+          example: Example Title
         description:
           type: string
           description: The project description.
+          example: A sample description.
         members:
           type: array
           items:
             type: string
           description: List of project member usernames.
+          example: []
         owners:
           type: array
           items:
             type: string
           description: List of project owner usernames.
+          example: []
         subgroups:
           type: array
           items:
             type: string
           description: List of associated Perforce groups.
+          example: []
         branches:
           type: array
           items:
@@ -1764,40 +2735,52 @@ components:
                 items:
                   type: string
           description: Branch definitions for the project.
+          example: []
         deleted:
           type: boolean
           description: Whether the project has been deleted.
+          example: true
         deploy:
           type: object
           description: Deploy configuration for the project.
+          example: example_value
         emailFlags:
           type: object
           description: Email notification settings.
+          example: user@example.com
         jobview:
           type: string
           description: A Perforce jobview expression for the project.
+          example: example_value
         minimumUpVotes:
           type: integer
           description: Minimum number of up votes required for approval.
+          example: 10
         private:
           type: boolean
           description: Whether the project is private.
+          example: true
         retainDefaultReviewers:
           type: boolean
           description: Whether to retain default reviewers on review updates.
+          example: true
         tests:
           type: object
           description: Test configuration for the project.
+          example: example_value
         workflow:
           type: string
           description: The workflow identifier associated with the project.
+          example: example_value
         defaults:
           type: object
           description: Default settings for the project.
+          example: example_value
         readme:
           type: string
           description: The project readme content.
 
+          example: example_value
   responses:
     BadRequest:
       description: >-

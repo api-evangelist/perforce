@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Comment",
+  "type": "object",
+  "description": "A comment on a review, changelist, or other topic in Helix Swarm.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique comment identifier."
+    },
+    "attachments": {
+      "type": "array",
+      "description": "File attachments on the comment."
+    },
+    "body": {
+      "type": "string",
+      "description": "The comment body text."
+    },
+    "context": {
+      "type": "object",
+      "description": "Inline context for file-level comments."
+    },
+    "edited": {
+      "type": "integer",
+      "description": "Unix timestamp of the last edit, or null if not edited."
+    },
+    "flags": {
+      "type": "array",
+      "description": "Flags applied to the comment."
+    },
+    "likes": {
+      "type": "array",
+      "description": "Usernames of users who liked the comment."
+    },
+    "taskState": {
+      "type": "string",
+      "description": "The task state of the comment."
+    },
+    "time": {
+      "type": "integer",
+      "description": "Unix timestamp when the comment was created."
+    },
+    "topic": {
+      "type": "string",
+      "description": "The topic the comment belongs to, such as reviews/1234."
+    },
+    "updated": {
+      "type": "integer",
+      "description": "Unix timestamp of the last update."
+    },
+    "user": {
+      "type": "string",
+      "description": "The username of the comment author."
+    }
+  }
+}

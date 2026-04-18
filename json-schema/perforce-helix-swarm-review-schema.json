@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Review",
+  "type": "object",
+  "description": "A code review in Helix Swarm, representing a set of changes under review with participants, votes, and state.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique review identifier."
+    },
+    "author": {
+      "type": "string",
+      "description": "The username of the review author."
+    },
+    "changes": {
+      "type": "array",
+      "description": "List of changelist IDs associated with the review."
+    },
+    "commits": {
+      "type": "array",
+      "description": "List of committed changelist IDs."
+    },
+    "commitStatus": {
+      "type": "array",
+      "description": "Status of commit operations."
+    },
+    "created": {
+      "type": "integer",
+      "description": "Unix timestamp when the review was created."
+    },
+    "deployDetails": {
+      "type": "array",
+      "description": "Deploy configuration details."
+    },
+    "deployStatus": {
+      "type": "string",
+      "description": "The current deploy status."
+    },
+    "description": {
+      "type": "string",
+      "description": "The review description."
+    },
+    "groups": {
+      "type": "array",
+      "description": "Reviewer groups assigned to the review."
+    },
+    "participants": {
+      "type": "object",
+      "description": "Map of participant usernames to their participation details including votes and required status."
+    },
+    "pending": {
+      "type": "boolean",
+      "description": "Whether the review has a pending changelist."
+    },
+    "projects": {
+      "type": "object",
+      "description": "Map of project IDs to affected branch names."
+    },
+    "roles": {
+      "type": "object",
+      "description": "Map of roles to lists of usernames."
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the review."
+    },
+    "stateLabel": {
+      "type": "string",
+      "description": "A display-friendly label for the current state."
+    },
+    "testDetails": {
+      "type": "array",
+      "description": "Details of test runs."
+    },
+    "testStatus": {
+      "type": "string",
+      "description": "The overall test status."
+    },
+    "type": {
+      "type": "string",
+      "description": "The review type (default or personal)."
+    },
+    "updated": {
+      "type": "integer",
+      "description": "Unix timestamp when the review was last updated."
+    },
+    "updateDate": {
+      "type": "string",
+      "description": "ISO 8601 formatted date when the review was last updated."
+    },
+    "versions": {
+      "type": "array",
+      "description": "List of review version objects."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "abc123",
+  "action": "example_value",
+  "change": 10,
+  "date": "example_value",
+  "description": "A sample description.",
+  "link": "example_value",
+  "streams": [],
+  "target": "example_value",
+  "topic": "example_value",
+  "type": "example_value",
+  "user": "example_value"
+}

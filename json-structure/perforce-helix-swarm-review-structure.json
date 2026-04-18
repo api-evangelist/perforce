@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Review",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "string"
+    },
+    "changes": {
+      "type": "array"
+    },
+    "commits": {
+      "type": "array"
+    },
+    "commitStatus": {
+      "type": "array"
+    },
+    "created": {
+      "type": "integer"
+    },
+    "deployDetails": {
+      "type": "array"
+    },
+    "deployStatus": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "groups": {
+      "type": "array"
+    },
+    "participants": {
+      "type": "object"
+    },
+    "pending": {
+      "type": "boolean"
+    },
+    "projects": {
+      "type": "object"
+    },
+    "roles": {
+      "type": "object"
+    },
+    "state": {
+      "type": "string"
+    },
+    "stateLabel": {
+      "type": "string"
+    },
+    "testDetails": {
+      "type": "array"
+    },
+    "testStatus": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "integer"
+    },
+    "updateDate": {
+      "type": "string"
+    },
+    "versions": {
+      "type": "array"
+    }
+  }
+}
