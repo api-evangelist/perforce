@@ -1,0 +1,13 @@
+{
+  "repo": "perforce",
+  "feeds": [
+    {
+      "source": "https://www.perforce.com/blog",
+      "feed_url": "https://www.perforce.com/rss.xml",
+      "saved": 10,
+      "title": "Perforce Software"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:34:32Z"
+}
