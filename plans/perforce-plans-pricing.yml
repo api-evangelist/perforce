@@ -4,228 +4,185 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Perforce
 providerId: perforce
 created: '2026-05-04'
-modified: '2026-05-04'
-tags: []
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Version Control
+  - DevOps
+  - Source Control
+  - SCM
+  - Application Lifecycle Management
+  - Project Management
+description: Perforce sells per-user / per-developer subscriptions for its product portfolio (Helix
+  Core / P4, Helix Swarm, Helix ALM, Helix TeamHub, Hansoft, P4 Plan, P4 DAM). Public pricing is
+  published only for the Helix Core / P4 product family - a Free tier for up to 5 users / 20
+  workspaces / 1000 files, a Cloud tier at $39 per user per month for up to 100 users with 64 GB
+  storage, and Scale and Platform tiers at custom-quoted annual pricing. Other product lines
+  (Hansoft, Helix ALM, TeamHub, P4 DAM, Hosted P4 Plan, Helix Authentication Service) are quoted by
+  Perforce sales. APIs ship with the underlying product license rather than as a separately
+  metered SKU.
+sources:
+  - https://www.perforce.com/products/helix-core
+  - https://www.perforce.com/resources/vcs/helix-core-pricing
 plans:
-  - id: perforce-free
-    name: Free
+  - id: perforce-p4-free
+    name: P4 (Helix Core) - Free
     type: freemium
-    description: Free entry tier for the Perforce API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free tier for Helix Core / P4 covering small teams of up to 5 users.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Users
+        name: users
         type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
+        metric: seat
+        limit: 5
+        timeFrame: usage
         geo: global
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
         unit: 1
-        price: '0.00'
+        price: '$0'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+      - label: Workspaces
+        name: workspaces
+        type: quota
+        metric: workspace
+        limit: 20
+        timeFrame: usage
         geo: global
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
         unit: 1
-        price: '0.00'
+        price: included
+        userMultiplied: false
+      - label: Files
+        name: files_total
+        type: quota
+        metric: file
+        limit: 1000
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Git Repositories
+        name: git_repos
+        type: quota
+        metric: repository
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Lifetime Support Cases
+        name: support_cases
+        type: quota
+        metric: case
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Perforce Helix Core API
-      - name: Perforce P4 REST API
-      - name: Perforce Helix Swarm API
-      - name: Perforce Hansoft API
-      - name: Perforce P4 Plan API
-      - name: Perforce Helix ALM REST API
-      - name: Perforce Helix TeamHub API
-      - name: Perforce P4 DAM REST API
-  - id: perforce-pro
-    name: Professional
-    type: paid
-    description: Production tier for Perforce. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: P4 Code Review
+      - name: Cloud Deployment Templates
+      - name: Free Training
+      - name: Self-Hosted Helix Core
+  - id: perforce-p4-cloud
+    name: P4 Cloud
+    type: subscription
+    description: Hosted Helix Core for teams of up to 100 users with unlimited workspaces, support,
+      and 64 GB storage.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
+      - label: Per-User Subscription
+        name: per_user_subscription
+        type: subscription
+        metric: seat
         limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Perforce Helix Core API
-      - name: Perforce P4 REST API
-      - name: Perforce Helix Swarm API
-      - name: Perforce Hansoft API
-      - name: Perforce P4 Plan API
-      - name: Perforce Helix ALM REST API
-      - name: Perforce Helix TeamHub API
-      - name: Perforce P4 DAM REST API
-      - name: Perforce P4 Search API
-      - name: Perforce Helix Authentication Service API
-  - id: perforce-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Perforce. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
+        unit: 1
+        price: '$39/user/month'
+        userMultiplied: true
+      - label: Included Storage
+        name: included_storage
         type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
+        metric: GB
+        limit: 64
+        timeFrame: usage
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.perforce.com/helix-core/v1
-          - https://p4server.example.com/api/v0
-          - https://swarm.example.com/api/v10
-          - https://hansoft.example.com/api
-          - https://p4plan.example.com/api
-          - https://helixalm.example.com/helix-alm/api/v0
-          - https://teamhub.example.com/api/v1
-          - https://dam.example.com/api
-          - https://p4search.example.com/api
-          - https://auth.example.com
-        unit: 1
-        price: custom
+        price: included
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Perforce Helix Core API
-      - name: Perforce P4 REST API
-      - name: Perforce Helix Swarm API
-      - name: Perforce Hansoft API
-      - name: Perforce P4 Plan API
-      - name: Perforce Helix ALM REST API
-      - name: Perforce Helix TeamHub API
-      - name: Perforce P4 DAM REST API
-      - name: Perforce P4 Search API
-      - name: Perforce Helix Authentication Service API
+      - name: Hosted Helix Core
+      - name: Unlimited Workspaces
+      - name: Unlimited Support Cases
+      - name: Automatic Updates and Backups
+      - name: P4 Code Review (3+ users)
+  - id: perforce-p4-scale
+    name: P4 Scale
+    type: enterprise
+    description: Self-hosted Helix Core for unlimited users; custom-quoted, billed annually.
+    entries:
+      - label: Per-User Subscription
+        name: per_user_subscription
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+    elements:
+      - name: Unlimited Users
+      - name: Unlimited Workspaces
+      - name: Unlimited Support Cases
+      - name: Unlimited Git Repos
+      - name: Optional P4 DAM Add-On
+  - id: perforce-p4-platform
+    name: P4 Platform
+    type: enterprise
+    description: Top-tier Helix Core bundle that adds P4 DAM and P4 Plan; custom-quoted annual
+      contract.
+    entries:
+      - label: Per-User Subscription
+        name: per_user_subscription
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+    elements:
+      - name: Everything in P4 Scale
+      - name: P4 DAM Included
+      - name: P4 Plan Included
+  - id: perforce-portfolio-other
+    name: Other Perforce Products (Hansoft, Helix ALM, TeamHub, Helix Authentication, P4 Search)
+    type: enterprise
+    description: Per-user / per-server subscriptions for the rest of the Perforce portfolio. Pricing
+      is not published; quoted by Perforce sales based on user count, deployment type (cloud vs
+      on-prem), and required modules. APIs are included with the product license.
+    entries:
+      - label: Per-User Subscription
+        name: per_user_subscription
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+    elements:
+      - name: Helix ALM (Issue / Test / Requirements)
+      - name: Hansoft (Agile Planning)
+      - name: P4 Plan
+      - name: Helix TeamHub (Git)
+      - name: P4 DAM
+      - name: P4 Search
+      - name: Helix Authentication Service
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

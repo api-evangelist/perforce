@@ -1,207 +1,114 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Perforce
+providerId: perforce
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Version Control
+  - DevOps
+  - Application Lifecycle Management
+description: FOCUS-aligned FinOps for Perforce - per-user subscription model across the Helix /
+  P4 product family with a published $39 per-user-per-month Cloud SKU and contact-sales tiers for
+  Scale, Platform, and the broader portfolio. APIs are included with the product license rather
+  than separately metered.
+sources:
+  - https://www.perforce.com/products/helix-core
+  - https://www.perforce.com/resources/vcs/helix-core-pricing
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Perforce
-providerId: perforce
-publisherName: Perforce
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Perforce API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Perforce Software, Inc.
+serviceCategory: Developer Tools
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Tiered Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Refund
 focusColumns:
   ServiceName: Perforce
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Developer Tools
+  ServiceSubcategory: Version Control
   ProviderName: Perforce
-  PublisherName: Perforce
-  InvoiceIssuerName: Perforce
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Perforce Software, Inc.
+  InvoiceIssuerName: Perforce Software, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: p4_cloud_user_month
+    description: Monthly per-user seat for the published P4 Cloud SKU ($39 per user per month).
+    unit: seat-month
+    aggregation: count
     dimensions:
-      - api
-      - endpoint
+      - product
+      - tenant
+  - name: p4_self_hosted_user_year
+    description: Annual per-user seat for self-hosted Helix Core (Free / Scale / Platform tiers).
+    unit: seat-year
+    aggregation: count
+    dimensions:
+      - product
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
+  - name: p4_cloud_storage
+    description: Hosted Helix Core storage (64 GB included with Cloud; overage by upgrade /
+      contact sales).
     unit: GB
-    aggregation: sum
+    aggregation: max
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - tenant
+  - name: helix_alm_user_year
+    description: Per-user seat for Helix ALM (Issues / Test / Requirements). Quoted annually by
+      sales.
+    unit: seat-year
+    aggregation: count
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Perforce Helix Core API
-    baseURL: https://api.perforce.com/helix-core/v1
-    tags:
-      - DevOps
-      - SCM
-      - Source Control
-      - Version Control
-    serviceName: Perforce Helix Core API
-    serviceCategory: API
-  - name: Perforce P4 REST API
-    baseURL: https://p4server.example.com/api/v0
-    tags:
-      - Automation
-      - DevOps
-      - REST API
-      - Version Control
-    serviceName: Perforce P4 REST API
-    serviceCategory: API
-  - name: Perforce Helix Swarm API
-    baseURL: https://swarm.example.com/api/v10
-    tags:
-      - Code Review
-      - Collaboration
-      - Workflow
-    serviceName: Perforce Helix Swarm API
-    serviceCategory: API
-  - name: Perforce Hansoft API
-    baseURL: https://hansoft.example.com/api
-    tags:
-      - Agile
-      - Planning
-      - Project Management
-    serviceName: Perforce Hansoft API
-    serviceCategory: API
-  - name: Perforce P4 Plan API
-    baseURL: https://p4plan.example.com/api
-    tags:
-      - Agile
-      - GraphQL
-      - Planning
-      - Project Management
-    serviceName: Perforce P4 Plan API
-    serviceCategory: API
-  - name: Perforce Helix ALM REST API
-    baseURL: https://helixalm.example.com/helix-alm/api/v0
-    tags:
-      - Application Lifecycle Management
-      - Issue Tracking
-      - Requirements Management
-      - Test Management
-    serviceName: Perforce Helix ALM REST API
-    serviceCategory: API
-  - name: Perforce Helix TeamHub API
-    baseURL: https://teamhub.example.com/api/v1
-    tags:
-      - Collaboration
-      - Git
-      - Repositories
-      - Source Code Management
-    serviceName: Perforce Helix TeamHub API
-    serviceCategory: API
-  - name: Perforce P4 DAM REST API
-    baseURL: https://dam.example.com/api
-    tags:
-      - Asset Management
-      - Digital Asset Management
-      - Media
-      - Version Control
-    serviceName: Perforce P4 DAM REST API
-    serviceCategory: API
-  - name: Perforce P4 Search API
-    baseURL: https://p4search.example.com/api
-    tags:
-      - Code Search
-      - Indexing
-      - Search
-    serviceName: Perforce P4 Search API
-    serviceCategory: API
-  - name: Perforce Helix Authentication Service API
-    baseURL: https://auth.example.com
-    tags:
-      - Authentication
-      - Identity
-      - OpenID Connect
-      - SAML
-      - SSO
-    serviceName: Perforce Helix Authentication Service API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - module
+  - name: hansoft_user_year
+    description: Per-user seat for Hansoft Agile planning. Quoted annually by sales.
+    unit: seat-year
+    aggregation: count
+    dimensions:
+      - team
+  - name: teamhub_user_year
+    description: Per-user seat for Helix TeamHub (Git collaboration). Quoted annually by sales.
+    unit: seat-year
+    aggregation: count
+    dimensions:
+      - tenant
+  - name: p4_dam_user_year
+    description: Per-user seat for P4 DAM (digital asset management). Bundled with Platform tier.
+    unit: seat-year
+    aggregation: count
+    dimensions:
+      - tenant
+principles:
+  - name: Visibility
+    description: Track named-user counts via each Perforce product's admin console (p4 users, Swarm
+      admin, Helix ALM admin); reconcile against the renewal SKU each year.
+  - name: Allocation
+    description: Allocate seats by tagging Perforce users to studios / business units in the user
+      directory or via Helix Authentication Service group claims; map game-studio or product-line
+      ownership to the renewal contract.
+  - name: Optimization
+    description: Move teams above 5 users from the Free tier to P4 Cloud (or self-host) before
+      hitting the 1000-file limit; consolidate Hansoft / Helix ALM / TeamHub renewals onto a
+      single Perforce contract for negotiation; right-size P4 Cloud storage to the 64 GB
+      included envelope.
+  - name: Accountability
+    description: Engineering / studio leadership owns the seat count per renewal; finance reviews
+      active-developer counts against contracted seats annually before renewal.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

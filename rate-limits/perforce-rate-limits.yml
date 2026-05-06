@@ -4,126 +4,55 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Perforce
 providerId: perforce
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Perforce API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Version Control
+  - DevOps
+notes: Perforce APIs ship inside customer-deployed (or single-tenant cloud) servers. There is no
+  public, multi-tenant API gateway with documented per-key rate limits. Throughput is bounded by
+  the customer's own server hardware, license type, and any reverse-proxy limits the customer
+  configures. The exception is P4 Cloud, where Perforce manages the server but does not publish
+  per-key rate limits.
+description: Perforce products (Helix Core / P4, Helix Swarm, Helix ALM, P4 DAM, P4 Search, Helix
+  TeamHub, Hansoft, Helix Authentication Service) are deployed as customer-managed or hosted
+  single-tenant servers. The vendor does not publish numeric API rate limits because throughput is
+  bounded by the customer's deployed capacity. P4 Cloud is multi-tenant managed but does not
+  publish per-tenant API rate-limit numerics.
+sources:
+  - https://www.perforce.com/products/helix-core
+  - https://www.perforce.com/resources/vcs/helix-core-pricing
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Perforce Helix Core API
-      - Perforce P4 REST API
-      - Perforce Helix Swarm API
-      - Perforce Hansoft API
-      - Perforce P4 Plan API
-      - Perforce Helix ALM REST API
-      - Perforce Helix TeamHub API
-      - Perforce P4 DAM REST API
-      - Perforce P4 Search API
-      - Perforce Helix Authentication Service API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Perforce Helix Core API
-      - Perforce P4 REST API
-      - Perforce Helix Swarm API
-      - Perforce Hansoft API
-      - Perforce P4 Plan API
-      - Perforce Helix ALM REST API
-      - Perforce Helix TeamHub API
-      - Perforce P4 DAM REST API
-      - Perforce P4 Search API
-      - Perforce Helix Authentication Service API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Perforce Helix Core API
-      - Perforce P4 REST API
-      - Perforce Helix Swarm API
-      - Perforce Hansoft API
-      - Perforce P4 Plan API
-      - Perforce Helix ALM REST API
-      - Perforce Helix TeamHub API
-      - Perforce P4 DAM REST API
-      - Perforce P4 Search API
-      - Perforce Helix Authentication Service API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Perforce Helix Core API
-      - Perforce P4 REST API
-      - Perforce Helix Swarm API
-      - Perforce Hansoft API
-      - Perforce P4 Plan API
-      - Perforce Helix ALM REST API
-      - Perforce Helix TeamHub API
-      - Perforce P4 DAM REST API
-      - Perforce P4 Search API
-      - Perforce Helix Authentication Service API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Perforce Helix Core API
-      - Perforce P4 REST API
-      - Perforce Helix Swarm API
-      - Perforce Hansoft API
-      - Perforce P4 Plan API
-      - Perforce Helix ALM REST API
-      - Perforce Helix TeamHub API
-      - Perforce P4 DAM REST API
-      - Perforce P4 Search API
-      - Perforce Helix Authentication Service API
+  - name: Self-hosted Perforce APIs
+    scope: server
+    metric: varies
+    limit: 'bounded by customer deployment; no vendor-published per-second / per-minute numeric'
+    notes: Includes Helix Core P4 REST, Swarm, Helix ALM, TeamHub, Hansoft, P4 Plan, P4 DAM,
+      P4 Search, Helix Authentication Service. Throughput depends on hardware sizing and customer
+      configuration.
+  - name: P4 Cloud APIs
+    scope: tenant
+    metric: varies
+    limit: 'not publicly documented; managed-service fair-use'
+    notes: Multi-tenant managed Helix Core. Limits are managed by Perforce ops and not published
+      per-key.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Customer-Managed Throughput
+    description: For self-hosted Perforce products, the deploying organization is responsible for
+      sizing servers and any reverse-proxy / load-balancer rate limits.
+  - name: Backoff
+    description: Standard practice on 429 / 503 is exponential backoff with jitter; honor
+      Retry-After if returned by an upstream proxy.
+  - name: Long-Running P4 Commands
+    description: Some Helix Core operations (sync, p4 print of large files) are long-running rather
+      than throttled per-second; size client batch operations accordingly.
+  - name: License Concurrency
+    description: Per-user license counts cap concurrent named-user sessions rather than per-second
+      API throughput.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
