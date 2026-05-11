@@ -231,6 +231,11 @@ common:
         description: Helix Core plugin for Unity game engine enabling version control of game projects directly within the editor.
       - name: Unreal Engine
         description: Native Helix Core integration with Unreal Engine for versioning game assets and source code.
+integrations:
+  - name: 'Atlassian: Jira'
+  - name: 'JetBrains: IntelliJ IDEA'
+  - name: 'MathWorks: MATLAB/Simulink'
+  - name: ftrack
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
