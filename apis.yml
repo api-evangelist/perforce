@@ -7,7 +7,7 @@ type: Index
 position: Consumer
 access: 3rd-Party
 created: '2024-01-01'
-modified: '2026-04-18'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - name: Perforce Helix Core API
@@ -231,6 +231,9 @@ common:
         description: Helix Core plugin for Unity game engine enabling version control of game projects directly within the editor.
       - name: Unreal Engine
         description: Native Helix Core integration with Unreal Engine for versioning game assets and source code.
+  - name: MCP Server
+    url: https://github.com/perforce/p4mcp-server
+    type: MCPServer
 integrations:
   - name: 'Atlassian: Jira'
   - name: 'JetBrains: IntelliJ IDEA'
