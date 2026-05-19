@@ -1,0 +1,246 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Perforce Helix Swarm API — Projects
+  description: 'Perforce Helix Swarm API — Projects. 5 operations. Lead operation: Perforce List Projects. Self-contained
+    Naftiko capability covering one Perforce business surface.'
+  tags:
+  - Perforce
+  - Projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFORCE_API_KEY: PERFORCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: helix-swarm-projects
+    baseUri: ''
+    description: Perforce Helix Swarm API — Projects business capability. Self-contained, no shared references.
+    resources:
+    - name: projects
+      path: /projects/
+      operations:
+      - name: listprojects
+        method: GET
+        description: Perforce List Projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of fields to include in the response.
+        - name: workflow
+          in: query
+          type: string
+          description: Filter projects using a specific workflow.
+      - name: createproject
+        method: POST
+        description: Perforce Create a Project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: projects-id
+      path: /projects/{id}
+      operations:
+      - name: getproject
+        method: GET
+        description: Perforce Get Project Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project identifier.
+          required: true
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of fields to include in the response.
+      - name: updateproject
+        method: PATCH
+        description: Perforce Update a Project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteproject
+        method: DELETE
+        description: Perforce Delete a Project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The project identifier.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.PERFORCE_USER}}'
+      password: '{{env.PERFORCE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: helix-swarm-projects-rest
+    port: 8080
+    description: REST adapter for Perforce Helix Swarm API — Projects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/projects
+      name: projects
+      description: REST surface for projects.
+      operations:
+      - method: GET
+        name: listprojects
+        description: Perforce List Projects
+        call: helix-swarm-projects.listprojects
+        with:
+          fields: rest.fields
+          workflow: rest.workflow
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createproject
+        description: Perforce Create a Project
+        call: helix-swarm-projects.createproject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{id}
+      name: projects-id
+      description: REST surface for projects-id.
+      operations:
+      - method: GET
+        name: getproject
+        description: Perforce Get Project Details
+        call: helix-swarm-projects.getproject
+        with:
+          id: rest.id
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateproject
+        description: Perforce Update a Project
+        call: helix-swarm-projects.updateproject
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteproject
+        description: Perforce Delete a Project
+        call: helix-swarm-projects.deleteproject
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: helix-swarm-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Perforce Helix Swarm API — Projects. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: perforce-list-projects
+      description: Perforce List Projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: helix-swarm-projects.listprojects
+      with:
+        fields: tools.fields
+        workflow: tools.workflow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perforce-create-project
+      description: Perforce Create a Project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: helix-swarm-projects.createproject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perforce-get-project-details
+      description: Perforce Get Project Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: helix-swarm-projects.getproject
+      with:
+        id: tools.id
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perforce-update-project
+      description: Perforce Update a Project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: helix-swarm-projects.updateproject
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perforce-delete-project
+      description: Perforce Delete a Project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: helix-swarm-projects.deleteproject
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

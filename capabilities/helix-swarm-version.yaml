@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Perforce Helix Swarm API — Version
+  description: 'Perforce Helix Swarm API — Version. 1 operations. Lead operation: Perforce Get Server Version. Self-contained
+    Naftiko capability covering one Perforce business surface.'
+  tags:
+  - Perforce
+  - Version
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFORCE_API_KEY: PERFORCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: helix-swarm-version
+    baseUri: ''
+    description: Perforce Helix Swarm API — Version business capability. Self-contained, no shared references.
+    resources:
+    - name: version
+      path: /version
+      operations:
+      - name: getversion
+        method: GET
+        description: Perforce Get Server Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.PERFORCE_USER}}'
+      password: '{{env.PERFORCE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: helix-swarm-version-rest
+    port: 8080
+    description: REST adapter for Perforce Helix Swarm API — Version. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/version
+      name: version
+      description: REST surface for version.
+      operations:
+      - method: GET
+        name: getversion
+        description: Perforce Get Server Version
+        call: helix-swarm-version.getversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: helix-swarm-version-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Perforce Helix Swarm API — Version. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: perforce-get-server-version
+      description: Perforce Get Server Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: helix-swarm-version.getversion
+      outputParameters:
+      - type: object
+        mapping: $.

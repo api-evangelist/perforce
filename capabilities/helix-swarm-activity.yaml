@@ -1,0 +1,145 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Perforce Helix Swarm API — Activity
+  description: 'Perforce Helix Swarm API — Activity. 2 operations. Lead operation: Perforce List Activity Entries. Self-contained
+    Naftiko capability covering one Perforce business surface.'
+  tags:
+  - Perforce
+  - Activity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    PERFORCE_API_KEY: PERFORCE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: helix-swarm-activity
+    baseUri: ''
+    description: Perforce Helix Swarm API — Activity business capability. Self-contained, no shared references.
+    resources:
+    - name: activity
+      path: /activity
+      operations:
+      - name: listactivity
+        method: GET
+        description: Perforce List Activity Entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: change
+          in: query
+          type: integer
+          description: Filter activity by changelist ID.
+        - name: stream
+          in: query
+          type: string
+          description: Filter by activity stream name, such as user-alice, review-1234, or project-myproject.
+        - name: type
+          in: query
+          type: string
+          description: Filter by activity type.
+        - name: after
+          in: query
+          type: integer
+          description: An activity ID to seek past for pagination.
+        - name: max
+          in: query
+          type: integer
+          description: Maximum number of entries to return. Defaults to 100.
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of fields to include in the response.
+      - name: createactivity
+        method: POST
+        description: Perforce Create Activity Entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.PERFORCE_USER}}'
+      password: '{{env.PERFORCE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: helix-swarm-activity-rest
+    port: 8080
+    description: REST adapter for Perforce Helix Swarm API — Activity. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/activity
+      name: activity
+      description: REST surface for activity.
+      operations:
+      - method: GET
+        name: listactivity
+        description: Perforce List Activity Entries
+        call: helix-swarm-activity.listactivity
+        with:
+          change: rest.change
+          stream: rest.stream
+          type: rest.type
+          after: rest.after
+          max: rest.max
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createactivity
+        description: Perforce Create Activity Entry
+        call: helix-swarm-activity.createactivity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: helix-swarm-activity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Perforce Helix Swarm API — Activity. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: perforce-list-activity-entries
+      description: Perforce List Activity Entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: helix-swarm-activity.listactivity
+      with:
+        change: tools.change
+        stream: tools.stream
+        type: tools.type
+        after: tools.after
+        max: tools.max
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: perforce-create-activity-entry
+      description: Perforce Create Activity Entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: helix-swarm-activity.createactivity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
