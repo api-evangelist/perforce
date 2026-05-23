@@ -1,0 +1,57 @@
+{
+  "operationId": "editComment",
+  "method": "PATCH",
+  "path": "/comments/{id}",
+  "summary": "Perforce Edit a Comment",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "EditcommentRequestExample",
+      "example": {
+        "topic": "example_value",
+        "body": "example_value",
+        "taskState": "comment",
+        "flags[]": [
+          "example_value"
+        ],
+        "silenceNotification": "example_value",
+        "delayNotification": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Editcomment200Example",
+      "example": {
+        "comment": {
+          "id": "abc123",
+          "attachments": [
+            {}
+          ],
+          "body": "example_value",
+          "context": {
+            "file": "example_value",
+            "leftLine": 10,
+            "rightLine": 10,
+            "content": "example_value",
+            "version": 10
+          },
+          "edited": 10,
+          "flags": [
+            "example_value"
+          ],
+          "likes": [
+            "example_value"
+          ],
+          "taskState": "comment",
+          "time": 10,
+          "topic": "example_value",
+          "updated": 10,
+          "user": "example_value"
+        }
+      }
+    }
+  ]
+}

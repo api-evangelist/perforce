@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Comment",
+  "title": "Comment",
+  "type": "object",
+  "description": "A comment on a review, changelist, or other topic in Helix Swarm.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique comment identifier.",
+      "example": "abc123"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "File attachments on the comment.",
+      "example": []
+    },
+    "body": {
+      "type": "string",
+      "description": "The comment body text.",
+      "example": "example_value"
+    },
+    "context": {
+      "type": "object",
+      "description": "Inline context for file-level comments.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The depot file path."
+        },
+        "leftLine": {
+          "type": "integer",
+          "description": "The left-side line number."
+        },
+        "rightLine": {
+          "type": "integer",
+          "description": "The right-side line number."
+        },
+        "content": {
+          "type": "string",
+          "description": "Adjacent content for context."
+        },
+        "version": {
+          "type": "integer",
+          "description": "The review version."
+        }
+      },
+      "example": "example_value"
+    },
+    "edited": {
+      "type": "integer",
+      "description": "Unix timestamp of the last edit, or null if not edited.",
+      "example": 10
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Flags applied to the comment.",
+      "example": []
+    },
+    "likes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Usernames of users who liked the comment.",
+      "example": []
+    },
+    "taskState": {
+      "type": "string",
+      "enum": [
+        "comment",
+        "open",
+        "closed",
+        "verified"
+      ],
+      "description": "The task state of the comment.",
+      "example": "comment"
+    },
+    "time": {
+      "type": "integer",
+      "description": "Unix timestamp when the comment was created.",
+      "example": 10
+    },
+    "topic": {
+      "type": "string",
+      "description": "The topic the comment belongs to, such as reviews/1234.",
+      "example": "example_value"
+    },
+    "updated": {
+      "type": "integer",
+      "description": "Unix timestamp of the last update.",
+      "example": 10
+    },
+    "user": {
+      "type": "string",
+      "description": "The username of the comment author.",
+      "example": "example_value"
+    }
+  }
+}

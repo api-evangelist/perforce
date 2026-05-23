@@ -1,0 +1,21 @@
+{
+  "operationId": "checkChange",
+  "method": "GET",
+  "path": "/changes/{id}/check",
+  "summary": "Perforce Check Change Against Workflow Rules",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Checkchange200Example",
+      "example": {
+        "status": "example_value",
+        "isValid": "500123",
+        "messages": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

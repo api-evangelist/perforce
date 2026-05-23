@@ -1,0 +1,49 @@
+{
+  "operationId": "createActivity",
+  "method": "POST",
+  "path": "/activity",
+  "summary": "Perforce Create Activity Entry",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "CreateactivityRequestExample",
+      "example": {
+        "type": "example_value",
+        "user": "example_value",
+        "action": "example_value",
+        "target": "example_value",
+        "topic": "example_value",
+        "description": "A sample description.",
+        "change": 10,
+        "streams[]": [
+          "example_value"
+        ],
+        "link": "https://www.example.com"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createactivity200Example",
+      "example": {
+        "activity": {
+          "id": "abc123",
+          "action": "example_value",
+          "change": 10,
+          "date": "2026-01-15T10:30:00Z",
+          "description": "A sample description.",
+          "link": "https://www.example.com",
+          "streams": [
+            "example_value"
+          ],
+          "target": "example_value",
+          "topic": "example_value",
+          "type": "example_value",
+          "user": "example_value"
+        }
+      }
+    }
+  ]
+}

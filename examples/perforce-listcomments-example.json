@@ -1,0 +1,19 @@
+{
+  "operationId": "listComments",
+  "method": "GET",
+  "path": "/comments/",
+  "summary": "Perforce List Comments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listcomments200Example",
+      "example": {
+        "topic": "example_value",
+        "comments": "example_value",
+        "lastSeen": 10
+      }
+    }
+  ]
+}

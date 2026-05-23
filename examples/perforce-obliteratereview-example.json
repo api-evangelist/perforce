@@ -1,0 +1,17 @@
+{
+  "operationId": "obliterateReview",
+  "method": "POST",
+  "path": "/reviews/{id}/obliterate",
+  "summary": "Perforce Obliterate a Review",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Obliteratereview200Example",
+      "example": {
+        "message": "example_value"
+      }
+    }
+  ]
+}

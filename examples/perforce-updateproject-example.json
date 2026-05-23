@@ -1,0 +1,65 @@
+{
+  "operationId": "updateProject",
+  "method": "PATCH",
+  "path": "/projects/{id}",
+  "summary": "Perforce Update a Project",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "UpdateprojectRequestExample",
+      "example": {
+        "name": "Example Title",
+        "members": [
+          "example_value"
+        ],
+        "owners": [
+          "example_value"
+        ],
+        "description": "A sample description.",
+        "private": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updateproject200Example",
+      "example": {
+        "project": {
+          "id": "abc123",
+          "name": "Example Title",
+          "description": "A sample description.",
+          "members": [
+            "example_value"
+          ],
+          "owners": [
+            "example_value"
+          ],
+          "subgroups": [
+            "example_value"
+          ],
+          "branches": [
+            {
+              "id": "abc123",
+              "name": "Example Title",
+              "paths": {},
+              "moderators": {}
+            }
+          ],
+          "deleted": true,
+          "deploy": "example_value",
+          "emailFlags": "user@example.com",
+          "jobview": "example_value",
+          "minimumUpVotes": 10,
+          "private": true,
+          "retainDefaultReviewers": true,
+          "tests": "example_value",
+          "workflow": "example_value",
+          "defaults": "example_value",
+          "readme": "example_value"
+        }
+      }
+    }
+  ]
+}

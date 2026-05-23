@@ -1,0 +1,17 @@
+{
+  "operationId": "deleteProject",
+  "method": "DELETE",
+  "path": "/projects/{id}",
+  "summary": "Perforce Delete a Project",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Deleteproject200Example",
+      "example": {
+        "id": "abc123"
+      }
+    }
+  ]
+}

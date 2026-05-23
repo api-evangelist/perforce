@@ -1,0 +1,17 @@
+name: Perforce Domain Vocabulary
+provider: Perforce
+providerId: perforce
+description: Tag-derived vocabulary for the Perforce API surface; sourced from openapi/ tags.
+terms:
+- term: Activity
+  description: Endpoints for viewing and creating activity stream entries.
+- term: Changes
+  description: Endpoints for inspecting changelists and their relationships.
+- term: Comments
+  description: Endpoints for managing review and changelist comments.
+- term: Projects
+  description: Endpoints for managing Swarm projects.
+- term: Reviews
+  description: Endpoints for managing code reviews.
+- term: Version
+  description: Endpoints for retrieving Swarm server version information.

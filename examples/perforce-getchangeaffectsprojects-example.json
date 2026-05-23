@@ -1,0 +1,20 @@
+{
+  "operationId": "getChangeAffectsProjects",
+  "method": "GET",
+  "path": "/changes/{change}/affectsprojects",
+  "summary": "Perforce Get Projects Affected by Change",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getchangeaffectsprojects200Example",
+      "example": {
+        "change": {
+          "id": "abc123",
+          "projects": "example_value"
+        }
+      }
+    }
+  ]
+}

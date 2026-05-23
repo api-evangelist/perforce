@@ -1,0 +1,17 @@
+{
+  "operationId": "getReviewTransitions",
+  "method": "GET",
+  "path": "/reviews/{id}/transitions",
+  "summary": "Perforce Get Review Transitions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getreviewtransitions200Example",
+      "example": {
+        "transitions": "example_value"
+      }
+    }
+  ]
+}

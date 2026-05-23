@@ -1,0 +1,71 @@
+{
+  "operationId": "addChangeToReview",
+  "method": "POST",
+  "path": "/reviews/{id}/changes/",
+  "summary": "Perforce Add Change to Review",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "AddchangetoreviewRequestExample",
+      "example": {
+        "change": 10,
+        "mode": "replace"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Addchangetoreview200Example",
+      "example": {
+        "review": {
+          "id": "abc123",
+          "author": "example_value",
+          "changes": [
+            10
+          ],
+          "commits": [
+            10
+          ],
+          "commitStatus": [
+            {}
+          ],
+          "created": 10,
+          "deployDetails": [
+            {}
+          ],
+          "deployStatus": "example_value",
+          "description": "A sample description.",
+          "groups": [
+            {}
+          ],
+          "participants": "example_value",
+          "pending": true,
+          "projects": "example_value",
+          "roles": "example_value",
+          "state": "needsReview",
+          "stateLabel": "example_value",
+          "testDetails": [
+            {}
+          ],
+          "testStatus": "example_value",
+          "type": "example_value",
+          "updated": 10,
+          "updateDate": "2026-01-15T10:30:00Z",
+          "versions": [
+            {
+              "difference": 10,
+              "stream": "example_value",
+              "change": 10,
+              "user": "example_value",
+              "time": 10,
+              "pending": true,
+              "archiveChange": 10
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

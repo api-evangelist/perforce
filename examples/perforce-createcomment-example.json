@@ -1,0 +1,62 @@
+{
+  "operationId": "createComment",
+  "method": "POST",
+  "path": "/comments/",
+  "summary": "Perforce Add a Comment",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "CreatecommentRequestExample",
+      "example": {
+        "topic": "example_value",
+        "body": "example_value",
+        "silenceNotification": "example_value",
+        "delayNotification": "example_value",
+        "taskState": "comment",
+        "flags[]": [
+          "example_value"
+        ],
+        "context[file]": "example_value",
+        "context[leftLine]": 10,
+        "context[rightLine]": 10,
+        "context[content]": "example_value",
+        "context[version]": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Createcomment200Example",
+      "example": {
+        "comment": {
+          "id": "abc123",
+          "attachments": [
+            {}
+          ],
+          "body": "example_value",
+          "context": {
+            "file": "example_value",
+            "leftLine": 10,
+            "rightLine": 10,
+            "content": "example_value",
+            "version": 10
+          },
+          "edited": 10,
+          "flags": [
+            "example_value"
+          ],
+          "likes": [
+            "example_value"
+          ],
+          "taskState": "comment",
+          "time": 10,
+          "topic": "example_value",
+          "updated": 10,
+          "user": "example_value"
+        }
+      }
+    }
+  ]
+}

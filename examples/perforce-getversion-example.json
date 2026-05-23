@@ -1,0 +1,21 @@
+{
+  "operationId": "getVersion",
+  "method": "GET",
+  "path": "/version",
+  "summary": "Perforce Get Server Version",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getversion200Example",
+      "example": {
+        "version": "example_value",
+        "year": "example_value",
+        "apiVersions": [
+          10
+        ]
+      }
+    }
+  ]
+}

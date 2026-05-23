@@ -1,0 +1,29 @@
+{
+  "operationId": "sendCommentNotification",
+  "method": "POST",
+  "path": "/comments/notify",
+  "summary": "Perforce Send Comment Notification",
+  "requestExamples": [
+    {
+      "contentType": "application/x-www-form-urlencoded",
+      "name": "SendcommentnotificationRequestExample",
+      "example": {
+        "topic": "example_value",
+        "preview": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Sendcommentnotification200Example",
+      "example": {
+        "isValid": "500123",
+        "message": "example_value",
+        "code": 10,
+        "preview": "example_value"
+      }
+    }
+  ]
+}

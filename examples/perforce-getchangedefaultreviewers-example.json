@@ -1,0 +1,33 @@
+{
+  "operationId": "getChangeDefaultReviewers",
+  "method": "GET",
+  "path": "/changes/{change}/defaultreviewers",
+  "summary": "Perforce Get Default Reviewers for Change",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getchangedefaultreviewers200Example",
+      "example": {
+        "change": {
+          "id": "abc123",
+          "defaultReviewers": {
+            "groups": [
+              {
+                "name": "Example Title",
+                "required": true
+              }
+            ],
+            "users": [
+              {
+                "name": "Example Title",
+                "required": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

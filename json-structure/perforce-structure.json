@@ -1,0 +1,279 @@
+{
+  "provider": "Perforce",
+  "providerId": "perforce",
+  "kind": "json-structure",
+  "description": "Structural overview of the Perforce API surface; extracted from openapi/.",
+  "schemaCount": 4,
+  "operationCount": 27,
+  "schemas": [
+    {
+      "name": "Review",
+      "type": "object",
+      "propertyCount": 22,
+      "required": []
+    },
+    {
+      "name": "Comment",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "Activity",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "Project",
+      "type": "object",
+      "propertyCount": 18,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/version",
+      "operationId": "getVersion",
+      "summary": "Perforce Get Server Version",
+      "tags": [
+        "Version"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reviews/",
+      "operationId": "listReviews",
+      "summary": "Perforce List Reviews",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/",
+      "operationId": "createReview",
+      "summary": "Perforce Create a Review",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reviews/{id}",
+      "operationId": "getReview",
+      "summary": "Perforce Get Review Details",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/reviews/{id}",
+      "operationId": "updateReview",
+      "summary": "Perforce Update Review Description",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reviews/{id}/transitions",
+      "operationId": "getReviewTransitions",
+      "summary": "Perforce Get Review Transitions",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/reviews/{id}/state/",
+      "operationId": "transitionReviewState",
+      "summary": "Perforce Transition Review State",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/{id}/changes/",
+      "operationId": "addChangeToReview",
+      "summary": "Perforce Add Change to Review",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/{id}/vote/",
+      "operationId": "setReviewVote",
+      "summary": "Perforce Set Vote on Review",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/{id}/cleanup",
+      "operationId": "cleanupReview",
+      "summary": "Perforce Clean up a Review",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/{id}/obliterate",
+      "operationId": "obliterateReview",
+      "summary": "Perforce Obliterate a Review",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reviews/archive/",
+      "operationId": "archiveInactiveReviews",
+      "summary": "Perforce Archive Inactive Reviews",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/dashboards/action",
+      "operationId": "getActionDashboard",
+      "summary": "Perforce Get Action Dashboard Reviews",
+      "tags": [
+        "Reviews"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/changes/{change}/affectsprojects",
+      "operationId": "getChangeAffectsProjects",
+      "summary": "Perforce Get Projects Affected by Change",
+      "tags": [
+        "Changes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/changes/{change}/defaultreviewers",
+      "operationId": "getChangeDefaultReviewers",
+      "summary": "Perforce Get Default Reviewers for Change",
+      "tags": [
+        "Changes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/changes/{id}/check",
+      "operationId": "checkChange",
+      "summary": "Perforce Check Change Against Workflow Rules",
+      "tags": [
+        "Changes"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/comments/",
+      "operationId": "listComments",
+      "summary": "Perforce List Comments",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/comments/",
+      "operationId": "createComment",
+      "summary": "Perforce Add a Comment",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/comments/{id}",
+      "operationId": "editComment",
+      "summary": "Perforce Edit a Comment",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/comments/notify",
+      "operationId": "sendCommentNotification",
+      "summary": "Perforce Send Comment Notification",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/activity",
+      "operationId": "listActivity",
+      "summary": "Perforce List Activity Entries",
+      "tags": [
+        "Activity"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/activity",
+      "operationId": "createActivity",
+      "summary": "Perforce Create Activity Entry",
+      "tags": [
+        "Activity"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/",
+      "operationId": "listProjects",
+      "summary": "Perforce List Projects",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/projects/",
+      "operationId": "createProject",
+      "summary": "Perforce Create a Project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/projects/{id}",
+      "operationId": "getProject",
+      "summary": "Perforce Get Project Details",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/projects/{id}",
+      "operationId": "deleteProject",
+      "summary": "Perforce Delete a Project",
+      "tags": [
+        "Projects"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/{id}",
+      "operationId": "updateProject",
+      "summary": "Perforce Update a Project",
+      "tags": [
+        "Projects"
+      ]
+    }
+  ]
+}
