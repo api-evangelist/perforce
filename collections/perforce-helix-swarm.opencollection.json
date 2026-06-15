@@ -1,0 +1,1001 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce Get Server Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/version"
+          },
+          "docs": "Retrieves the installed Helix Swarm version, release year, and available API versions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/reviews/",
+            "params": [
+              {
+                "name": "after",
+                "value": "10",
+                "type": "query",
+                "description": "A review ID to seek past for pagination."
+              },
+              {
+                "name": "max",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of reviews to return. Defaults to 1000."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              },
+              {
+                "name": "author[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter reviews by one or more authors."
+              },
+              {
+                "name": "change[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter reviews by one or more changelist IDs."
+              },
+              {
+                "name": "hasReviewers",
+                "value": "true",
+                "type": "query",
+                "description": "Filter by whether reviewers are assigned."
+              },
+              {
+                "name": "ids[]",
+                "value": "",
+                "type": "query",
+                "description": "Fetch specific reviews by their IDs."
+              },
+              {
+                "name": "keywords",
+                "value": "example_value",
+                "type": "query",
+                "description": "Keywords to search for in reviews."
+              },
+              {
+                "name": "participants[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter reviews by one or more participants."
+              },
+              {
+                "name": "project[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter reviews by one or more projects."
+              },
+              {
+                "name": "state[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected."
+              },
+              {
+                "name": "passesTests",
+                "value": "true",
+                "type": "query",
+                "description": "Filter reviews by whether tests have passed."
+              },
+              {
+                "name": "notUpdatedSince",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "Filter reviews not updated since the given date (YYYY-mm-dd)."
+              },
+              {
+                "name": "hasVoted",
+                "value": "up",
+                "type": "query",
+                "description": "Filter reviews by vote direction."
+              },
+              {
+                "name": "myComments",
+                "value": "true",
+                "type": "query",
+                "description": "Filter reviews that the authenticated user has commented on."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of code reviews, with optional filtering by author, state, project, participants, keywords, and other criteria."
+        },
+        {
+          "info": {
+            "name": "Perforce Create a Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "change",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "reviewers",
+                  "value": ""
+                },
+                {
+                  "name": "requiredReviewers",
+                  "value": ""
+                },
+                {
+                  "name": "reviewerGroups",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new code review from a submitted or pending changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Review Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/reviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific code review, including versions, participants, and reviewer groups."
+        },
+        {
+          "info": {
+            "name": "Perforce Update Review Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/reviews/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "author",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a review's description or author."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Review Transitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/transitions",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              },
+              {
+                "name": "upVoters",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of users assumed to have voted up."
+              }
+            ]
+          },
+          "docs": "Retrieves the available state transitions for a review, optionally considering assumed up-voters."
+        },
+        {
+          "info": {
+            "name": "Perforce Transition Review State",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/state/",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "state",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "commit",
+                  "value": ""
+                },
+                {
+                  "name": "wait",
+                  "value": ""
+                },
+                {
+                  "name": "jobs[]",
+                  "value": ""
+                },
+                {
+                  "name": "fixStatus",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Transitions a review to a new state such as approved, rejected, needsReview, needsRevision, or archived. Optionally triggers commit on approval."
+        },
+        {
+          "info": {
+            "name": "Perforce Add Change to Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/changes/",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "change",
+                  "value": ""
+                },
+                {
+                  "name": "mode",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Adds a changelist to an existing review, either replacing or appending to the current set of changes."
+        },
+        {
+          "info": {
+            "name": "Perforce Set Vote on Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/vote/",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "vote",
+                  "value": ""
+                },
+                {
+                  "name": "version",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Casts an up vote, down vote, or clears an existing vote on a review."
+        },
+        {
+          "info": {
+            "name": "Perforce Clean up a Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/cleanup",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "reopen",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Cleans up a review's pending changelist, optionally reopening files to the user's default changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Obliterate a Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/:id/obliterate",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The review ID."
+              }
+            ]
+          },
+          "docs": "Permanently removes a review and all associated data. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Perforce Archive Inactive Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/reviews/archive/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "notUpdatedSince",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Archives reviews that have not been updated since the specified date."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Action Dashboard Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/dashboards/action"
+          },
+          "docs": "Retrieves reviews assigned to the authenticated user's action dashboard, showing reviews that require attention."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce Get Projects Affected by Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:change/affectsprojects",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "path",
+                "description": "The changelist number."
+              }
+            ]
+          },
+          "docs": "Retrieves the projects and branches that are affected by a given changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Default Reviewers for Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:change/defaultreviewers",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "path",
+                "description": "The changelist number."
+              }
+            ]
+          },
+          "docs": "Retrieves the default reviewers configured for the branches and projects affected by a changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Check Change Against Workflow Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:id/check",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The changelist number."
+              },
+              {
+                "name": "type",
+                "value": "enforced",
+                "type": "query",
+                "description": "The type of check to perform."
+              }
+            ]
+          },
+          "docs": "Performs configured workflow checks on a changelist, validating it against enforced, strict, or shelve rules."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/comments/",
+            "params": [
+              {
+                "name": "after",
+                "value": "10",
+                "type": "query",
+                "description": "A comment ID to seek past for pagination."
+              },
+              {
+                "name": "max",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of comments to return. Defaults to 100."
+              },
+              {
+                "name": "topic",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter comments by topic, such as reviews/1234 for a specific review."
+              },
+              {
+                "name": "context[version]",
+                "value": "10",
+                "type": "query",
+                "description": "Filter by a specific review version."
+              },
+              {
+                "name": "ignoreArchived",
+                "value": "true",
+                "type": "query",
+                "description": "Exclude comments on archived reviews."
+              },
+              {
+                "name": "tasksOnly",
+                "value": "true",
+                "type": "query",
+                "description": "Return only comments flagged as tasks."
+              },
+              {
+                "name": "taskStates",
+                "value": "",
+                "type": "query",
+                "description": "Filter by task state. Valid values include open, closed, verified, and comment."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of comments, optionally filtered by topic, version, task state, or archive status."
+        },
+        {
+          "info": {
+            "name": "Perforce Add a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/comments/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "body",
+                  "value": ""
+                },
+                {
+                  "name": "silenceNotification",
+                  "value": ""
+                },
+                {
+                  "name": "delayNotification",
+                  "value": ""
+                },
+                {
+                  "name": "taskState",
+                  "value": ""
+                },
+                {
+                  "name": "flags[]",
+                  "value": ""
+                },
+                {
+                  "name": "context[file]",
+                  "value": ""
+                },
+                {
+                  "name": "context[leftLine]",
+                  "value": ""
+                },
+                {
+                  "name": "context[rightLine]",
+                  "value": ""
+                },
+                {
+                  "name": "context[content]",
+                  "value": ""
+                },
+                {
+                  "name": "context[version]",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new comment on a topic such as a review or changelist. Comments can include inline file context and task flags."
+        },
+        {
+          "info": {
+            "name": "Perforce Edit a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The comment ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "body",
+                  "value": ""
+                },
+                {
+                  "name": "taskState",
+                  "value": ""
+                },
+                {
+                  "name": "flags[]",
+                  "value": ""
+                },
+                {
+                  "name": "silenceNotification",
+                  "value": ""
+                },
+                {
+                  "name": "delayNotification",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an existing comment's body, task state, or flags."
+        },
+        {
+          "info": {
+            "name": "Perforce Send Comment Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/comments/notify",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "preview",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Sends or previews a notification for pending comments on a topic."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Activity Entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/activity",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "query",
+                "description": "Filter activity by changelist ID."
+              },
+              {
+                "name": "stream",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject."
+              },
+              {
+                "name": "type",
+                "value": "change",
+                "type": "query",
+                "description": "Filter by activity type."
+              },
+              {
+                "name": "after",
+                "value": "10",
+                "type": "query",
+                "description": "An activity ID to seek past for pagination."
+              },
+              {
+                "name": "max",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of entries to return. Defaults to 100."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of activity entries from the activity stream, optionally filtered by changelist, stream, or type."
+        },
+        {
+          "info": {
+            "name": "Perforce Create Activity Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/activity",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "user",
+                  "value": ""
+                },
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "target",
+                  "value": ""
+                },
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "change",
+                  "value": ""
+                },
+                {
+                  "name": "streams[]",
+                  "value": ""
+                },
+                {
+                  "name": "link",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new entry in the activity stream."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/projects/",
+            "params": [
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              },
+              {
+                "name": "workflow",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter projects using a specific workflow."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Swarm projects with their configuration, branches, members, and settings."
+        },
+        {
+          "info": {
+            "name": "Perforce Create a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/projects/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "members",
+                  "value": ""
+                },
+                {
+                  "name": "subgroups",
+                  "value": ""
+                },
+                {
+                  "name": "owners",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "private",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new Swarm project with the specified configuration."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Project Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific Swarm project."
+        },
+        {
+          "info": {
+            "name": "Perforce Update a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "members",
+                  "value": ""
+                },
+                {
+                  "name": "owners",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "private",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an existing Swarm project's configuration."
+        },
+        {
+          "info": {
+            "name": "Perforce Delete a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              }
+            ]
+          },
+          "docs": "Deletes a Swarm project. Only project owners or administrators can perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
