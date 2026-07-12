@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/perforce-helix-swarm-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using Perforce username and password or ticket. The
+    password can be a standard Perforce password or a Swarm-generated API ticket.
+  sources:
+  - openapi/perforce-helix-swarm-openapi.yml

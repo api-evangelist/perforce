@@ -200,6 +200,10 @@ apis:
   - type: GitHubRepository
     url: https://github.com/perforce/helix-authentication-service
 common:
+- type: DomainSecurity
+  url: security/perforce-domain-security.yml
+- type: Authentication
+  url: authentication/perforce-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/perforce
 - type: Portal
