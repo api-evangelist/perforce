@@ -200,6 +200,8 @@ apis:
   - type: GitHubRepository
     url: https://github.com/perforce/helix-authentication-service
 common:
+- type: AgenticAccess
+  url: agentic-access/perforce-agentic-access.yml
 - type: DomainSecurity
   url: security/perforce-domain-security.yml
 - type: Authentication
