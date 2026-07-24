@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm Activity Version API
+  version: '9'
+  description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+
+    access to code reviews, changelists, comments, activity streams, and project
+
+    management. Helix Swarm enables collaborative code review workflows
+
+    integrated with Helix Core version control.
+
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+
+    API versions older than v9 are no longer supported. Version v11 extends
+
+    the API but does not yet cover all features, so v9 is recommended for
+
+    full functionality.'
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+servers:
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
+security:
+- basicAuth: []
+tags:
+- name: Version
+  description: Endpoints for retrieving Swarm server version information.
+paths:
+  /version:
+    get:
+      operationId: getVersion
+      summary: Perforce Get Server Version
+      description: Retrieves the installed Helix Swarm version, release year, and available API versions.
+      tags:
+      - Version
+      responses:
+        '200':
+          description: Server version information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: The installed Swarm version string.
+                  year:
+                    type: string
+                    description: The release year of the installed version.
+                  apiVersions:
+                    type: array
+                    items:
+                      type: integer
+                    description: List of supported API version numbers.
+              examples:
+                Getversion200Example:
+                  summary: Default getVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    version: example_value
+                    year: example_value
+                    apiVersions:
+                    - 10
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Perforce username and password or ticket. The password can be a standard Perforce password or a Swarm-generated API ticket.
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html

@@ -1,0 +1,1323 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm Activity Reviews API
+  version: '9'
+  description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+
+    access to code reviews, changelists, comments, activity streams, and project
+
+    management. Helix Swarm enables collaborative code review workflows
+
+    integrated with Helix Core version control.
+
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+
+    API versions older than v9 are no longer supported. Version v11 extends
+
+    the API but does not yet cover all features, so v9 is recommended for
+
+    full functionality.'
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+servers:
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
+security:
+- basicAuth: []
+tags:
+- name: Reviews
+  description: Endpoints for managing code reviews.
+paths:
+  /reviews/:
+    get:
+      operationId: listReviews
+      summary: Perforce List Reviews
+      description: Retrieves a list of code reviews, with optional filtering by author, state, project, participants, keywords, and other criteria.
+      tags:
+      - Reviews
+      parameters:
+      - name: after
+        in: query
+        description: A review ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of reviews to return. Defaults to 1000.
+        schema:
+          type: integer
+          default: 1000
+        example: 10
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      - name: author[]
+        in: query
+        description: Filter reviews by one or more authors.
+        schema:
+          type: array
+          items:
+            type: string
+        explode: true
+        example: []
+      - name: change[]
+        in: query
+        description: Filter reviews by one or more changelist IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        example: []
+      - name: hasReviewers
+        in: query
+        description: Filter by whether reviewers are assigned.
+        schema:
+          type: boolean
+        example: true
+      - name: ids[]
+        in: query
+        description: Fetch specific reviews by their IDs.
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        example: []
+      - name: keywords
+        in: query
+        description: Keywords to search for in reviews.
+        schema:
+          type: string
+        example: example_value
+      - name: participants[]
+        in: query
+        description: Filter reviews by one or more participants.
+        schema:
+          type: array
+          items:
+            type: string
+        explode: true
+        example: []
+      - name: project[]
+        in: query
+        description: Filter reviews by one or more projects.
+        schema:
+          type: array
+          items:
+            type: string
+        explode: true
+        example: []
+      - name: state[]
+        in: query
+        description: Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - needsReview
+            - needsRevision
+            - approved
+            - archived
+            - rejected
+        explode: true
+        example: []
+      - name: passesTests
+        in: query
+        description: Filter reviews by whether tests have passed.
+        schema:
+          type: boolean
+        example: true
+      - name: notUpdatedSince
+        in: query
+        description: Filter reviews not updated since the given date (YYYY-mm-dd).
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: hasVoted
+        in: query
+        description: Filter reviews by vote direction.
+        schema:
+          type: string
+          enum:
+          - up
+          - down
+        example: up
+      - name: myComments
+        in: query
+        description: Filter reviews that the authenticated user has commented on.
+        schema:
+          type: boolean
+        example: true
+      responses:
+        '200':
+          description: A list of reviews.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last review in the result set for pagination.
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  totalCount:
+                    type: integer
+                    description: Total number of reviews matching the query.
+              examples:
+                Listreviews200Example:
+                  summary: Default listReviews 200 response
+                  x-microcks-default: true
+                  value:
+                    lastSeen: 10
+                    reviews:
+                    - id: abc123
+                      author: example_value
+                      changes:
+                      - {}
+                      commits:
+                      - {}
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - {}
+                    totalCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createReview
+      summary: Perforce Create a Review
+      description: Creates a new code review from a submitted or pending changelist.
+      tags:
+      - Reviews
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - change
+              properties:
+                change:
+                  type: integer
+                  description: The changelist ID to create the review from.
+                description:
+                  type: string
+                  description: The review description.
+                reviewers:
+                  type: array
+                  items:
+                    type: string
+                  description: List of reviewer usernames.
+                requiredReviewers:
+                  type: array
+                  items:
+                    type: string
+                  description: List of required reviewer usernames.
+                reviewerGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      required:
+                        type: boolean
+                  description: Reviewer groups with optional required flag.
+            examples:
+              CreatereviewRequestExample:
+                summary: Default createReview request
+                x-microcks-default: true
+                value:
+                  change: 10
+                  description: A sample description.
+                  reviewers:
+                  - example_value
+                  requiredReviewers:
+                  - example_value
+                  reviewerGroups:
+                  - name: Example Title
+                    required: true
+      responses:
+        '200':
+          description: The newly created review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Createreview200Example:
+                  summary: Default createReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}:
+    get:
+      operationId: getReview
+      summary: Perforce Get Review Details
+      description: Retrieves detailed information for a specific code review, including versions, participants, and reviewer groups.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Review details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Getreview200Example:
+                  summary: Default getReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateReview
+      summary: Perforce Update Review Description
+      description: Updates a review's description or author.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                author:
+                  type: string
+                  description: The new author username for the review.
+                description:
+                  type: string
+                  description: The new description for the review.
+            examples:
+              UpdatereviewRequestExample:
+                summary: Default updateReview request
+                x-microcks-default: true
+                value:
+                  author: example_value
+                  description: A sample description.
+      responses:
+        '200':
+          description: The updated review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Updatereview200Example:
+                  summary: Default updateReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/transitions:
+    get:
+      operationId: getReviewTransitions
+      summary: Perforce Get Review Transitions
+      description: Retrieves the available state transitions for a review, optionally considering assumed up-voters.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      - name: upVoters
+        in: query
+        description: Comma-separated list of users assumed to have voted up.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Available state transitions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transitions:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of transition identifiers to their display labels.
+              examples:
+                Getreviewtransitions200Example:
+                  summary: Default getReviewTransitions 200 response
+                  x-microcks-default: true
+                  value:
+                    transitions: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/state/:
+    patch:
+      operationId: transitionReviewState
+      summary: Perforce Transition Review State
+      description: Transitions a review to a new state such as approved, rejected, needsReview, needsRevision, or archived. Optionally triggers commit on approval.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - state
+              properties:
+                state:
+                  type: string
+                  enum:
+                  - needsReview
+                  - needsRevision
+                  - approved
+                  - archived
+                  - rejected
+                  description: The target state for the review.
+                description:
+                  type: string
+                  description: An optional comment for the state transition.
+                commit:
+                  type: boolean
+                  description: If true, triggers an approve-and-commit workflow.
+                wait:
+                  type: boolean
+                  description: If true, waits for the commit to complete before responding.
+                jobs[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Job IDs to attach on commit.
+                fixStatus:
+                  type: string
+                  description: The fix status to apply to attached jobs.
+            examples:
+              TransitionreviewstateRequestExample:
+                summary: Default transitionReviewState request
+                x-microcks-default: true
+                value:
+                  state: needsReview
+                  description: A sample description.
+                  commit: true
+                  wait: true
+                  jobs[]:
+                  - example_value
+                  fixStatus: example_value
+      responses:
+        '200':
+          description: The review with updated state.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Transitionreviewstate200Example:
+                  summary: Default transitionReviewState 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/changes/:
+    post:
+      operationId: addChangeToReview
+      summary: Perforce Add Change to Review
+      description: Adds a changelist to an existing review, either replacing or appending to the current set of changes.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - change
+              properties:
+                change:
+                  type: integer
+                  description: The changelist ID to add.
+                mode:
+                  type: string
+                  enum:
+                  - replace
+                  - append
+                  default: replace
+                  description: Whether to replace the current changes or append the new one.
+            examples:
+              AddchangetoreviewRequestExample:
+                summary: Default addChangeToReview request
+                x-microcks-default: true
+                value:
+                  change: 10
+                  mode: replace
+      responses:
+        '200':
+          description: The updated review.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Addchangetoreview200Example:
+                  summary: Default addChangeToReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/vote/:
+    post:
+      operationId: setReviewVote
+      summary: Perforce Set Vote on Review
+      description: Casts an up vote, down vote, or clears an existing vote on a review.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - vote
+              properties:
+                vote:
+                  type: string
+                  enum:
+                  - up
+                  - down
+                  - clear
+                  description: The vote to cast.
+                version:
+                  type: string
+                  description: The review version to associate with the vote.
+            examples:
+              SetreviewvoteRequestExample:
+                summary: Default setReviewVote request
+                x-microcks-default: true
+                value:
+                  vote: up
+                  version: example_value
+      responses:
+        '200':
+          description: Confirmation of the vote.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Setreviewvote200Example:
+                  summary: Default setReviewVote 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/cleanup:
+    post:
+      operationId: cleanupReview
+      summary: Perforce Clean up a Review
+      description: Cleans up a review's pending changelist, optionally reopening files to the user's default changelist.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reopen:
+                  type: boolean
+                  description: If true, reopens files in the user's default changelist.
+            examples:
+              CleanupreviewRequestExample:
+                summary: Default cleanupReview request
+                x-microcks-default: true
+                value:
+                  reopen: true
+      responses:
+        '200':
+          description: Cleanup confirmation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/Review'
+              examples:
+                Cleanupreview200Example:
+                  summary: Default cleanupReview 200 response
+                  x-microcks-default: true
+                  value:
+                    review:
+                      id: abc123
+                      author: example_value
+                      changes:
+                      - 10
+                      commits:
+                      - 10
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - difference: 10
+                        stream: example_value
+                        change: 10
+                        user: example_value
+                        time: 10
+                        pending: true
+                        archiveChange: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/{id}/obliterate:
+    post:
+      operationId: obliterateReview
+      summary: Perforce Obliterate a Review
+      description: Permanently removes a review and all associated data. This action cannot be undone.
+      tags:
+      - Reviews
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The review ID.
+        schema:
+          type: integer
+        example: abc123
+      responses:
+        '200':
+          description: Obliteration confirmation message.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Confirmation that the review has been obliterated.
+              examples:
+                Obliteratereview200Example:
+                  summary: Default obliterateReview 200 response
+                  x-microcks-default: true
+                  value:
+                    message: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reviews/archive/:
+    post:
+      operationId: archiveInactiveReviews
+      summary: Perforce Archive Inactive Reviews
+      description: Archives reviews that have not been updated since the specified date.
+      tags:
+      - Reviews
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - notUpdatedSince
+              - description
+              properties:
+                notUpdatedSince:
+                  type: string
+                  format: date
+                  description: Archive reviews not updated since this date (YYYY-mm-dd).
+                description:
+                  type: string
+                  description: A comment to attach to the archived reviews.
+            examples:
+              ArchiveinactivereviewsRequestExample:
+                summary: Default archiveInactiveReviews request
+                x-microcks-default: true
+                value:
+                  notUpdatedSince: '2026-01-15'
+                  description: A sample description.
+      responses:
+        '200':
+          description: Archive operation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  archivedCount:
+                    type: integer
+                    description: Number of reviews that were archived.
+              examples:
+                Archiveinactivereviews200Example:
+                  summary: Default archiveInactiveReviews 200 response
+                  x-microcks-default: true
+                  value:
+                    archivedCount: 10
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /dashboards/action:
+    get:
+      operationId: getActionDashboard
+      summary: Perforce Get Action Dashboard Reviews
+      description: Retrieves reviews assigned to the authenticated user's action dashboard, showing reviews that require attention.
+      tags:
+      - Reviews
+      responses:
+        '200':
+          description: Action dashboard reviews.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lastSeen:
+                    type: integer
+                    description: Pagination cursor.
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  totalCount:
+                    type: integer
+                    description: Total number of reviews on the dashboard.
+              examples:
+                Getactiondashboard200Example:
+                  summary: Default getActionDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    lastSeen: 10
+                    reviews:
+                    - id: abc123
+                      author: example_value
+                      changes:
+                      - {}
+                      commits:
+                      - {}
+                      commitStatus:
+                      - {}
+                      created: 10
+                      deployDetails:
+                      - {}
+                      deployStatus: example_value
+                      description: A sample description.
+                      groups:
+                      - {}
+                      participants: example_value
+                      pending: true
+                      projects: example_value
+                      roles: example_value
+                      state: needsReview
+                      stateLabel: example_value
+                      testDetails:
+                      - {}
+                      testStatus: example_value
+                      type: example_value
+                      updated: 10
+                      updateDate: '2026-01-15T10:30:00Z'
+                      versions:
+                      - {}
+                    totalCount: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+              details:
+                type: object
+                description: Additional details about the validation error.
+  schemas:
+    Review:
+      type: object
+      description: A code review in Helix Swarm, representing a set of changes under review with participants, votes, and state.
+      properties:
+        id:
+          type: integer
+          description: The unique review identifier.
+          example: abc123
+        author:
+          type: string
+          description: The username of the review author.
+          example: example_value
+        changes:
+          type: array
+          items:
+            type: integer
+          description: List of changelist IDs associated with the review.
+          example: []
+        commits:
+          type: array
+          items:
+            type: integer
+          description: List of committed changelist IDs.
+          example: []
+        commitStatus:
+          type: array
+          items:
+            type: object
+          description: Status of commit operations.
+          example: []
+        created:
+          type: integer
+          description: Unix timestamp when the review was created.
+          example: 10
+        deployDetails:
+          type: array
+          items:
+            type: object
+          description: Deploy configuration details.
+          example: []
+        deployStatus:
+          type: string
+          description: The current deploy status.
+          example: example_value
+        description:
+          type: string
+          description: The review description.
+          example: A sample description.
+        groups:
+          type: array
+          items:
+            type: object
+          description: Reviewer groups assigned to the review.
+          example: []
+        participants:
+          type: object
+          additionalProperties:
+            type: object
+          description: Map of participant usernames to their participation details including votes and required status.
+          example: example_value
+        pending:
+          type: boolean
+          description: Whether the review has a pending changelist.
+          example: true
+        projects:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Map of project IDs to affected branch names.
+          example: example_value
+        roles:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Map of roles to lists of usernames.
+          example: example_value
+        state:
+          type: string
+          enum:
+          - needsReview
+          - needsRevision
+          - approved
+          - archived
+          - rejected
+          description: The current state of the review.
+          example: needsReview
+        stateLabel:
+          type: string
+          description: A display-friendly label for the current state.
+          example: example_value
+        testDetails:
+          type: array
+          items:
+            type: object
+          description: Details of test runs.
+          example: []
+        testStatus:
+          type: string
+          description: The overall test status.
+          example: example_value
+        type:
+          type: string
+          description: The review type (default or personal).
+          example: example_value
+        updated:
+          type: integer
+          description: Unix timestamp when the review was last updated.
+          example: 10
+        updateDate:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted date when the review was last updated.
+          example: '2026-01-15T10:30:00Z'
+        versions:
+          type: array
+          items:
+            type: object
+            properties:
+              difference:
+                type: integer
+              stream:
+                type: string
+              change:
+                type: integer
+              user:
+                type: string
+              time:
+                type: integer
+              pending:
+                type: boolean
+              archiveChange:
+                type: integer
+          description: List of review version objects.
+          example: []
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Perforce username and password or ticket. The password can be a standard Perforce password or a Swarm-generated API ticket.
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html

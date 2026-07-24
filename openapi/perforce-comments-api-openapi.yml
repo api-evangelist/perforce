@@ -1,0 +1,553 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm Activity Comments API
+  version: '9'
+  description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+
+    access to code reviews, changelists, comments, activity streams, and project
+
+    management. Helix Swarm enables collaborative code review workflows
+
+    integrated with Helix Core version control.
+
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+
+    API versions older than v9 are no longer supported. Version v11 extends
+
+    the API but does not yet cover all features, so v9 is recommended for
+
+    full functionality.'
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+servers:
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
+security:
+- basicAuth: []
+tags:
+- name: Comments
+  description: Endpoints for managing review and changelist comments.
+paths:
+  /comments/:
+    get:
+      operationId: listComments
+      summary: Perforce List Comments
+      description: Retrieves a list of comments, optionally filtered by topic, version, task state, or archive status.
+      tags:
+      - Comments
+      parameters:
+      - name: after
+        in: query
+        description: A comment ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of comments to return. Defaults to 100.
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: topic
+        in: query
+        description: Filter comments by topic, such as reviews/1234 for a specific review.
+        schema:
+          type: string
+        example: example_value
+      - name: context[version]
+        in: query
+        description: Filter by a specific review version.
+        schema:
+          type: integer
+        example: 10
+      - name: ignoreArchived
+        in: query
+        description: Exclude comments on archived reviews.
+        schema:
+          type: boolean
+        example: true
+      - name: tasksOnly
+        in: query
+        description: Return only comments flagged as tasks.
+        schema:
+          type: boolean
+        example: true
+      - name: taskStates
+        in: query
+        description: Filter by task state. Valid values include open, closed, verified, and comment.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - open
+            - closed
+            - verified
+            - comment
+        explode: true
+        example: []
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: A list of comments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topic:
+                    type: string
+                    description: The topic filter applied, if any.
+                  comments:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Comment'
+                    description: Map of comment IDs to comment objects.
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last comment for pagination.
+              examples:
+                Listcomments200Example:
+                  summary: Default listComments 200 response
+                  x-microcks-default: true
+                  value:
+                    topic: example_value
+                    comments: example_value
+                    lastSeen: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createComment
+      summary: Perforce Add a Comment
+      description: Creates a new comment on a topic such as a review or changelist. Comments can include inline file context and task flags.
+      tags:
+      - Comments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - topic
+              - body
+              properties:
+                topic:
+                  type: string
+                  description: The topic to comment on, such as reviews/1234.
+                body:
+                  type: string
+                  description: The comment body text.
+                silenceNotification:
+                  type: string
+                  description: Set to suppress email notifications.
+                delayNotification:
+                  type: string
+                  description: Set to delay email notifications for batching.
+                taskState:
+                  type: string
+                  enum:
+                  - comment
+                  - open
+                  description: Whether the comment is a plain comment or an open task.
+                flags[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Flags to apply, such as closed.
+                context[file]:
+                  type: string
+                  description: The depot file path for an inline comment.
+                context[leftLine]:
+                  type: integer
+                  description: The left-side line number for an inline comment.
+                context[rightLine]:
+                  type: integer
+                  description: The right-side line number for an inline comment.
+                context[content]:
+                  type: string
+                  description: Adjacent content for context in inline comments.
+                context[version]:
+                  type: integer
+                  description: The review version for the inline comment context.
+            examples:
+              CreatecommentRequestExample:
+                summary: Default createComment request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  body: example_value
+                  silenceNotification: example_value
+                  delayNotification: example_value
+                  taskState: comment
+                  flags[]:
+                  - example_value
+                  context[file]: example_value
+                  context[leftLine]: 10
+                  context[rightLine]: 10
+                  context[content]: example_value
+                  context[version]: 10
+      responses:
+        '200':
+          description: The newly created comment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/Comment'
+              examples:
+                Createcomment200Example:
+                  summary: Default createComment 200 response
+                  x-microcks-default: true
+                  value:
+                    comment:
+                      id: abc123
+                      attachments:
+                      - {}
+                      body: example_value
+                      context:
+                        file: example_value
+                        leftLine: 10
+                        rightLine: 10
+                        content: example_value
+                        version: 10
+                      edited: 10
+                      flags:
+                      - example_value
+                      likes:
+                      - example_value
+                      taskState: comment
+                      time: 10
+                      topic: example_value
+                      updated: 10
+                      user: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/{id}:
+    patch:
+      operationId: editComment
+      summary: Perforce Edit a Comment
+      description: Updates an existing comment's body, task state, or flags.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The comment ID.
+        schema:
+          type: integer
+        example: abc123
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - body
+              properties:
+                topic:
+                  type: string
+                  description: The topic reference for the comment.
+                body:
+                  type: string
+                  description: The updated comment body text.
+                taskState:
+                  type: string
+                  enum:
+                  - comment
+                  - open
+                  - closed
+                  - verified
+                  description: The updated task state.
+                flags[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated flags for the comment.
+                silenceNotification:
+                  type: string
+                  description: Set to suppress email notifications.
+                delayNotification:
+                  type: string
+                  description: Set to delay email notifications for batching.
+            examples:
+              EditcommentRequestExample:
+                summary: Default editComment request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  body: example_value
+                  taskState: comment
+                  flags[]:
+                  - example_value
+                  silenceNotification: example_value
+                  delayNotification: example_value
+      responses:
+        '200':
+          description: The updated comment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/Comment'
+              examples:
+                Editcomment200Example:
+                  summary: Default editComment 200 response
+                  x-microcks-default: true
+                  value:
+                    comment:
+                      id: abc123
+                      attachments:
+                      - {}
+                      body: example_value
+                      context:
+                        file: example_value
+                        leftLine: 10
+                        rightLine: 10
+                        content: example_value
+                        version: 10
+                      edited: 10
+                      flags:
+                      - example_value
+                      likes:
+                      - example_value
+                      taskState: comment
+                      time: 10
+                      topic: example_value
+                      updated: 10
+                      user: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/notify:
+    post:
+      operationId: sendCommentNotification
+      summary: Perforce Send Comment Notification
+      description: Sends or previews a notification for pending comments on a topic.
+      tags:
+      - Comments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - topic
+              properties:
+                topic:
+                  type: string
+                  description: The target topic for the notification.
+                preview:
+                  type: string
+                  description: Set to true to preview the notification without sending.
+            examples:
+              SendcommentnotificationRequestExample:
+                summary: Default sendCommentNotification request
+                x-microcks-default: true
+                value:
+                  topic: example_value
+                  preview: example_value
+      responses:
+        '200':
+          description: Notification result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isValid:
+                    type: boolean
+                    description: Whether the notification request is valid.
+                  message:
+                    type: string
+                    description: A descriptive message about the result.
+                  code:
+                    type: integer
+                    description: A status code for the notification.
+                  preview:
+                    type: object
+                    description: Preview data if preview was requested.
+              examples:
+                Sendcommentnotification200Example:
+                  summary: Default sendCommentNotification 200 response
+                  x-microcks-default: true
+                  value:
+                    isValid: '500123'
+                    message: example_value
+                    code: 10
+                    preview: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+              details:
+                type: object
+                description: Additional details about the validation error.
+  schemas:
+    Comment:
+      type: object
+      description: A comment on a review, changelist, or other topic in Helix Swarm.
+      properties:
+        id:
+          type: integer
+          description: The unique comment identifier.
+          example: abc123
+        attachments:
+          type: array
+          items:
+            type: object
+          description: File attachments on the comment.
+          example: []
+        body:
+          type: string
+          description: The comment body text.
+          example: example_value
+        context:
+          type: object
+          description: Inline context for file-level comments.
+          properties:
+            file:
+              type: string
+              description: The depot file path.
+            leftLine:
+              type: integer
+              description: The left-side line number.
+            rightLine:
+              type: integer
+              description: The right-side line number.
+            content:
+              type: string
+              description: Adjacent content for context.
+            version:
+              type: integer
+              description: The review version.
+          example: example_value
+        edited:
+          type: integer
+          description: Unix timestamp of the last edit, or null if not edited.
+          example: 10
+        flags:
+          type: array
+          items:
+            type: string
+          description: Flags applied to the comment.
+          example: []
+        likes:
+          type: array
+          items:
+            type: string
+          description: Usernames of users who liked the comment.
+          example: []
+        taskState:
+          type: string
+          enum:
+          - comment
+          - open
+          - closed
+          - verified
+          description: The task state of the comment.
+          example: comment
+        time:
+          type: integer
+          description: Unix timestamp when the comment was created.
+          example: 10
+        topic:
+          type: string
+          description: The topic the comment belongs to, such as reviews/1234.
+          example: example_value
+        updated:
+          type: integer
+          description: Unix timestamp of the last update.
+          example: 10
+        user:
+          type: string
+          description: The username of the comment author.
+          example: example_value
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Perforce username and password or ticket. The password can be a standard Perforce password or a Swarm-generated API ticket.
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html

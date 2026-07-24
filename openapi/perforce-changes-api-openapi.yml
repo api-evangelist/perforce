@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm Activity Changes API
+  version: '9'
+  description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+
+    access to code reviews, changelists, comments, activity streams, and project
+
+    management. Helix Swarm enables collaborative code review workflows
+
+    integrated with Helix Core version control.
+
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+
+    API versions older than v9 are no longer supported. Version v11 extends
+
+    the API but does not yet cover all features, so v9 is recommended for
+
+    full functionality.'
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+servers:
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
+security:
+- basicAuth: []
+tags:
+- name: Changes
+  description: Endpoints for inspecting changelists and their relationships.
+paths:
+  /changes/{change}/affectsprojects:
+    get:
+      operationId: getChangeAffectsProjects
+      summary: Perforce Get Projects Affected by Change
+      description: Retrieves the projects and branches that are affected by a given changelist.
+      tags:
+      - Changes
+      parameters:
+      - name: change
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Projects and branches affected by the changelist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The changelist number.
+                      projects:
+                        type: object
+                        additionalProperties:
+                          type: array
+                          items:
+                            type: string
+                        description: Map of project names to arrays of affected branch names.
+              examples:
+                Getchangeaffectsprojects200Example:
+                  summary: Default getChangeAffectsProjects 200 response
+                  x-microcks-default: true
+                  value:
+                    change:
+                      id: abc123
+                      projects: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /changes/{change}/defaultreviewers:
+    get:
+      operationId: getChangeDefaultReviewers
+      summary: Perforce Get Default Reviewers for Change
+      description: Retrieves the default reviewers configured for the branches and projects affected by a changelist.
+      tags:
+      - Changes
+      parameters:
+      - name: change
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: 10
+      responses:
+        '200':
+          description: Default reviewers for the changelist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  change:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The changelist number.
+                      defaultReviewers:
+                        type: object
+                        properties:
+                          groups:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                required:
+                                  type: boolean
+                          users:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                required:
+                                  type: boolean
+              examples:
+                Getchangedefaultreviewers200Example:
+                  summary: Default getChangeDefaultReviewers 200 response
+                  x-microcks-default: true
+                  value:
+                    change:
+                      id: abc123
+                      defaultReviewers:
+                        groups:
+                        - name: Example Title
+                          required: true
+                        users:
+                        - name: Example Title
+                          required: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /changes/{id}/check:
+    get:
+      operationId: checkChange
+      summary: Perforce Check Change Against Workflow Rules
+      description: Performs configured workflow checks on a changelist, validating it against enforced, strict, or shelve rules.
+      tags:
+      - Changes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The changelist number.
+        schema:
+          type: integer
+        example: abc123
+      - name: type
+        in: query
+        required: true
+        description: The type of check to perform.
+        schema:
+          type: string
+          enum:
+          - enforced
+          - strict
+          - shelve
+        example: enforced
+      responses:
+        '200':
+          description: Check results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: The overall status of the check.
+                  isValid:
+                    type: boolean
+                    description: Whether the changelist passes the check.
+                  messages:
+                    type: array
+                    items:
+                      type: string
+                    description: Descriptive messages about check results.
+              examples:
+                Checkchange200Example:
+                  summary: Default checkChange 200 response
+                  x-microcks-default: true
+                  value:
+                    status: example_value
+                    isValid: '500123'
+                    messages:
+                    - example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Perforce username and password or ticket. The password can be a standard Perforce password or a Swarm-generated API ticket.
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html

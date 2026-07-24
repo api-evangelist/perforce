@@ -1,0 +1,321 @@
+openapi: 3.1.0
+info:
+  title: Perforce Helix Swarm Activity API
+  version: '9'
+  description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
+
+    access to code reviews, changelists, comments, activity streams, and project
+
+    management. Helix Swarm enables collaborative code review workflows
+
+    integrated with Helix Core version control.
+
+
+    The API uses HTTP Basic authentication with Perforce credentials or API
+
+    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
+
+    API versions older than v9 are no longer supported. Version v11 extends
+
+    the API but does not yet cover all features, so v9 is recommended for
+
+    full functionality.'
+  contact:
+    name: Perforce Support
+    url: https://www.perforce.com/support
+  license:
+    name: Proprietary
+    url: https://www.perforce.com/terms-use
+  termsOfService: https://www.perforce.com/terms-use
+servers:
+- url: '{scheme}://{host}/api/v9'
+  description: Helix Swarm server instance
+  variables:
+    scheme:
+      default: https
+      enum:
+      - https
+      - http
+      description: The protocol scheme.
+    host:
+      default: swarm.example.com
+      description: The hostname of your Helix Swarm instance.
+security:
+- basicAuth: []
+tags:
+- name: Activity
+  description: Endpoints for viewing and creating activity stream entries.
+paths:
+  /activity:
+    get:
+      operationId: listActivity
+      summary: Perforce List Activity Entries
+      description: Retrieves a list of activity entries from the activity stream, optionally filtered by changelist, stream, or type.
+      tags:
+      - Activity
+      parameters:
+      - name: change
+        in: query
+        description: Filter activity by changelist ID.
+        schema:
+          type: integer
+        example: 10
+      - name: stream
+        in: query
+        description: Filter by activity stream name, such as user-alice, review-1234, or project-myproject.
+        schema:
+          type: string
+        example: example_value
+      - name: type
+        in: query
+        description: Filter by activity type.
+        schema:
+          type: string
+          enum:
+          - change
+          - comment
+          - job
+          - review
+        example: change
+      - name: after
+        in: query
+        description: An activity ID to seek past for pagination.
+        schema:
+          type: integer
+        example: 10
+      - name: max
+        in: query
+        description: Maximum number of entries to return. Defaults to 100.
+        schema:
+          type: integer
+          default: 100
+        example: 10
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: A list of activity entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+                  lastSeen:
+                    type: integer
+                    description: The ID of the last entry for pagination.
+              examples:
+                Listactivity200Example:
+                  summary: Default listActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    activity:
+                    - id: abc123
+                      action: example_value
+                      change: 10
+                      date: '2026-01-15T10:30:00Z'
+                      description: A sample description.
+                      link: https://www.example.com
+                      streams:
+                      - {}
+                      target: example_value
+                      topic: example_value
+                      type: example_value
+                      user: example_value
+                    lastSeen: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createActivity
+      summary: Perforce Create Activity Entry
+      description: Creates a new entry in the activity stream.
+      tags:
+      - Activity
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - type
+              - user
+              - action
+              - target
+              properties:
+                type:
+                  type: string
+                  description: The activity classification type.
+                user:
+                  type: string
+                  description: The username of the user performing the action.
+                action:
+                  type: string
+                  description: A past-tense description of the activity.
+                target:
+                  type: string
+                  description: The object receiving the action.
+                topic:
+                  type: string
+                  description: An optional comment thread identifier.
+                description:
+                  type: string
+                  description: Contextual information about the activity.
+                change:
+                  type: integer
+                  description: A related changelist ID.
+                streams[]:
+                  type: array
+                  items:
+                    type: string
+                  description: Stream names where the activity should appear.
+                link:
+                  type: string
+                  format: uri
+                  description: A URL for the activity target.
+            examples:
+              CreateactivityRequestExample:
+                summary: Default createActivity request
+                x-microcks-default: true
+                value:
+                  type: example_value
+                  user: example_value
+                  action: example_value
+                  target: example_value
+                  topic: example_value
+                  description: A sample description.
+                  change: 10
+                  streams[]:
+                  - example_value
+                  link: https://www.example.com
+      responses:
+        '200':
+          description: The newly created activity entry.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    $ref: '#/components/schemas/Activity'
+              examples:
+                Createactivity200Example:
+                  summary: Default createActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    activity:
+                      id: abc123
+                      action: example_value
+                      change: 10
+                      date: '2026-01-15T10:30:00Z'
+                      description: A sample description.
+                      link: https://www.example.com
+                      streams:
+                      - example_value
+                      target: example_value
+                      topic: example_value
+                      type: example_value
+                      user: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
+              details:
+                type: object
+                description: Additional details about the validation error.
+  schemas:
+    Activity:
+      type: object
+      description: An entry in the Helix Swarm activity stream recording an action performed by a user.
+      properties:
+        id:
+          type: integer
+          description: The unique activity entry identifier.
+          example: abc123
+        action:
+          type: string
+          description: A past-tense description of the action performed.
+          example: example_value
+        change:
+          type: integer
+          description: The related changelist ID, if applicable.
+          example: 10
+        date:
+          type: string
+          format: date-time
+          description: The date and time the activity occurred.
+          example: '2026-01-15T10:30:00Z'
+        description:
+          type: string
+          description: Contextual information about the activity.
+          example: A sample description.
+        link:
+          type: string
+          format: uri
+          description: A URL linking to the activity target.
+          example: https://www.example.com
+        streams:
+          type: array
+          items:
+            type: string
+          description: The activity streams this entry appears in.
+          example: []
+        target:
+          type: string
+          description: The object that received the action.
+          example: example_value
+        topic:
+          type: string
+          description: An associated comment thread topic.
+          example: example_value
+        type:
+          type: string
+          description: The activity type classification.
+          example: example_value
+        user:
+          type: string
+          description: The username of the user who performed the action.
+          example: example_value
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Perforce username and password or ticket. The password can be a standard Perforce password or a Swarm-generated API ticket.
+externalDocs:
+  description: Helix Swarm API Documentation
+  url: https://help.perforce.com/helix-core/helix-swarm/swarm/current/Content/Swarm/swarm-apidoc_endpoints.html
