@@ -3,6 +3,19 @@ name: Perforce
 description: >-
   Perforce Software provides enterprise-scale development tools, including version control, application lifecycle
   management, agile planning, and static analysis solutions for development teams.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.perforce.com/sites/default/files/perforce-logo.png
 url: https://www.perforce.com
 type: Index
@@ -12,33 +25,14 @@ created: '2024-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- name: Perforce Helix Core API
-  description: >-
-    REST API for Helix Core version control system, providing programmatic access to repository operations, file
-    management, and versioning capabilities.
-  image: https://www.perforce.com/sites/default/files/helix-core-icon.png
-  humanURL: https://www.perforce.com/products/helix-core
-  baseURL: https://api.perforce.com/helix-core/v1
-  tags:
-  - DevOps
-  - SCM
-  - Source Control
-  - Version Control
-  properties:
-  - type: Documentation
-    url: https://www.perforce.com/manuals/p4api/
-  - type: OpenAPI
-    url: https://api.perforce.com/helix-core/openapi.json
-  - type: Authentication
-    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
-  - type: GettingStarted
-    url: https://www.perforce.com/products/helix-core/learning-resources
 - name: Perforce P4 REST API
   description: >-
-    Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate workflows and
-    integrate P4 with other tools via standard HTTP endpoints for server info, depots, files, and changelists.
+    Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate workflows
+    and integrate P4 with other tools via standard HTTP endpoints for server info, depots, files, and
+    changelists.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
-  humanURL: https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
+  humanURL: >-
+    https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
   baseURL: https://p4server.example.com/api/v0
   tags:
   - Automation
@@ -47,33 +41,11 @@ apis:
   - Version Control
   properties:
   - type: Documentation
-    url: https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
+    url: >-
+      https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
   - type: ChangeLog
-    url: https://help.perforce.com/helix-core/server-apps/cmdref/2025.2/Content/CmdRef/whats-new-2025-2.html
-- name: Perforce Helix Swarm API
-  description: >-
-    REST API for Helix Swarm code review and collaboration platform, enabling automated code review workflows and team
-    collaboration.
-  image: https://www.perforce.com/sites/default/files/helix-swarm-icon.png
-  humanURL: https://www.perforce.com/products/helix-swarm
-  baseURL: https://swarm.example.com/api/v10
-  tags:
-  - Code Review
-  - Collaboration
-  - Workflow
-  properties:
-  - type: Documentation
-    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
-  - type: APIReference
-    url: https://www.perforce.com/manuals/swarm/api/index.html
-  - type: Authentication
-    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
-  - type: OpenAPI
-    url: openapi/perforce-helix-swarm-openapi.yml
-  - type: JSONSchema
-    url: json-schema/perforce-review-schema.json
-  - type: JSONLD
-    url: json-ld/perforce-context.jsonld
+    url: >-
+      https://help.perforce.com/helix-core/server-apps/cmdref/2025.2/Content/CmdRef/whats-new-2025-2.html
 - name: Perforce Hansoft API
   description: >-
     API for Hansoft agile project management, providing access to project planning, tracking, and reporting
@@ -92,8 +64,8 @@ apis:
     url: https://www.perforce.com/downloads/hansoft-sdk
 - name: Perforce P4 Plan API
   description: >-
-    GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting queries, mutations, and
-    real-time subscriptions for planning views, sprints, tasks, and user management.
+    GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting queries,
+    mutations, and real-time subscriptions for planning views, sprints, tasks, and user management.
   image: https://www.perforce.com/sites/default/files/hansoft-icon.png
   humanURL: https://www.perforce.com/products/hansoft
   baseURL: https://p4plan.example.com/api
@@ -113,8 +85,8 @@ apis:
     type: GraphQL
 - name: Perforce Helix ALM REST API
   description: >-
-    REST API for Helix ALM application lifecycle management platform, enabling automation of tasks and development of
-    integrations for requirements management, issue tracking, and test case management.
+    REST API for Helix ALM application lifecycle management platform, enabling automation of tasks and
+    development of integrations for requirements management, issue tracking, and test case management.
   image: https://www.perforce.com/sites/default/files/helix-alm-icon.png
   humanURL: https://www.perforce.com/products/helix-alm
   baseURL: https://helixalm.example.com/helix-alm/api/v0
@@ -129,11 +101,12 @@ apis:
   - type: APIReference
     url: https://help.perforce.com/helix-alm/helixalm/current/rest-api/index.html
   - type: GettingStarted
-    url: https://help.perforce.com/helix-alm/helixalm/2019.3.0/restapi/Content/RESTAPI/GettingStarted.htm
+    url: >-
+      https://help.perforce.com/helix-alm/helixalm/2019.3.0/restapi/Content/RESTAPI/GettingStarted.htm
 - name: Perforce Helix TeamHub API
   description: >-
-    REST API for Helix TeamHub source code repository management platform, providing access to repositories, projects,
-    users, and company resources across Git, Mercurial, Subversion, and other repository types.
+    REST API for Helix TeamHub source code repository management platform, providing access to repositories,
+    projects, users, and company resources across Git, Mercurial, Subversion, and other repository types.
   image: https://www.perforce.com/sites/default/files/helix-teamhub-icon.png
   humanURL: https://www.perforce.com/products/helix-teamhub
   baseURL: https://teamhub.example.com/api/v1
@@ -146,11 +119,12 @@ apis:
   - type: Documentation
     url: https://help.perforce.com/helix-core/helix-teamhub/current/Content/HTH-API/api-v1.html
   - type: GettingStarted
-    url: https://help.perforce.com/helix-core/helix-teamhub/2025.5.0/Content/HTH-API/getting-started.html
+    url: >-
+      https://help.perforce.com/helix-core/helix-teamhub/2025.5.0/Content/HTH-API/getting-started.html
 - name: Perforce P4 DAM REST API
   description: >-
-    REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset workflows for finding,
-    reviewing, sharing, and managing versioned assets stored in Helix Core.
+    REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset workflows
+    for finding, reviewing, sharing, and managing versioned assets stored in Helix Core.
   image: https://www.perforce.com/sites/default/files/helix-dam-icon.png
   humanURL: https://www.perforce.com/products/helix-dam
   baseURL: https://dam.example.com/api
@@ -164,10 +138,11 @@ apis:
     url: https://help.perforce.com/helix-core/helix-dam/current/api/
 - name: Perforce P4 Search API
   description: >-
-    REST API for P4 Search, providing indexing and search capabilities across Helix Core servers to support code
-    review, file content search, and changelist description search.
+    REST API for P4 Search, providing indexing and search capabilities across Helix Core servers to support
+    code review, file content search, and changelist description search.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
-  humanURL: https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html
+  humanURL: >-
+    https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html
   baseURL: https://p4search.example.com/api
   tags:
   - Code Search
@@ -175,14 +150,15 @@ apis:
   - Search
   properties:
   - type: Documentation
-    url: https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-endpoints.html
+    url: >-
+      https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-endpoints.html
   - type: Authentication
     url: >-
       https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-authentication.html
 - name: Perforce Helix Authentication Service API
   description: >-
-    REST API for the Helix Authentication Service, a Node.js based authentication protocol integration service
-    supporting OpenID Connect and SAML 2.0 for authenticating users across Perforce products.
+    REST API for the Helix Authentication Service, a Node.js based authentication protocol integration
+    service supporting OpenID Connect and SAML 2.0 for authenticating users across Perforce products.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
   humanURL: https://help.perforce.com/helix-core/integrations-plugins/helix-auth-svc/current/
   baseURL: https://auth.example.com
@@ -199,7 +175,165 @@ apis:
     url: https://github.com/perforce/helix-authentication-service/blob/main/docs/REST_API.md
   - type: GitHubRepository
     url: https://github.com/perforce/helix-authentication-service
+- aid: perforce:perforce-activity-api
+  name: Perforce Activity API
+  description: Endpoints for viewing and creating activity stream entries.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Activity
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-activity-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
+- aid: perforce:perforce-changes-api
+  name: Perforce Changes API
+  description: Endpoints for inspecting changelists and their relationships.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Changes
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-changes-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
+- aid: perforce:perforce-comments-api
+  name: Perforce Comments API
+  description: Endpoints for managing review and changelist comments.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-comments-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
+- aid: perforce:perforce-projects-api
+  name: Perforce Projects API
+  description: Endpoints for managing Swarm projects.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
+- aid: perforce:perforce-reviews-api
+  name: Perforce Reviews API
+  description: Endpoints for managing code reviews.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Reviews
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-reviews-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
+- aid: perforce:perforce-version-api
+  name: Perforce Version API
+  description: Endpoints for retrieving Swarm server version information.
+  humanURL: https://www.perforce.com/products/helix-core
+  baseURL: https://api.perforce.com/helix-core/v1
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/perforce-version-api-openapi.yml
+  - type: Documentation
+    url: https://www.perforce.com/manuals/p4api/
+  - type: Authentication
+    url: https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html
+  - type: GettingStarted
+    url: https://www.perforce.com/products/helix-core/learning-resources
+  - type: Documentation
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html
+  - type: APIReference
+    url: https://www.perforce.com/manuals/swarm/api/index.html
+  - type: Authentication
+    url: https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html
+  - type: JSONSchema
+    url: json-schema/perforce-review-schema.json
+  - type: JSONLD
+    url: json-ld/perforce-context.jsonld
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/perforce/overview
 - type: AgenticAccess
   url: agentic-access/perforce-agentic-access.yml
 - type: DomainSecurity
