@@ -1,0 +1,1440 @@
+{
+  "info": {
+    "_postman_id": "56dd1eeb-d075-4496-b9c7-afd5fb5b7cd4",
+    "name": "Perforce Helix Swarm Activity Projects API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:35:02.000Z",
+    "updatedAt": "2026-07-28T02:35:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56dd1eeb-d075-4496-b9c7-afd5fb5b7cd4"
+  },
+  "item": [
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Perforce Get Project Details",
+              "id": "d8e0bad9-61ca-4af8-9a80-da67c04f07ae",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id?fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "23e70461-4582-4936-b400-ebbb3a3da214",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The project identifier."
+                    }
+                  ]
+                },
+                "description": "Retrieves detailed information for a specific Swarm project."
+              },
+              "response": [
+                {
+                  "id": "ca98d54e-a9bb-407e-ac13-0c75d77efdaf",
+                  "name": "Project details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"owners\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subgroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"deleted\": \"<boolean>\",\n    \"deploy\": {},\n    \"emailFlags\": {},\n    \"jobview\": \"<string>\",\n    \"minimumUpVotes\": \"<integer>\",\n    \"private\": \"<boolean>\",\n    \"retainDefaultReviewers\": \"<boolean>\",\n    \"tests\": {},\n    \"workflow\": \"<string>\",\n    \"defaults\": {},\n    \"readme\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-ca98d54e-a9bb-407e-ac13-0c75d77efdaf"
+                },
+                {
+                  "id": "97e98fe0-cbfe-470f-965c-34a7b2ebb42d",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-97e98fe0-cbfe-470f-965c-34a7b2ebb42d"
+                },
+                {
+                  "id": "f66a2b95-dc97-4872-bb39-2ea32a8e062e",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-f66a2b95-dc97-4872-bb39-2ea32a8e062e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-d8e0bad9-61ca-4af8-9a80-da67c04f07ae"
+            },
+            {
+              "name": "Perforce Update a Project",
+              "id": "1d7b4507-745f-492b-b76c-23aa803393fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "Updated project name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated list of project members.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated list of project members.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated list of project owners.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated list of project owners.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated project description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated privacy setting.",
+                      "key": "private",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "440f6897-862c-4857-89d7-372f69957fd1",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The project identifier."
+                    }
+                  ]
+                },
+                "description": "Updates an existing Swarm project's configuration."
+              },
+              "response": [
+                {
+                  "id": "d246efe1-38eb-4afb-99b8-031815dd30a6",
+                  "name": "The updated project.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "Updated project name.",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated project description.",
+                          "key": "description",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated privacy setting.",
+                          "key": "private",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"owners\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subgroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"deleted\": \"<boolean>\",\n    \"deploy\": {},\n    \"emailFlags\": {},\n    \"jobview\": \"<string>\",\n    \"minimumUpVotes\": \"<integer>\",\n    \"private\": \"<boolean>\",\n    \"retainDefaultReviewers\": \"<boolean>\",\n    \"tests\": {},\n    \"workflow\": \"<string>\",\n    \"defaults\": {},\n    \"readme\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-d246efe1-38eb-4afb-99b8-031815dd30a6"
+                },
+                {
+                  "id": "65c64416-8e4c-4e5d-b2a6-6dc22201c9db",
+                  "name": "The request was malformed or missing required parameters.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "Updated project name.",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated project description.",
+                          "key": "description",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated privacy setting.",
+                          "key": "private",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-65c64416-8e4c-4e5d-b2a6-6dc22201c9db"
+                },
+                {
+                  "id": "ce718261-d70f-4dc5-a70e-4ca27f2c1bf1",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "Updated project name.",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated project description.",
+                          "key": "description",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated privacy setting.",
+                          "key": "private",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-ce718261-d70f-4dc5-a70e-4ca27f2c1bf1"
+                },
+                {
+                  "id": "97a51479-425f-4411-ad88-b57cdb269eb7",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "Updated project name.",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project members.",
+                          "key": "members",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated list of project owners.",
+                          "key": "owners",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated project description.",
+                          "key": "description",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated privacy setting.",
+                          "key": "private",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-97a51479-425f-4411-ad88-b57cdb269eb7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-1d7b4507-745f-492b-b76c-23aa803393fd"
+            },
+            {
+              "name": "Perforce Delete a Project",
+              "id": "eacac942-58a5-4884-9fbf-b15654171b37",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "71885209-c6b3-434a-a7e6-f02525aff519",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The project identifier."
+                    }
+                  ]
+                },
+                "description": "Deletes a Swarm project. Only project owners or administrators can perform this action."
+              },
+              "response": [
+                {
+                  "id": "e40e5ec4-80a6-4711-83f0-8d71b96f9dc7",
+                  "name": "Deletion confirmation.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-e40e5ec4-80a6-4711-83f0-8d71b96f9dc7"
+                },
+                {
+                  "id": "829b2939-039f-491d-b571-28df6311d30d",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-829b2939-039f-491d-b571-28df6311d30d"
+                },
+                {
+                  "id": "20201149-6ccb-462d-bd78-8297eecbfe48",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:03.000Z",
+                  "updatedAt": "2026-07-28T02:35:03.000Z",
+                  "uid": "35240-20201149-6ccb-462d-bd78-8297eecbfe48"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-eacac942-58a5-4884-9fbf-b15654171b37"
+            }
+          ],
+          "id": "9557d3e7-5577-4c23-8be3-5cca5e8dc6eb",
+          "createdAt": "2026-07-28T02:35:03.000Z",
+          "updatedAt": "2026-07-28T02:35:03.000Z",
+          "uid": "35240-9557d3e7-5577-4c23-8be3-5cca5e8dc6eb"
+        },
+        {
+          "name": "Perforce List Projects",
+          "id": "3184518a-4f6e-4e2a-b4c0-da79fa6a13d7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/projects/?fields=<string>&workflow=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects",
+                ""
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated list of fields to include in the response.",
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter projects using a specific workflow.",
+                  "key": "workflow",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of Swarm projects with their configuration, branches, members, and settings."
+          },
+          "response": [
+            {
+              "id": "f87cdc87-01cf-4ef9-a793-063b0356cd7f",
+              "name": "A list of projects.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/?fields=<string>&workflow=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter projects using a specific workflow.",
+                      "key": "workflow",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"projects\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"members\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"owners\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subgroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"branches\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paths\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"moderators\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paths\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"moderators\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"deleted\": \"<boolean>\",\n      \"deploy\": {},\n      \"emailFlags\": {},\n      \"jobview\": \"<string>\",\n      \"minimumUpVotes\": \"<integer>\",\n      \"private\": \"<boolean>\",\n      \"retainDefaultReviewers\": \"<boolean>\",\n      \"tests\": {},\n      \"workflow\": \"<string>\",\n      \"defaults\": {},\n      \"readme\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"members\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"owners\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"subgroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"branches\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paths\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"moderators\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paths\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"moderators\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"deleted\": \"<boolean>\",\n      \"deploy\": {},\n      \"emailFlags\": {},\n      \"jobview\": \"<string>\",\n      \"minimumUpVotes\": \"<integer>\",\n      \"private\": \"<boolean>\",\n      \"retainDefaultReviewers\": \"<boolean>\",\n      \"tests\": {},\n      \"workflow\": \"<string>\",\n      \"defaults\": {},\n      \"readme\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-f87cdc87-01cf-4ef9-a793-063b0356cd7f"
+            },
+            {
+              "id": "0cf1baff-ce6b-47d8-8b69-946c3395bfec",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/?fields=<string>&workflow=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter projects using a specific workflow.",
+                      "key": "workflow",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-0cf1baff-ce6b-47d8-8b69-946c3395bfec"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:03.000Z",
+          "updatedAt": "2026-07-28T02:35:03.000Z",
+          "uid": "35240-3184518a-4f6e-4e2a-b4c0-da79fa6a13d7"
+        },
+        {
+          "name": "Perforce Create a Project",
+          "id": "ac7f7f0c-7ba2-4c2e-b1d4-335931f12a0e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The project name.",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Array of project member usernames.",
+                  "key": "members",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Array of project member usernames.",
+                  "key": "members",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of subgroup names.",
+                  "key": "subgroups",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of subgroup names.",
+                  "key": "subgroups",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of project owner usernames.",
+                  "key": "owners",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Array of project owner usernames.",
+                  "key": "owners",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The project description.",
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Whether the project is private.",
+                  "key": "private",
+                  "value": "false"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects",
+                ""
+              ]
+            },
+            "description": "Creates a new Swarm project with the specified configuration."
+          },
+          "response": [
+            {
+              "id": "fecd0747-90b4-46f2-a027-9d956937be95",
+              "name": "The newly created project.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The project name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The project description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the project is private.",
+                      "key": "private",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"project\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"owners\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subgroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"paths\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"moderators\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"deleted\": \"<boolean>\",\n    \"deploy\": {},\n    \"emailFlags\": {},\n    \"jobview\": \"<string>\",\n    \"minimumUpVotes\": \"<integer>\",\n    \"private\": \"<boolean>\",\n    \"retainDefaultReviewers\": \"<boolean>\",\n    \"tests\": {},\n    \"workflow\": \"<string>\",\n    \"defaults\": {},\n    \"readme\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-fecd0747-90b4-46f2-a027-9d956937be95"
+            },
+            {
+              "id": "7fd34b5e-0282-4301-8944-fe5b3dcb6f8e",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The project name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The project description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the project is private.",
+                      "key": "private",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-7fd34b5e-0282-4301-8944-fe5b3dcb6f8e"
+            },
+            {
+              "id": "453b6a8d-416d-4862-b6a2-ae3455fd2112",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The project name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Array of project member usernames.",
+                      "key": "members",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of subgroup names.",
+                      "key": "subgroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Array of project owner usernames.",
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The project description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the project is private.",
+                      "key": "private",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/projects/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ""
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:03.000Z",
+              "updatedAt": "2026-07-28T02:35:03.000Z",
+              "uid": "35240-453b6a8d-416d-4862-b6a2-ae3455fd2112"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:03.000Z",
+          "updatedAt": "2026-07-28T02:35:03.000Z",
+          "uid": "35240-ac7f7f0c-7ba2-4c2e-b1d4-335931f12a0e"
+        }
+      ],
+      "id": "2ea80ae5-a193-463d-a559-05f5ecc9d32c",
+      "createdAt": "2026-07-28T02:35:03.000Z",
+      "updatedAt": "2026-07-28T02:35:03.000Z",
+      "uid": "35240-2ea80ae5-a193-463d-a559-05f5ecc9d32c"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}

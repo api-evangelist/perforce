@@ -1,0 +1,24 @@
+{
+  "provider": "perforce",
+  "sources": [
+    "perforce-activity-api-openapi.yml",
+    "perforce-changes-api-openapi.yml",
+    "perforce-comments-api-openapi.yml",
+    "perforce-projects-api-openapi.yml",
+    "perforce-reviews-api-openapi.yml",
+    "perforce-version-api-openapi.yml"
+  ],
+  "outputs": [
+    "perforce-activity-api-openapi.yml",
+    "perforce-changes-api-openapi.yml",
+    "perforce-comments-api-openapi.yml",
+    "perforce-projects-api-openapi.yml",
+    "perforce-reviews-api-openapi.yml",
+    "perforce-version-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

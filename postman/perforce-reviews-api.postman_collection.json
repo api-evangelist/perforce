@@ -1,0 +1,3560 @@
+{
+  "info": {
+    "_postman_id": "2d189fa4-f809-4e07-a604-e9868a3a599a",
+    "name": "Perforce Helix Swarm Activity Reviews API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:35:04.000Z",
+    "updatedAt": "2026-07-28T02:35:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2d189fa4-f809-4e07-a604-e9868a3a599a"
+  },
+  "item": [
+    {
+      "name": "reviews",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "transitions",
+              "item": [
+                {
+                  "name": "Perforce Get Review Transitions",
+                  "id": "c33962e5-ca3f-48f9-b58d-df99bd208410",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/transitions?upVoters=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "transitions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of users assumed to have voted up.",
+                          "key": "upVoters",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9ba8ff49-b4f8-4b5e-bcac-0315a2bab4cc",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the available state transitions for a review, optionally considering assumed up-voters."
+                  },
+                  "response": [
+                    {
+                      "id": "450a101f-06d7-4981-9482-e0595e65bedb",
+                      "name": "Available state transitions.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/transitions?upVoters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "transitions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of users assumed to have voted up.",
+                              "key": "upVoters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"transitions\": {\n    \"sunt_327\": \"<string>\",\n    \"Ut86_\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-450a101f-06d7-4981-9482-e0595e65bedb"
+                    },
+                    {
+                      "id": "7d347ac7-4c89-477f-8091-2c1806c1652a",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/transitions?upVoters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "transitions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of users assumed to have voted up.",
+                              "key": "upVoters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-7d347ac7-4c89-477f-8091-2c1806c1652a"
+                    },
+                    {
+                      "id": "abbc83f7-3a03-4466-b91f-ab1fcfd9d48c",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/transitions?upVoters=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "transitions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of users assumed to have voted up.",
+                              "key": "upVoters",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-abbc83f7-3a03-4466-b91f-ab1fcfd9d48c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-c33962e5-ca3f-48f9-b58d-df99bd208410"
+                }
+              ],
+              "id": "f174308a-d411-446c-b69e-fc72c96cb281",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-f174308a-d411-446c-b69e-fc72c96cb281"
+            },
+            {
+              "name": "state",
+              "item": [
+                {
+                  "name": "Perforce Transition Review State",
+                  "id": "0b8f6667-4715-4355-bf0d-3cb2811135ba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The target state for the review.",
+                          "key": "state",
+                          "value": "archived"
+                        },
+                        {
+                          "description": "An optional comment for the state transition.",
+                          "key": "description",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "If true, triggers an approve-and-commit workflow.",
+                          "key": "commit",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, waits for the commit to complete before responding.",
+                          "key": "wait",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Job IDs to attach on commit.",
+                          "key": "jobs[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Job IDs to attach on commit.",
+                          "key": "jobs[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The fix status to apply to attached jobs.",
+                          "key": "fixStatus",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/state/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "state",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "9935a48d-ac69-4a16-bf22-5eb74a535123",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Transitions a review to a new state such as approved, rejected, needsReview, needsRevision, or archived. Optionally triggers commit on approval."
+                  },
+                  "response": [
+                    {
+                      "id": "626e532f-82c2-465f-aed7-f03aeaa31a81",
+                      "name": "The review with updated state.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The target state for the review.",
+                              "key": "state",
+                              "value": "archived"
+                            },
+                            {
+                              "description": "An optional comment for the state transition.",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If true, triggers an approve-and-commit workflow.",
+                              "key": "commit",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "If true, waits for the commit to complete before responding.",
+                              "key": "wait",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fix status to apply to attached jobs.",
+                              "key": "fixStatus",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/state/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "state",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-626e532f-82c2-465f-aed7-f03aeaa31a81"
+                    },
+                    {
+                      "id": "d59527ca-d11f-41ba-b093-c5250271dc1d",
+                      "name": "The request was malformed or missing required parameters.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The target state for the review.",
+                              "key": "state",
+                              "value": "archived"
+                            },
+                            {
+                              "description": "An optional comment for the state transition.",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If true, triggers an approve-and-commit workflow.",
+                              "key": "commit",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "If true, waits for the commit to complete before responding.",
+                              "key": "wait",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fix status to apply to attached jobs.",
+                              "key": "fixStatus",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/state/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "state",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-d59527ca-d11f-41ba-b093-c5250271dc1d"
+                    },
+                    {
+                      "id": "8e6313c4-c4a3-4b77-9206-7169381d5511",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The target state for the review.",
+                              "key": "state",
+                              "value": "archived"
+                            },
+                            {
+                              "description": "An optional comment for the state transition.",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If true, triggers an approve-and-commit workflow.",
+                              "key": "commit",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "If true, waits for the commit to complete before responding.",
+                              "key": "wait",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fix status to apply to attached jobs.",
+                              "key": "fixStatus",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/state/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "state",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-8e6313c4-c4a3-4b77-9206-7169381d5511"
+                    },
+                    {
+                      "id": "bda1d1df-56e4-4792-8886-f5aebffd1d0b",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The target state for the review.",
+                              "key": "state",
+                              "value": "archived"
+                            },
+                            {
+                              "description": "An optional comment for the state transition.",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If true, triggers an approve-and-commit workflow.",
+                              "key": "commit",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "If true, waits for the commit to complete before responding.",
+                              "key": "wait",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Job IDs to attach on commit.",
+                              "key": "jobs[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fix status to apply to attached jobs.",
+                              "key": "fixStatus",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/state/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "state",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-bda1d1df-56e4-4792-8886-f5aebffd1d0b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-0b8f6667-4715-4355-bf0d-3cb2811135ba"
+                }
+              ],
+              "id": "1cbeb362-0aa6-4146-8f49-9893bf90b495",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-1cbeb362-0aa6-4146-8f49-9893bf90b495"
+            },
+            {
+              "name": "changes",
+              "item": [
+                {
+                  "name": "Perforce Add Change to Review",
+                  "id": "565110f6-764a-47c1-96c7-649bbc232f3f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The changelist ID to add.",
+                          "key": "change",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Whether to replace the current changes or append the new one.",
+                          "key": "mode",
+                          "value": "replace"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/changes/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "changes",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "2cf9d3a4-9196-4418-98f6-0b326b29f34e",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Adds a changelist to an existing review, either replacing or appending to the current set of changes."
+                  },
+                  "response": [
+                    {
+                      "id": "2b3757f1-64ff-4946-83c1-af56953d09de",
+                      "name": "The updated review.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The changelist ID to add.",
+                              "key": "change",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Whether to replace the current changes or append the new one.",
+                              "key": "mode",
+                              "value": "replace"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/changes/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "changes",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-2b3757f1-64ff-4946-83c1-af56953d09de"
+                    },
+                    {
+                      "id": "b1e0c80d-e9c2-49b7-9932-71175393404e",
+                      "name": "The request was malformed or missing required parameters.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The changelist ID to add.",
+                              "key": "change",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Whether to replace the current changes or append the new one.",
+                              "key": "mode",
+                              "value": "replace"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/changes/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "changes",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-b1e0c80d-e9c2-49b7-9932-71175393404e"
+                    },
+                    {
+                      "id": "6c35ad02-46f6-4cfc-8f51-eb83f7e88372",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The changelist ID to add.",
+                              "key": "change",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Whether to replace the current changes or append the new one.",
+                              "key": "mode",
+                              "value": "replace"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/changes/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "changes",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-6c35ad02-46f6-4cfc-8f51-eb83f7e88372"
+                    },
+                    {
+                      "id": "ea0c3dfa-7970-43cc-a60a-471a2f7dbf29",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The changelist ID to add.",
+                              "key": "change",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Whether to replace the current changes or append the new one.",
+                              "key": "mode",
+                              "value": "replace"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/changes/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "changes",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-ea0c3dfa-7970-43cc-a60a-471a2f7dbf29"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-565110f6-764a-47c1-96c7-649bbc232f3f"
+                }
+              ],
+              "id": "678d7756-ce3d-41d9-aa99-f3b131216f92",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-678d7756-ce3d-41d9-aa99-f3b131216f92"
+            },
+            {
+              "name": "vote",
+              "item": [
+                {
+                  "name": "Perforce Set Vote on Review",
+                  "id": "ce7daecd-d453-472c-b381-876d765d072f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The vote to cast.",
+                          "key": "vote",
+                          "value": "down"
+                        },
+                        {
+                          "description": "The review version to associate with the vote.",
+                          "key": "version",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/vote/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "vote",
+                        ""
+                      ],
+                      "variable": [
+                        {
+                          "id": "a08d43e1-dc14-4c91-acc4-1c13f42ba3dd",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Casts an up vote, down vote, or clears an existing vote on a review."
+                  },
+                  "response": [
+                    {
+                      "id": "c3a418ac-7975-4333-93cb-4b76b75ddcc5",
+                      "name": "Confirmation of the vote.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The vote to cast.",
+                              "key": "vote",
+                              "value": "down"
+                            },
+                            {
+                              "description": "The review version to associate with the vote.",
+                              "key": "version",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/vote/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "vote",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-c3a418ac-7975-4333-93cb-4b76b75ddcc5"
+                    },
+                    {
+                      "id": "36b63258-acf5-4a39-a289-a24c04604326",
+                      "name": "The request was malformed or missing required parameters.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The vote to cast.",
+                              "key": "vote",
+                              "value": "down"
+                            },
+                            {
+                              "description": "The review version to associate with the vote.",
+                              "key": "version",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/vote/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "vote",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-36b63258-acf5-4a39-a289-a24c04604326"
+                    },
+                    {
+                      "id": "566c6260-dad3-4cab-ba32-6958c0186f18",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The vote to cast.",
+                              "key": "vote",
+                              "value": "down"
+                            },
+                            {
+                              "description": "The review version to associate with the vote.",
+                              "key": "version",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/vote/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "vote",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-566c6260-dad3-4cab-ba32-6958c0186f18"
+                    },
+                    {
+                      "id": "18488e02-b520-43be-ad51-c6e2581e1bb5",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The vote to cast.",
+                              "key": "vote",
+                              "value": "down"
+                            },
+                            {
+                              "description": "The review version to associate with the vote.",
+                              "key": "version",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/vote/",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "vote",
+                            ""
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-18488e02-b520-43be-ad51-c6e2581e1bb5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-ce7daecd-d453-472c-b381-876d765d072f"
+                }
+              ],
+              "id": "6e82a590-d515-46c4-84a0-da93fb51e9b3",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-6e82a590-d515-46c4-84a0-da93fb51e9b3"
+            },
+            {
+              "name": "cleanup",
+              "item": [
+                {
+                  "name": "Perforce Clean up a Review",
+                  "id": "d21bae56-d587-4017-b3bb-58b5a473984d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "If true, reopens files in the user's default changelist.",
+                          "key": "reopen",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/cleanup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "cleanup"
+                      ],
+                      "variable": [
+                        {
+                          "id": "03750bd1-1919-488a-b5f8-616a3156e10d",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Cleans up a review's pending changelist, optionally reopening files to the user's default changelist."
+                  },
+                  "response": [
+                    {
+                      "id": "d3fac73f-c8f6-4e7b-98b5-b74c4499f57e",
+                      "name": "Cleanup confirmation.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "If true, reopens files in the user's default changelist.",
+                              "key": "reopen",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/cleanup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "cleanup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-d3fac73f-c8f6-4e7b-98b5-b74c4499f57e"
+                    },
+                    {
+                      "id": "099e48e4-72f4-4cf2-bcd5-49c9f1f2164d",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "If true, reopens files in the user's default changelist.",
+                              "key": "reopen",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/cleanup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "cleanup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-099e48e4-72f4-4cf2-bcd5-49c9f1f2164d"
+                    },
+                    {
+                      "id": "575e271b-4c16-47b6-8177-00dd81123849",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "If true, reopens files in the user's default changelist.",
+                              "key": "reopen",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/cleanup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "cleanup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-575e271b-4c16-47b6-8177-00dd81123849"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-d21bae56-d587-4017-b3bb-58b5a473984d"
+                }
+              ],
+              "id": "03ff84be-91a9-4888-b21a-854792ff6b57",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-03ff84be-91a9-4888-b21a-854792ff6b57"
+            },
+            {
+              "name": "obliterate",
+              "item": [
+                {
+                  "name": "Perforce Obliterate a Review",
+                  "id": "a2024a41-6b18-4423-a1ee-68f0438c3212",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id/obliterate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id",
+                        "obliterate"
+                      ],
+                      "variable": [
+                        {
+                          "id": "13b94912-21c9-4cf1-b8cf-5997ccd1119b",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The review ID."
+                        }
+                      ]
+                    },
+                    "description": "Permanently removes a review and all associated data. This action cannot be undone."
+                  },
+                  "response": [
+                    {
+                      "id": "8964b09f-3e1f-4833-b3d0-637c72fa4d5a",
+                      "name": "Obliteration confirmation message.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/obliterate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "obliterate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-8964b09f-3e1f-4833-b3d0-637c72fa4d5a"
+                    },
+                    {
+                      "id": "f9aab69b-11be-452a-bf8a-a377b2ef4e38",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/obliterate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "obliterate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-f9aab69b-11be-452a-bf8a-a377b2ef4e38"
+                    },
+                    {
+                      "id": "9a0bc45c-a848-4cda-b730-ab494fd5f7da",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reviews/:id/obliterate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reviews",
+                            ":id",
+                            "obliterate"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:04.000Z",
+                      "updatedAt": "2026-07-28T02:35:04.000Z",
+                      "uid": "35240-9a0bc45c-a848-4cda-b730-ab494fd5f7da"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-a2024a41-6b18-4423-a1ee-68f0438c3212"
+                }
+              ],
+              "id": "783df750-377a-432d-b55f-639591af4f45",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-783df750-377a-432d-b55f-639591af4f45"
+            },
+            {
+              "name": "Perforce Get Review Details",
+              "id": "f50131eb-bcc1-4572-a6c8-45ef4b029896",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/:id?fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "e5c4384a-a360-4a51-8ad4-691c9a3c8062",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) The review ID."
+                    }
+                  ]
+                },
+                "description": "Retrieves detailed information for a specific code review, including versions, participants, and reviewer groups."
+              },
+              "response": [
+                {
+                  "id": "0e2ad7a9-b29a-45d1-b7db-c9af0aa74d1c",
+                  "name": "Review details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-0e2ad7a9-b29a-45d1-b7db-c9af0aa74d1c"
+                },
+                {
+                  "id": "75db9159-bf1f-4022-88d4-66643a180d76",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-75db9159-bf1f-4022-88d4-66643a180d76"
+                },
+                {
+                  "id": "223b747b-4451-4ff7-9531-ff17a85f46cb",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id?fields=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of fields to include in the response.",
+                          "key": "fields",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-223b747b-4451-4ff7-9531-ff17a85f46cb"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-f50131eb-bcc1-4572-a6c8-45ef4b029896"
+            },
+            {
+              "name": "Perforce Update Review Description",
+              "id": "95eb2d95-6075-47d1-85ee-4185dab7ff96",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "The new author username for the review.",
+                      "key": "author",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The new description for the review.",
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b09eabbf-20b8-4b00-98d8-4763e85547c9",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) The review ID."
+                    }
+                  ]
+                },
+                "description": "Updates a review's description or author."
+              },
+              "response": [
+                {
+                  "id": "f3d421f7-e5f0-4855-a4f2-fe1fa1d8c3f6",
+                  "name": "The updated review.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "The new author username for the review.",
+                          "key": "author",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The new description for the review.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-f3d421f7-e5f0-4855-a4f2-fe1fa1d8c3f6"
+                },
+                {
+                  "id": "b7bdd47b-9273-451c-af6c-3b122ddedc7c",
+                  "name": "The request was malformed or missing required parameters.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "The new author username for the review.",
+                          "key": "author",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The new description for the review.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-b7bdd47b-9273-451c-af6c-3b122ddedc7c"
+                },
+                {
+                  "id": "e8ec1bf3-ff4e-455d-886b-2a2ea7f7eeb3",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "The new author username for the review.",
+                          "key": "author",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The new description for the review.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-e8ec1bf3-ff4e-455d-886b-2a2ea7f7eeb3"
+                },
+                {
+                  "id": "5125b728-dd2c-48b0-8c98-11b3c6796637",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "The new author username for the review.",
+                          "key": "author",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The new description for the review.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-5125b728-dd2c-48b0-8c98-11b3c6796637"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-95eb2d95-6075-47d1-85ee-4185dab7ff96"
+            }
+          ],
+          "id": "a39094eb-e263-4f75-86ee-38b3124025dc",
+          "createdAt": "2026-07-28T02:35:04.000Z",
+          "updatedAt": "2026-07-28T02:35:04.000Z",
+          "uid": "35240-a39094eb-e263-4f75-86ee-38b3124025dc"
+        },
+        {
+          "name": "archive",
+          "item": [
+            {
+              "name": "Perforce Archive Inactive Reviews",
+              "id": "a3a263c7-f164-4ef5-b786-5806cb122427",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) Archive reviews not updated since this date (YYYY-mm-dd).",
+                      "key": "notUpdatedSince",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) A comment to attach to the archived reviews.",
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/archive/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    "archive",
+                    ""
+                  ]
+                },
+                "description": "Archives reviews that have not been updated since the specified date."
+              },
+              "response": [
+                {
+                  "id": "7ed66703-35ec-42ac-9e9b-7dddec11bf01",
+                  "name": "Archive operation result.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) Archive reviews not updated since this date (YYYY-mm-dd).",
+                          "key": "notUpdatedSince",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) A comment to attach to the archived reviews.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/archive/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        "archive",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"archivedCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-7ed66703-35ec-42ac-9e9b-7dddec11bf01"
+                },
+                {
+                  "id": "76bd6aee-9df5-4fe1-80ad-2288b1473075",
+                  "name": "The request was malformed or missing required parameters.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) Archive reviews not updated since this date (YYYY-mm-dd).",
+                          "key": "notUpdatedSince",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) A comment to attach to the archived reviews.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/archive/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        "archive",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-76bd6aee-9df5-4fe1-80ad-2288b1473075"
+                },
+                {
+                  "id": "9df082f7-80ea-43e3-ab72-a7d777349690",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) Archive reviews not updated since this date (YYYY-mm-dd).",
+                          "key": "notUpdatedSince",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) A comment to attach to the archived reviews.",
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reviews/archive/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reviews",
+                        "archive",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-9df082f7-80ea-43e3-ab72-a7d777349690"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-a3a263c7-f164-4ef5-b786-5806cb122427"
+            }
+          ],
+          "id": "0e86c780-9294-444d-aa07-c9c10e99fe78",
+          "createdAt": "2026-07-28T02:35:04.000Z",
+          "updatedAt": "2026-07-28T02:35:04.000Z",
+          "uid": "35240-0e86c780-9294-444d-aa07-c9c10e99fe78"
+        },
+        {
+          "name": "Perforce List Reviews",
+          "id": "d43ce90a-d9a4-4e8c-a97c-0834ce87d525",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/?after=<integer>&max=1000&fields=<string>&author[]=<string>&author[]=<string>&change[]=<integer>&change[]=<integer>&hasReviewers=<boolean>&ids[]=<integer>&ids[]=<integer>&keywords=<string>&participants[]=<string>&participants[]=<string>&project[]=<string>&project[]=<string>&state[]=archived&state[]=needsRevision&passesTests=<boolean>&notUpdatedSince=<date>&hasVoted=down&myComments=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews",
+                ""
+              ],
+              "query": [
+                {
+                  "description": "A review ID to seek past for pagination.",
+                  "key": "after",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Maximum number of reviews to return. Defaults to 1000.",
+                  "key": "max",
+                  "value": "1000"
+                },
+                {
+                  "description": "Comma-separated list of fields to include in the response.",
+                  "key": "fields",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more authors.",
+                  "key": "author[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more authors.",
+                  "key": "author[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more changelist IDs.",
+                  "key": "change[]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter reviews by one or more changelist IDs.",
+                  "key": "change[]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by whether reviewers are assigned.",
+                  "key": "hasReviewers",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Fetch specific reviews by their IDs.",
+                  "key": "ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Fetch specific reviews by their IDs.",
+                  "key": "ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Keywords to search for in reviews.",
+                  "key": "keywords",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more participants.",
+                  "key": "participants[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more participants.",
+                  "key": "participants[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more projects.",
+                  "key": "project[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by one or more projects.",
+                  "key": "project[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected.",
+                  "key": "state[]",
+                  "value": "archived"
+                },
+                {
+                  "description": "Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected.",
+                  "key": "state[]",
+                  "value": "needsRevision"
+                },
+                {
+                  "description": "Filter reviews by whether tests have passed.",
+                  "key": "passesTests",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Filter reviews not updated since the given date (YYYY-mm-dd).",
+                  "key": "notUpdatedSince",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Filter reviews by vote direction.",
+                  "key": "hasVoted",
+                  "value": "down"
+                },
+                {
+                  "description": "Filter reviews that the authenticated user has commented on.",
+                  "key": "myComments",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of code reviews, with optional filtering by author, state, project, participants, keywords, and other criteria."
+          },
+          "response": [
+            {
+              "id": "cef2528b-e7a4-4230-b3fb-a80f5fbdaaca",
+              "name": "A list of reviews.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/?after=<integer>&max=1000&fields=<string>&author[]=<string>&change[]=<integer>&hasReviewers=<boolean>&ids[]=<integer>&keywords=<string>&participants[]=<string>&project[]=<string>&state[]=needsRevision&passesTests=<boolean>&notUpdatedSince=<date>&hasVoted=down&myComments=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "A review ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of reviews to return. Defaults to 1000.",
+                      "key": "max",
+                      "value": "1000"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more authors.",
+                      "key": "author[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more changelist IDs.",
+                      "key": "change[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by whether reviewers are assigned.",
+                      "key": "hasReviewers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Fetch specific reviews by their IDs.",
+                      "key": "ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Keywords to search for in reviews.",
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more participants.",
+                      "key": "participants[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more projects.",
+                      "key": "project[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected.",
+                      "key": "state[]",
+                      "value": "needsRevision"
+                    },
+                    {
+                      "description": "Filter reviews by whether tests have passed.",
+                      "key": "passesTests",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Filter reviews not updated since the given date (YYYY-mm-dd).",
+                      "key": "notUpdatedSince",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter reviews by vote direction.",
+                      "key": "hasVoted",
+                      "value": "down"
+                    },
+                    {
+                      "description": "Filter reviews that the authenticated user has commented on.",
+                      "key": "myComments",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"lastSeen\": \"<integer>\",\n  \"reviews\": [\n    {\n      \"id\": \"<integer>\",\n      \"author\": \"<string>\",\n      \"changes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"commits\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"created\": \"<integer>\",\n      \"deployStatus\": \"<string>\",\n      \"description\": \"<string>\",\n      \"participants\": {\n        \"commodo_6aa\": {},\n        \"officia__6\": {}\n      },\n      \"pending\": \"<boolean>\",\n      \"projects\": {\n        \"adipisicing137\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"culpac27\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sede\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"roles\": {\n        \"sed_30\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"state\": \"approved\",\n      \"stateLabel\": \"<string>\",\n      \"testStatus\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"updateDate\": \"<dateTime>\",\n      \"versions\": [\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        },\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"author\": \"<string>\",\n      \"changes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"commits\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"created\": \"<integer>\",\n      \"deployStatus\": \"<string>\",\n      \"description\": \"<string>\",\n      \"participants\": {\n        \"amet__9\": {},\n        \"in_1b\": {},\n        \"id_b_\": {},\n        \"mollit8\": {},\n        \"ea708\": {}\n      },\n      \"pending\": \"<boolean>\",\n      \"projects\": {\n        \"enim1\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"ipsum_6f7\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"roles\": {\n        \"exercitatione\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"state\": \"needsReview\",\n      \"stateLabel\": \"<string>\",\n      \"testStatus\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"updateDate\": \"<dateTime>\",\n      \"versions\": [\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        },\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-cef2528b-e7a4-4230-b3fb-a80f5fbdaaca"
+            },
+            {
+              "id": "b8894a2e-6412-40db-bb2a-028256354377",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/?after=<integer>&max=1000&fields=<string>&author[]=<string>&change[]=<integer>&hasReviewers=<boolean>&ids[]=<integer>&keywords=<string>&participants[]=<string>&project[]=<string>&state[]=needsRevision&passesTests=<boolean>&notUpdatedSince=<date>&hasVoted=down&myComments=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "A review ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of reviews to return. Defaults to 1000.",
+                      "key": "max",
+                      "value": "1000"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more authors.",
+                      "key": "author[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more changelist IDs.",
+                      "key": "change[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by whether reviewers are assigned.",
+                      "key": "hasReviewers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Fetch specific reviews by their IDs.",
+                      "key": "ids[]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Keywords to search for in reviews.",
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more participants.",
+                      "key": "participants[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by one or more projects.",
+                      "key": "project[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter reviews by state. Valid values include needsReview, needsRevision, approved, archived, and rejected.",
+                      "key": "state[]",
+                      "value": "needsRevision"
+                    },
+                    {
+                      "description": "Filter reviews by whether tests have passed.",
+                      "key": "passesTests",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Filter reviews not updated since the given date (YYYY-mm-dd).",
+                      "key": "notUpdatedSince",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter reviews by vote direction.",
+                      "key": "hasVoted",
+                      "value": "down"
+                    },
+                    {
+                      "description": "Filter reviews that the authenticated user has commented on.",
+                      "key": "myComments",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-b8894a2e-6412-40db-bb2a-028256354377"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:04.000Z",
+          "updatedAt": "2026-07-28T02:35:04.000Z",
+          "uid": "35240-d43ce90a-d9a4-4e8c-a97c-0834ce87d525"
+        },
+        {
+          "name": "Perforce Create a Review",
+          "id": "4bfe8aeb-efa4-4cf0-ba51-fec73638e43c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The changelist ID to create the review from.",
+                  "key": "change",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The review description.",
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of reviewer usernames.",
+                  "key": "reviewers",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of reviewer usernames.",
+                  "key": "reviewers",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of required reviewer usernames.",
+                  "key": "requiredReviewers",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of required reviewer usernames.",
+                  "key": "requiredReviewers",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Reviewer groups with optional required flag.",
+                  "key": "reviewerGroups",
+                  "value": "[object Object]"
+                },
+                {
+                  "description": "Reviewer groups with optional required flag.",
+                  "key": "reviewerGroups",
+                  "value": "[object Object]"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reviews/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews",
+                ""
+              ]
+            },
+            "description": "Creates a new code review from a submitted or pending changelist."
+          },
+          "response": [
+            {
+              "id": "1f6643f1-1a36-448d-8387-87019e38a2c1",
+              "name": "The newly created review.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The changelist ID to create the review from.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The review description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"review\": {\n    \"id\": \"<integer>\",\n    \"author\": \"<string>\",\n    \"changes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"commits\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"created\": \"<integer>\",\n    \"deployStatus\": \"<string>\",\n    \"description\": \"<string>\",\n    \"participants\": {\n      \"non_f4\": {},\n      \"enim_1\": {},\n      \"deserunt_3\": {}\n    },\n    \"pending\": \"<boolean>\",\n    \"projects\": {\n      \"elit023\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"ad8\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": \"approved\",\n    \"stateLabel\": \"<string>\",\n    \"testStatus\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"updateDate\": \"<dateTime>\",\n    \"versions\": [\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      },\n      {\n        \"difference\": \"<integer>\",\n        \"stream\": \"<string>\",\n        \"change\": \"<integer>\",\n        \"user\": \"<string>\",\n        \"time\": \"<integer>\",\n        \"pending\": \"<boolean>\",\n        \"archiveChange\": \"<integer>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-1f6643f1-1a36-448d-8387-87019e38a2c1"
+            },
+            {
+              "id": "4159ddb6-a63b-4c2c-8b08-ff4cfc296bf0",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The changelist ID to create the review from.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The review description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-4159ddb6-a63b-4c2c-8b08-ff4cfc296bf0"
+            },
+            {
+              "id": "3af1893f-7015-436b-8a71-c1cf5e54ed35",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The changelist ID to create the review from.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The review description.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of reviewer usernames.",
+                      "key": "reviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of required reviewer usernames.",
+                      "key": "requiredReviewers",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "Reviewer groups with optional required flag.",
+                      "key": "reviewerGroups",
+                      "value": "[object Object]"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reviews/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reviews",
+                    ""
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-3af1893f-7015-436b-8a71-c1cf5e54ed35"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:04.000Z",
+          "updatedAt": "2026-07-28T02:35:04.000Z",
+          "uid": "35240-4bfe8aeb-efa4-4cf0-ba51-fec73638e43c"
+        }
+      ],
+      "id": "77dc7121-7736-47ea-aa22-abe849a33eda",
+      "createdAt": "2026-07-28T02:35:04.000Z",
+      "updatedAt": "2026-07-28T02:35:04.000Z",
+      "uid": "35240-77dc7121-7736-47ea-aa22-abe849a33eda"
+    },
+    {
+      "name": "dashboards",
+      "item": [
+        {
+          "name": "action",
+          "item": [
+            {
+              "name": "Perforce Get Action Dashboard Reviews",
+              "id": "37e8bda9-392e-4708-bb9f-4093a5a830b3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboards/action",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboards",
+                    "action"
+                  ]
+                },
+                "description": "Retrieves reviews assigned to the authenticated user's action dashboard, showing reviews that require attention."
+              },
+              "response": [
+                {
+                  "id": "ae415758-c61a-426e-b0ad-1d53307db495",
+                  "name": "Action dashboard reviews.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dashboards/action",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dashboards",
+                        "action"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"lastSeen\": \"<integer>\",\n  \"reviews\": [\n    {\n      \"id\": \"<integer>\",\n      \"author\": \"<string>\",\n      \"changes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"commits\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"created\": \"<integer>\",\n      \"deployStatus\": \"<string>\",\n      \"description\": \"<string>\",\n      \"participants\": {\n        \"eiusmod_37_\": {},\n        \"ute0a\": {}\n      },\n      \"pending\": \"<boolean>\",\n      \"projects\": {\n        \"commodo_c\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"roles\": {\n        \"in_e\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"state\": \"approved\",\n      \"stateLabel\": \"<string>\",\n      \"testStatus\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"updateDate\": \"<dateTime>\",\n      \"versions\": [\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        },\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"author\": \"<string>\",\n      \"changes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"commits\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"created\": \"<integer>\",\n      \"deployStatus\": \"<string>\",\n      \"description\": \"<string>\",\n      \"participants\": {\n        \"Lorem_e\": {}\n      },\n      \"pending\": \"<boolean>\",\n      \"projects\": {\n        \"ut9a\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"velit_a_8\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"roles\": {\n        \"cillum35\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"et82e\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"state\": \"approved\",\n      \"stateLabel\": \"<string>\",\n      \"testStatus\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"updateDate\": \"<dateTime>\",\n      \"versions\": [\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        },\n        {\n          \"difference\": \"<integer>\",\n          \"stream\": \"<string>\",\n          \"change\": \"<integer>\",\n          \"user\": \"<string>\",\n          \"time\": \"<integer>\",\n          \"pending\": \"<boolean>\",\n          \"archiveChange\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-ae415758-c61a-426e-b0ad-1d53307db495"
+                },
+                {
+                  "id": "f4073265-4ba7-444e-a66e-d4cf4ddae2b7",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dashboards/action",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dashboards",
+                        "action"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:04.000Z",
+                  "updatedAt": "2026-07-28T02:35:04.000Z",
+                  "uid": "35240-f4073265-4ba7-444e-a66e-d4cf4ddae2b7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:04.000Z",
+              "updatedAt": "2026-07-28T02:35:04.000Z",
+              "uid": "35240-37e8bda9-392e-4708-bb9f-4093a5a830b3"
+            }
+          ],
+          "id": "54284447-e8ac-42cc-b817-2b4316240a98",
+          "createdAt": "2026-07-28T02:35:04.000Z",
+          "updatedAt": "2026-07-28T02:35:04.000Z",
+          "uid": "35240-54284447-e8ac-42cc-b817-2b4316240a98"
+        }
+      ],
+      "id": "33d7fee4-b01e-40e5-b025-43f972c39870",
+      "createdAt": "2026-07-28T02:35:04.000Z",
+      "updatedAt": "2026-07-28T02:35:04.000Z",
+      "uid": "35240-33d7fee4-b01e-40e5-b025-43f972c39870"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}

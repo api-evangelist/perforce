@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "67e5bec0-c213-4ee5-904e-0eee27b31d8a",
+    "name": "Perforce Helix Swarm Activity Version API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:35:06.000Z",
+    "updatedAt": "2026-07-28T02:35:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-67e5bec0-c213-4ee5-904e-0eee27b31d8a"
+  },
+  "item": [
+    {
+      "name": "version",
+      "item": [
+        {
+          "name": "Perforce Get Server Version",
+          "id": "4da6dec3-142a-4b7e-853a-ff02f8ccace6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/version",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "version"
+              ]
+            },
+            "description": "Retrieves the installed Helix Swarm version, release year, and available API versions."
+          },
+          "response": [
+            {
+              "id": "401c7a13-f5d7-4c09-ad62-848b30c8416f",
+              "name": "Server version information.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/version",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "version"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"version\": \"<string>\",\n  \"year\": \"<string>\",\n  \"apiVersions\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "createdAt": "2026-07-28T02:35:07.000Z",
+              "updatedAt": "2026-07-28T02:35:07.000Z",
+              "uid": "35240-401c7a13-f5d7-4c09-ad62-848b30c8416f"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:07.000Z",
+          "updatedAt": "2026-07-28T02:35:07.000Z",
+          "uid": "35240-4da6dec3-142a-4b7e-853a-ff02f8ccace6"
+        }
+      ],
+      "id": "0fd4e34f-762f-4dd1-8e6a-ecde6bf70f88",
+      "createdAt": "2026-07-28T02:35:07.000Z",
+      "updatedAt": "2026-07-28T02:35:07.000Z",
+      "uid": "35240-0fd4e34f-762f-4dd1-8e6a-ecde6bf70f88"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}

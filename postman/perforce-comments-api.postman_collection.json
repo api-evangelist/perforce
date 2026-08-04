@@ -1,0 +1,1445 @@
+{
+  "info": {
+    "_postman_id": "7b5e22dd-cf21-44dc-91cb-cdb44f0d9349",
+    "name": "Perforce Helix Swarm Activity Comments API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:35:01.000Z",
+    "updatedAt": "2026-07-28T02:35:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7b5e22dd-cf21-44dc-91cb-cdb44f0d9349"
+  },
+  "item": [
+    {
+      "name": "comments",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Perforce Edit a Comment",
+              "id": "71fed8b6-7d54-49af-b6b2-0f56fc6b693f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The updated comment body text.",
+                      "key": "body",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The topic reference for the comment.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The updated task state.",
+                      "key": "taskState",
+                      "value": "closed"
+                    },
+                    {
+                      "description": "Updated flags for the comment.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Updated flags for the comment.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to suppress email notifications.",
+                      "key": "silenceNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to delay email notifications for batching.",
+                      "key": "delayNotification",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2159c235-d635-4cb5-8712-3bae4da9e756",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) The comment ID."
+                    }
+                  ]
+                },
+                "description": "Updates an existing comment's body, task state, or flags."
+              },
+              "response": [
+                {
+                  "id": "dcce5a8a-16d1-4508-909b-bb9abffedd6e",
+                  "name": "The updated comment.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The updated comment body text.",
+                          "key": "body",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The topic reference for the comment.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The updated task state.",
+                          "key": "taskState",
+                          "value": "closed"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to suppress email notifications.",
+                          "key": "silenceNotification",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to delay email notifications for batching.",
+                          "key": "delayNotification",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"comment\": {\n    \"id\": \"<integer>\",\n    \"body\": \"<string>\",\n    \"context\": {\n      \"file\": \"<string>\",\n      \"leftLine\": \"<integer>\",\n      \"rightLine\": \"<integer>\",\n      \"content\": \"<string>\",\n      \"version\": \"<integer>\"\n    },\n    \"edited\": \"<integer>\",\n    \"flags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"likes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"taskState\": \"comment\",\n    \"time\": \"<integer>\",\n    \"topic\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"user\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-dcce5a8a-16d1-4508-909b-bb9abffedd6e"
+                },
+                {
+                  "id": "7980cb30-1706-4c7b-bd32-6cb1fa7a24e7",
+                  "name": "The request was malformed or missing required parameters.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The updated comment body text.",
+                          "key": "body",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The topic reference for the comment.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The updated task state.",
+                          "key": "taskState",
+                          "value": "closed"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to suppress email notifications.",
+                          "key": "silenceNotification",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to delay email notifications for batching.",
+                          "key": "delayNotification",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-7980cb30-1706-4c7b-bd32-6cb1fa7a24e7"
+                },
+                {
+                  "id": "98412452-23a0-47c6-b6f5-61585eeaa227",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The updated comment body text.",
+                          "key": "body",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The topic reference for the comment.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The updated task state.",
+                          "key": "taskState",
+                          "value": "closed"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to suppress email notifications.",
+                          "key": "silenceNotification",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to delay email notifications for batching.",
+                          "key": "delayNotification",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-98412452-23a0-47c6-b6f5-61585eeaa227"
+                },
+                {
+                  "id": "7cf33b6e-02cf-4824-8548-8c5359c0e1c6",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The updated comment body text.",
+                          "key": "body",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The topic reference for the comment.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The updated task state.",
+                          "key": "taskState",
+                          "value": "closed"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Updated flags for the comment.",
+                          "key": "flags[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to suppress email notifications.",
+                          "key": "silenceNotification",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to delay email notifications for batching.",
+                          "key": "delayNotification",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-7cf33b6e-02cf-4824-8548-8c5359c0e1c6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-71fed8b6-7d54-49af-b6b2-0f56fc6b693f"
+            }
+          ],
+          "id": "d0bcd6c5-c447-40ba-9e53-0fa9b0687e10",
+          "createdAt": "2026-07-28T02:35:01.000Z",
+          "updatedAt": "2026-07-28T02:35:01.000Z",
+          "uid": "35240-d0bcd6c5-c447-40ba-9e53-0fa9b0687e10"
+        },
+        {
+          "name": "notify",
+          "item": [
+            {
+              "name": "Perforce Send Comment Notification",
+              "id": "0362bb1f-23af-4ad8-947c-fc3876822778",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The target topic for the notification.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to true to preview the notification without sending.",
+                      "key": "preview",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/notify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    "notify"
+                  ]
+                },
+                "description": "Sends or previews a notification for pending comments on a topic."
+              },
+              "response": [
+                {
+                  "id": "6e65768c-ec7b-496c-be5c-1e82834f4244",
+                  "name": "Notification result.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The target topic for the notification.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to true to preview the notification without sending.",
+                          "key": "preview",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/notify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        "notify"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"isValid\": \"<boolean>\",\n  \"message\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"preview\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-6e65768c-ec7b-496c-be5c-1e82834f4244"
+                },
+                {
+                  "id": "42ae3d5a-6f9a-4a72-8196-853e3aeeebd2",
+                  "name": "The request was malformed or missing required parameters.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The target topic for the notification.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to true to preview the notification without sending.",
+                          "key": "preview",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/notify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        "notify"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-42ae3d5a-6f9a-4a72-8196-853e3aeeebd2"
+                },
+                {
+                  "id": "d3057ce2-3764-4e37-8e37-c59d03c6d4c7",
+                  "name": "Authentication is required or the provided credentials are invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The target topic for the notification.",
+                          "key": "topic",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to true to preview the notification without sending.",
+                          "key": "preview",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/notify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        "notify"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:35:01.000Z",
+                  "updatedAt": "2026-07-28T02:35:01.000Z",
+                  "uid": "35240-d3057ce2-3764-4e37-8e37-c59d03c6d4c7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-0362bb1f-23af-4ad8-947c-fc3876822778"
+            }
+          ],
+          "id": "5c7b1aec-b3ef-4f68-836a-4ba295fd3bdc",
+          "createdAt": "2026-07-28T02:35:01.000Z",
+          "updatedAt": "2026-07-28T02:35:01.000Z",
+          "uid": "35240-5c7b1aec-b3ef-4f68-836a-4ba295fd3bdc"
+        },
+        {
+          "name": "Perforce List Comments",
+          "id": "b9570dfe-1cb1-434e-9f0e-26f3b3487f1a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/comments/?after=<integer>&max=100&topic=<string>&context[version]=<integer>&ignoreArchived=<boolean>&tasksOnly=<boolean>&taskStates=verified&taskStates=comment&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                ""
+              ],
+              "query": [
+                {
+                  "description": "A comment ID to seek past for pagination.",
+                  "key": "after",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Maximum number of comments to return. Defaults to 100.",
+                  "key": "max",
+                  "value": "100"
+                },
+                {
+                  "description": "Filter comments by topic, such as reviews/1234 for a specific review.",
+                  "key": "topic",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by a specific review version.",
+                  "key": "context[version]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Exclude comments on archived reviews.",
+                  "key": "ignoreArchived",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Return only comments flagged as tasks.",
+                  "key": "tasksOnly",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Filter by task state. Valid values include open, closed, verified, and comment.",
+                  "key": "taskStates",
+                  "value": "verified"
+                },
+                {
+                  "description": "Filter by task state. Valid values include open, closed, verified, and comment.",
+                  "key": "taskStates",
+                  "value": "comment"
+                },
+                {
+                  "description": "Comma-separated list of fields to include in the response.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of comments, optionally filtered by topic, version, task state, or archive status."
+          },
+          "response": [
+            {
+              "id": "23db8140-9d2a-4eca-b8ec-4e17d85a76b1",
+              "name": "A list of comments.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/?after=<integer>&max=100&topic=<string>&context[version]=<integer>&ignoreArchived=<boolean>&tasksOnly=<boolean>&taskStates=comment&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "A comment ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of comments to return. Defaults to 100.",
+                      "key": "max",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Filter comments by topic, such as reviews/1234 for a specific review.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by a specific review version.",
+                      "key": "context[version]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Exclude comments on archived reviews.",
+                      "key": "ignoreArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Return only comments flagged as tasks.",
+                      "key": "tasksOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Filter by task state. Valid values include open, closed, verified, and comment.",
+                      "key": "taskStates",
+                      "value": "comment"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"topic\": \"<string>\",\n  \"comments\": {\n    \"in_fd\": {\n      \"id\": \"<integer>\",\n      \"body\": \"<string>\",\n      \"context\": {\n        \"file\": \"<string>\",\n        \"leftLine\": \"<integer>\",\n        \"rightLine\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"version\": \"<integer>\"\n      },\n      \"edited\": \"<integer>\",\n      \"flags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"likes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"taskState\": \"verified\",\n      \"time\": \"<integer>\",\n      \"topic\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"user\": \"<string>\"\n    },\n    \"culpae5d\": {\n      \"id\": \"<integer>\",\n      \"body\": \"<string>\",\n      \"context\": {\n        \"file\": \"<string>\",\n        \"leftLine\": \"<integer>\",\n        \"rightLine\": \"<integer>\",\n        \"content\": \"<string>\",\n        \"version\": \"<integer>\"\n      },\n      \"edited\": \"<integer>\",\n      \"flags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"likes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"taskState\": \"comment\",\n      \"time\": \"<integer>\",\n      \"topic\": \"<string>\",\n      \"updated\": \"<integer>\",\n      \"user\": \"<string>\"\n    }\n  },\n  \"lastSeen\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-23db8140-9d2a-4eca-b8ec-4e17d85a76b1"
+            },
+            {
+              "id": "8e1c6974-a296-4b53-a544-94f91bc59abc",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/?after=<integer>&max=100&topic=<string>&context[version]=<integer>&ignoreArchived=<boolean>&tasksOnly=<boolean>&taskStates=comment&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "A comment ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of comments to return. Defaults to 100.",
+                      "key": "max",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Filter comments by topic, such as reviews/1234 for a specific review.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by a specific review version.",
+                      "key": "context[version]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Exclude comments on archived reviews.",
+                      "key": "ignoreArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Return only comments flagged as tasks.",
+                      "key": "tasksOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Filter by task state. Valid values include open, closed, verified, and comment.",
+                      "key": "taskStates",
+                      "value": "comment"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-8e1c6974-a296-4b53-a544-94f91bc59abc"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:01.000Z",
+          "updatedAt": "2026-07-28T02:35:01.000Z",
+          "uid": "35240-b9570dfe-1cb1-434e-9f0e-26f3b3487f1a"
+        },
+        {
+          "name": "Perforce Add a Comment",
+          "id": "22a61adf-d100-4c5e-a4cb-5801f10b5c84",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The topic to comment on, such as reviews/1234.",
+                  "key": "topic",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The comment body text.",
+                  "key": "body",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Set to suppress email notifications.",
+                  "key": "silenceNotification",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Set to delay email notifications for batching.",
+                  "key": "delayNotification",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Whether the comment is a plain comment or an open task.",
+                  "key": "taskState",
+                  "value": "comment"
+                },
+                {
+                  "description": "Flags to apply, such as closed.",
+                  "key": "flags[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Flags to apply, such as closed.",
+                  "key": "flags[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The depot file path for an inline comment.",
+                  "key": "context[file]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The left-side line number for an inline comment.",
+                  "key": "context[leftLine]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The right-side line number for an inline comment.",
+                  "key": "context[rightLine]",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Adjacent content for context in inline comments.",
+                  "key": "context[content]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The review version for the inline comment context.",
+                  "key": "context[version]",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                ""
+              ]
+            },
+            "description": "Creates a new comment on a topic such as a review or changelist. Comments can include inline file context and task flags."
+          },
+          "response": [
+            {
+              "id": "6c1d76df-c562-4757-bcb5-a9ed77afeca2",
+              "name": "The newly created comment.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The topic to comment on, such as reviews/1234.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The comment body text.",
+                      "key": "body",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to suppress email notifications.",
+                      "key": "silenceNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to delay email notifications for batching.",
+                      "key": "delayNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the comment is a plain comment or an open task.",
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The depot file path for an inline comment.",
+                      "key": "context[file]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The left-side line number for an inline comment.",
+                      "key": "context[leftLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The right-side line number for an inline comment.",
+                      "key": "context[rightLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Adjacent content for context in inline comments.",
+                      "key": "context[content]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The review version for the inline comment context.",
+                      "key": "context[version]",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"comment\": {\n    \"id\": \"<integer>\",\n    \"body\": \"<string>\",\n    \"context\": {\n      \"file\": \"<string>\",\n      \"leftLine\": \"<integer>\",\n      \"rightLine\": \"<integer>\",\n      \"content\": \"<string>\",\n      \"version\": \"<integer>\"\n    },\n    \"edited\": \"<integer>\",\n    \"flags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"likes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"taskState\": \"comment\",\n    \"time\": \"<integer>\",\n    \"topic\": \"<string>\",\n    \"updated\": \"<integer>\",\n    \"user\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-6c1d76df-c562-4757-bcb5-a9ed77afeca2"
+            },
+            {
+              "id": "8433ab3d-c706-4335-b823-26c506505f06",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The topic to comment on, such as reviews/1234.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The comment body text.",
+                      "key": "body",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to suppress email notifications.",
+                      "key": "silenceNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to delay email notifications for batching.",
+                      "key": "delayNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the comment is a plain comment or an open task.",
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The depot file path for an inline comment.",
+                      "key": "context[file]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The left-side line number for an inline comment.",
+                      "key": "context[leftLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The right-side line number for an inline comment.",
+                      "key": "context[rightLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Adjacent content for context in inline comments.",
+                      "key": "context[content]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The review version for the inline comment context.",
+                      "key": "context[version]",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-8433ab3d-c706-4335-b823-26c506505f06"
+            },
+            {
+              "id": "9511a379-69a5-4e01-bbfb-f9940ce75234",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The topic to comment on, such as reviews/1234.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The comment body text.",
+                      "key": "body",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to suppress email notifications.",
+                      "key": "silenceNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set to delay email notifications for batching.",
+                      "key": "delayNotification",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether the comment is a plain comment or an open task.",
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Flags to apply, such as closed.",
+                      "key": "flags[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The depot file path for an inline comment.",
+                      "key": "context[file]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The left-side line number for an inline comment.",
+                      "key": "context[leftLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The right-side line number for an inline comment.",
+                      "key": "context[rightLine]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Adjacent content for context in inline comments.",
+                      "key": "context[content]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The review version for the inline comment context.",
+                      "key": "context[version]",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/comments/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ""
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:35:01.000Z",
+              "updatedAt": "2026-07-28T02:35:01.000Z",
+              "uid": "35240-9511a379-69a5-4e01-bbfb-f9940ce75234"
+            }
+          ],
+          "createdAt": "2026-07-28T02:35:01.000Z",
+          "updatedAt": "2026-07-28T02:35:01.000Z",
+          "uid": "35240-22a61adf-d100-4c5e-a4cb-5801f10b5c84"
+        }
+      ],
+      "id": "2b1ac66f-1938-4c29-b831-21376f7df8cd",
+      "createdAt": "2026-07-28T02:35:01.000Z",
+      "updatedAt": "2026-07-28T02:35:01.000Z",
+      "uid": "35240-2b1ac66f-1938-4c29-b831-21376f7df8cd"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}

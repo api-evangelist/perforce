@@ -1,0 +1,656 @@
+{
+  "info": {
+    "_postman_id": "d338c639-d728-4a2e-b64f-d943b59debd9",
+    "name": "Perforce Helix Swarm Activity API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:34:58.000Z",
+    "updatedAt": "2026-07-28T02:34:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d338c639-d728-4a2e-b64f-d943b59debd9"
+  },
+  "item": [
+    {
+      "name": "activity",
+      "item": [
+        {
+          "name": "Perforce List Activity Entries",
+          "id": "ffc399f9-97cb-42c0-8a8d-b78a58977c25",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/activity?change=<integer>&stream=<string>&type=job&after=<integer>&max=100&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "activity"
+              ],
+              "query": [
+                {
+                  "description": "Filter activity by changelist ID.",
+                  "key": "change",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject.",
+                  "key": "stream",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by activity type.",
+                  "key": "type",
+                  "value": "job"
+                },
+                {
+                  "description": "An activity ID to seek past for pagination.",
+                  "key": "after",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Maximum number of entries to return. Defaults to 100.",
+                  "key": "max",
+                  "value": "100"
+                },
+                {
+                  "description": "Comma-separated list of fields to include in the response.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of activity entries from the activity stream, optionally filtered by changelist, stream, or type."
+          },
+          "response": [
+            {
+              "id": "3919c8d8-a072-469c-aacf-2acb67bfa13b",
+              "name": "A list of activity entries.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity?change=<integer>&stream=<string>&type=job&after=<integer>&max=100&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter activity by changelist ID.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject.",
+                      "key": "stream",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by activity type.",
+                      "key": "type",
+                      "value": "job"
+                    },
+                    {
+                      "description": "An activity ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of entries to return. Defaults to 100.",
+                      "key": "max",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"activity\": [\n    {\n      \"id\": \"<integer>\",\n      \"action\": \"<string>\",\n      \"change\": \"<integer>\",\n      \"date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"link\": \"<uri>\",\n      \"streams\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"target\": \"<string>\",\n      \"topic\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"action\": \"<string>\",\n      \"change\": \"<integer>\",\n      \"date\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"link\": \"<uri>\",\n      \"streams\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"target\": \"<string>\",\n      \"topic\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user\": \"<string>\"\n    }\n  ],\n  \"lastSeen\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:34:59.000Z",
+              "updatedAt": "2026-07-28T02:34:59.000Z",
+              "uid": "35240-3919c8d8-a072-469c-aacf-2acb67bfa13b"
+            },
+            {
+              "id": "7b9c10bd-d06f-4c0b-bd3f-0f2f1ade07b5",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/activity?change=<integer>&stream=<string>&type=job&after=<integer>&max=100&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter activity by changelist ID.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject.",
+                      "key": "stream",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by activity type.",
+                      "key": "type",
+                      "value": "job"
+                    },
+                    {
+                      "description": "An activity ID to seek past for pagination.",
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum number of entries to return. Defaults to 100.",
+                      "key": "max",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Comma-separated list of fields to include in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:34:59.000Z",
+              "updatedAt": "2026-07-28T02:34:59.000Z",
+              "uid": "35240-7b9c10bd-d06f-4c0b-bd3f-0f2f1ade07b5"
+            }
+          ],
+          "createdAt": "2026-07-28T02:34:59.000Z",
+          "updatedAt": "2026-07-28T02:34:59.000Z",
+          "uid": "35240-ffc399f9-97cb-42c0-8a8d-b78a58977c25"
+        },
+        {
+          "name": "Perforce Create Activity Entry",
+          "id": "611c9bb7-0a02-452a-b9d6-994f4b420038",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The activity classification type.",
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The username of the user performing the action.",
+                  "key": "user",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) A past-tense description of the activity.",
+                  "key": "action",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The object receiving the action.",
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An optional comment thread identifier.",
+                  "key": "topic",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Contextual information about the activity.",
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "description": "A related changelist ID.",
+                  "key": "change",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Stream names where the activity should appear.",
+                  "key": "streams[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Stream names where the activity should appear.",
+                  "key": "streams[]",
+                  "value": "<string>"
+                },
+                {
+                  "description": "A URL for the activity target.",
+                  "key": "link",
+                  "value": "<uri>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/activity",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "activity"
+              ]
+            },
+            "description": "Creates a new entry in the activity stream."
+          },
+          "response": [
+            {
+              "id": "08b0ca1c-27f8-4c8c-b0cd-9604e3bfa928",
+              "name": "The newly created activity entry.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The activity classification type.",
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The username of the user performing the action.",
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A past-tense description of the activity.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The object receiving the action.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An optional comment thread identifier.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Contextual information about the activity.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A related changelist ID.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A URL for the activity target.",
+                      "key": "link",
+                      "value": "<uri>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/activity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"activity\": {\n    \"id\": \"<integer>\",\n    \"action\": \"<string>\",\n    \"change\": \"<integer>\",\n    \"date\": \"<dateTime>\",\n    \"description\": \"<string>\",\n    \"link\": \"<uri>\",\n    \"streams\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"target\": \"<string>\",\n    \"topic\": \"<string>\",\n    \"type\": \"<string>\",\n    \"user\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T02:34:59.000Z",
+              "updatedAt": "2026-07-28T02:34:59.000Z",
+              "uid": "35240-08b0ca1c-27f8-4c8c-b0cd-9604e3bfa928"
+            },
+            {
+              "id": "25293a84-9322-4884-a5ea-736d82f32b01",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The activity classification type.",
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The username of the user performing the action.",
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A past-tense description of the activity.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The object receiving the action.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An optional comment thread identifier.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Contextual information about the activity.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A related changelist ID.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A URL for the activity target.",
+                      "key": "link",
+                      "value": "<uri>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/activity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"details\": {}\n}",
+              "createdAt": "2026-07-28T02:34:59.000Z",
+              "updatedAt": "2026-07-28T02:34:59.000Z",
+              "uid": "35240-25293a84-9322-4884-a5ea-736d82f32b01"
+            },
+            {
+              "id": "ba6c5345-679f-49f3-b718-c27ac032f327",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The activity classification type.",
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The username of the user performing the action.",
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A past-tense description of the activity.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The object receiving the action.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An optional comment thread identifier.",
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Contextual information about the activity.",
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A related changelist ID.",
+                      "key": "change",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Stream names where the activity should appear.",
+                      "key": "streams[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A URL for the activity target.",
+                      "key": "link",
+                      "value": "<uri>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/activity",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "activity"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:34:59.000Z",
+              "updatedAt": "2026-07-28T02:34:59.000Z",
+              "uid": "35240-ba6c5345-679f-49f3-b718-c27ac032f327"
+            }
+          ],
+          "createdAt": "2026-07-28T02:34:59.000Z",
+          "updatedAt": "2026-07-28T02:34:59.000Z",
+          "uid": "35240-611c9bb7-0a02-452a-b9d6-994f4b420038"
+        }
+      ],
+      "id": "7b0be366-7778-4f92-a5ed-32c7089b7792",
+      "createdAt": "2026-07-28T02:34:59.000Z",
+      "updatedAt": "2026-07-28T02:34:59.000Z",
+      "uid": "35240-7b0be366-7778-4f92-a5ed-32c7089b7792"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}

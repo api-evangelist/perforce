@@ -1,0 +1,689 @@
+{
+  "info": {
+    "_postman_id": "4195a281-8817-43b3-8b63-e84d573e243e",
+    "name": "Perforce Helix Swarm Activity Changes API",
+    "description": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:34:59.000Z",
+    "updatedAt": "2026-07-28T02:34:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4195a281-8817-43b3-8b63-e84d573e243e"
+  },
+  "item": [
+    {
+      "name": "changes",
+      "item": [
+        {
+          "name": "{change}",
+          "item": [
+            {
+              "name": "affectsprojects",
+              "item": [
+                {
+                  "name": "Perforce Get Projects Affected by Change",
+                  "id": "a795862a-d203-4d28-96e2-dbdb90b02e97",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/changes/:change/affectsprojects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "changes",
+                        ":change",
+                        "affectsprojects"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4d8dcab7-eaed-4de8-8cb7-47f338e2e4e4",
+                          "key": "change",
+                          "value": "<integer>",
+                          "description": "(Required) The changelist number."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the projects and branches that are affected by a given changelist."
+                  },
+                  "response": [
+                    {
+                      "id": "11255f9f-404c-43dc-ad7d-46f495353348",
+                      "name": "Projects and branches affected by the changelist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/affectsprojects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "affectsprojects"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"change\": {\n    \"id\": \"<integer>\",\n    \"projects\": {\n      \"labore7\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-11255f9f-404c-43dc-ad7d-46f495353348"
+                    },
+                    {
+                      "id": "7fef1ffd-9793-4ecf-ad79-bb9c73aba0e1",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/affectsprojects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "affectsprojects"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-7fef1ffd-9793-4ecf-ad79-bb9c73aba0e1"
+                    },
+                    {
+                      "id": "c00bfdf2-6902-4778-b5d3-eb6dc626b78e",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/affectsprojects",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "affectsprojects"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-c00bfdf2-6902-4778-b5d3-eb6dc626b78e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:00.000Z",
+                  "updatedAt": "2026-07-28T02:35:00.000Z",
+                  "uid": "35240-a795862a-d203-4d28-96e2-dbdb90b02e97"
+                }
+              ],
+              "id": "9c3a2cc3-427e-43fb-a4f5-82b77de82653",
+              "createdAt": "2026-07-28T02:35:00.000Z",
+              "updatedAt": "2026-07-28T02:35:00.000Z",
+              "uid": "35240-9c3a2cc3-427e-43fb-a4f5-82b77de82653"
+            },
+            {
+              "name": "defaultreviewers",
+              "item": [
+                {
+                  "name": "Perforce Get Default Reviewers for Change",
+                  "id": "867faadf-86b6-48c4-aada-dfde5a4d9f9a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/changes/:change/defaultreviewers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "changes",
+                        ":change",
+                        "defaultreviewers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d2467164-8451-4a10-b222-7c9b37f57a88",
+                          "key": "change",
+                          "value": "<integer>",
+                          "description": "(Required) The changelist number."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the default reviewers configured for the branches and projects affected by a changelist."
+                  },
+                  "response": [
+                    {
+                      "id": "14c19a4d-b292-4517-b9e3-31dbb9b1d607",
+                      "name": "Default reviewers for the changelist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/defaultreviewers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "defaultreviewers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"change\": {\n    \"id\": \"<integer>\",\n    \"defaultReviewers\": {\n      \"groups\": [\n        {\n          \"name\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"users\": [\n        {\n          \"name\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-14c19a4d-b292-4517-b9e3-31dbb9b1d607"
+                    },
+                    {
+                      "id": "71bc65a3-68f9-4a72-ad3d-ba60f8b49a99",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/defaultreviewers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "defaultreviewers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-71bc65a3-68f9-4a72-ad3d-ba60f8b49a99"
+                    },
+                    {
+                      "id": "159eb0aa-b3e9-429d-9cd4-e590aceee969",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:change/defaultreviewers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":change",
+                            "defaultreviewers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "change"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-159eb0aa-b3e9-429d-9cd4-e590aceee969"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:00.000Z",
+                  "updatedAt": "2026-07-28T02:35:00.000Z",
+                  "uid": "35240-867faadf-86b6-48c4-aada-dfde5a4d9f9a"
+                }
+              ],
+              "id": "2c0022de-e514-4fbd-af06-3c6862eabcbf",
+              "createdAt": "2026-07-28T02:35:00.000Z",
+              "updatedAt": "2026-07-28T02:35:00.000Z",
+              "uid": "35240-2c0022de-e514-4fbd-af06-3c6862eabcbf"
+            }
+          ],
+          "id": "5ced5ff1-24d8-4506-9e46-aed63f59ff86",
+          "createdAt": "2026-07-28T02:35:00.000Z",
+          "updatedAt": "2026-07-28T02:35:00.000Z",
+          "uid": "35240-5ced5ff1-24d8-4506-9e46-aed63f59ff86"
+        },
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "check",
+              "item": [
+                {
+                  "name": "Perforce Check Change Against Workflow Rules",
+                  "id": "0748f0ec-4bcc-4227-aa7d-1499cc1c9e43",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/changes/:id/check?type=enforced",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "changes",
+                        ":id",
+                        "check"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The type of check to perform.",
+                          "key": "type",
+                          "value": "enforced"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "502eaeda-b54c-4820-8fec-2a27dc61cc7c",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The changelist number."
+                        }
+                      ]
+                    },
+                    "description": "Performs configured workflow checks on a changelist, validating it against enforced, strict, or shelve rules."
+                  },
+                  "response": [
+                    {
+                      "id": "e976bd1c-efd2-40b6-b665-789b1d4a1b9b",
+                      "name": "Check results.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:id/check?type=enforced",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":id",
+                            "check"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The type of check to perform.",
+                              "key": "type",
+                              "value": "enforced"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"isValid\": \"<boolean>\",\n  \"messages\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-e976bd1c-efd2-40b6-b665-789b1d4a1b9b"
+                    },
+                    {
+                      "id": "4e091ede-e46c-4b38-b7a5-3f3eb76ca7b0",
+                      "name": "Authentication is required or the provided credentials are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:id/check?type=enforced",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":id",
+                            "check"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The type of check to perform.",
+                              "key": "type",
+                              "value": "enforced"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-4e091ede-e46c-4b38-b7a5-3f3eb76ca7b0"
+                    },
+                    {
+                      "id": "51fa1d71-67c6-4fd0-9f6b-4a7eb92a6f4a",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/changes/:id/check?type=enforced",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "changes",
+                            ":id",
+                            "check"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The type of check to perform.",
+                              "key": "type",
+                              "value": "enforced"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:35:00.000Z",
+                      "updatedAt": "2026-07-28T02:35:00.000Z",
+                      "uid": "35240-51fa1d71-67c6-4fd0-9f6b-4a7eb92a6f4a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:35:00.000Z",
+                  "updatedAt": "2026-07-28T02:35:00.000Z",
+                  "uid": "35240-0748f0ec-4bcc-4227-aa7d-1499cc1c9e43"
+                }
+              ],
+              "id": "f110b80a-2dd6-45f4-9c9c-6cad14b22f90",
+              "createdAt": "2026-07-28T02:35:00.000Z",
+              "updatedAt": "2026-07-28T02:35:00.000Z",
+              "uid": "35240-f110b80a-2dd6-45f4-9c9c-6cad14b22f90"
+            }
+          ],
+          "id": "838d4932-420a-442c-93d6-48eb6f1ab2d8",
+          "createdAt": "2026-07-28T02:35:00.000Z",
+          "updatedAt": "2026-07-28T02:35:00.000Z",
+          "uid": "35240-838d4932-420a-442c-93d6-48eb6f1ab2d8"
+        }
+      ],
+      "id": "7f8cc438-4780-443d-9bda-c71750b55cae",
+      "createdAt": "2026-07-28T02:35:00.000Z",
+      "updatedAt": "2026-07-28T02:35:00.000Z",
+      "uid": "35240-7f8cc438-4780-443d-9bda-c71750b55cae"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "scheme",
+      "value": "https"
+    },
+    {
+      "key": "host",
+      "value": "swarm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "{{scheme}}://{{host}}/api/v9"
+    }
+  ]
+}
