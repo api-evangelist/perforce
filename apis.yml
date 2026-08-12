@@ -332,6 +332,9 @@ apis:
   - type: JSONLD
     url: json-ld/perforce-context.jsonld
 common:
+- type: License
+  name: MIT
+  url: https://github.com/perforce/helix-authentication-service/blob/main/LICENSE
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/perforce/overview
 - type: AgenticAccess
