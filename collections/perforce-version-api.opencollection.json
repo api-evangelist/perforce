@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm Activity Version API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce Get Server Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/version"
+          },
+          "docs": "Retrieves the installed Helix Swarm version, release year, and available API versions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

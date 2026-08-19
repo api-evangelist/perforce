@@ -1,0 +1,1851 @@
+{
+  "item": [
+    {
+      "id": "cf652605-6a4e-4c26-a2c5-3568a7ce15e6",
+      "name": "Comments",
+      "description": {
+        "content": "Endpoints for managing review and changelist comments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90147414-0d9b-4ed8-91b5-e133ad4f487e",
+          "name": "Perforce List Comments",
+          "request": {
+            "name": "Perforce List Comments",
+            "description": {
+              "content": "Retrieves a list of comments, optionally filtered by topic, version, task state, or archive status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "A comment ID to seek past for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "100",
+                  "description": "Maximum number of comments to return. Defaults to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "Filter comments by topic, such as reviews/1234 for a specific review."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[version]",
+                  "value": "<integer>",
+                  "description": "Filter by a specific review version."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreArchived",
+                  "value": "<boolean>",
+                  "description": "Exclude comments on archived reviews."
+                },
+                {
+                  "disabled": false,
+                  "key": "tasksOnly",
+                  "value": "<boolean>",
+                  "description": "Return only comments flagged as tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskStates",
+                  "value": "<string>",
+                  "description": "Filter by task state. Valid values include open, closed, verified, and comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskStates",
+                  "value": "<string>",
+                  "description": "Filter by task state. Valid values include open, closed, verified, and comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to include in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f143e2e3-3f09-446a-8415-9903640e6297",
+              "name": "A list of comments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "10"
+                    },
+                    {
+                      "key": "max",
+                      "value": "10"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "context[version]",
+                      "value": "10"
+                    },
+                    {
+                      "key": "ignoreArchived",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tasksOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"topic\": \"example_value\",\n  \"comments\": \"example_value\",\n  \"lastSeen\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5bf8f7f-60b7-41be-ac9e-3b9f197d803e",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "10"
+                    },
+                    {
+                      "key": "max",
+                      "value": "10"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "context[version]",
+                      "value": "10"
+                    },
+                    {
+                      "key": "ignoreArchived",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tasksOnly",
+                      "value": "true"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9abeca8-52bf-40ae-ac89-0b0553b265a9",
+          "name": "Perforce Add a Comment",
+          "request": {
+            "name": "Perforce Add a Comment",
+            "description": {
+              "content": "Creates a new comment on a topic such as a review or changelist. Comments can include inline file context and task flags.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "(Required) The topic to comment on, such as reviews/1234."
+                },
+                {
+                  "disabled": false,
+                  "key": "body",
+                  "value": "<string>",
+                  "description": "(Required) The comment body text."
+                },
+                {
+                  "disabled": false,
+                  "key": "silenceNotification",
+                  "value": "<string>",
+                  "description": "Set to suppress email notifications."
+                },
+                {
+                  "disabled": false,
+                  "key": "delayNotification",
+                  "value": "<string>",
+                  "description": "Set to delay email notifications for batching."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskState",
+                  "value": "<string>",
+                  "description": "Whether the comment is a plain comment or an open task."
+                },
+                {
+                  "disabled": false,
+                  "key": "flags[]",
+                  "value": "<string>",
+                  "description": "Flags to apply, such as closed."
+                },
+                {
+                  "disabled": false,
+                  "key": "flags[]",
+                  "value": "<string>",
+                  "description": "Flags to apply, such as closed."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[file]",
+                  "value": "<string>",
+                  "description": "The depot file path for an inline comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[leftLine]",
+                  "value": "<integer>",
+                  "description": "The left-side line number for an inline comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[rightLine]",
+                  "value": "<integer>",
+                  "description": "The right-side line number for an inline comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[content]",
+                  "value": "<string>",
+                  "description": "Adjacent content for context in inline comments."
+                },
+                {
+                  "disabled": false,
+                  "key": "context[version]",
+                  "value": "<integer>",
+                  "description": "The review version for the inline comment context."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da20eb3c-9251-4819-9ef4-14ba53eeb2ac",
+              "name": "The newly created comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The topic to comment on, such as reviews/1234.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the comment is a plain comment or an open task.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Flags to apply, such as closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The depot file path for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[file]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The left-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[leftLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The right-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[rightLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Adjacent content for context in inline comments.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[content]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The review version for the inline comment context.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[version]",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comment\": {\n    \"id\": \"abc123\",\n    \"attachments\": [\n      {}\n    ],\n    \"body\": \"example_value\",\n    \"context\": {\n      \"file\": \"example_value\",\n      \"leftLine\": 10,\n      \"rightLine\": 10,\n      \"content\": \"example_value\",\n      \"version\": 10\n    },\n    \"edited\": 10,\n    \"flags\": [\n      \"example_value\"\n    ],\n    \"likes\": [\n      \"example_value\"\n    ],\n    \"taskState\": \"comment\",\n    \"time\": 10,\n    \"topic\": \"example_value\",\n    \"updated\": 10,\n    \"user\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ac7f45a-618a-4ca6-b4c7-a39c76b55b33",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The topic to comment on, such as reviews/1234.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the comment is a plain comment or an open task.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Flags to apply, such as closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The depot file path for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[file]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The left-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[leftLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The right-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[rightLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Adjacent content for context in inline comments.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[content]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The review version for the inline comment context.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[version]",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74fcb365-cbb9-40dd-ae11-f495025ddb3e",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The topic to comment on, such as reviews/1234.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the comment is a plain comment or an open task.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Flags to apply, such as closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The depot file path for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[file]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The left-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[leftLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The right-side line number for an inline comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[rightLine]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Adjacent content for context in inline comments.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[content]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The review version for the inline comment context.",
+                        "type": "text/plain"
+                      },
+                      "key": "context[version]",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "192f904c-5de2-4877-9a39-34b9e8ab5c27",
+          "name": "Perforce Edit a Comment",
+          "request": {
+            "name": "Perforce Edit a Comment",
+            "description": {
+              "content": "Updates an existing comment's body, task state, or flags.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The comment ID."
+                },
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "body",
+                  "value": "<string>",
+                  "description": "(Required) The updated comment body text."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "The topic reference for the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskState",
+                  "value": "<string>",
+                  "description": "The updated task state."
+                },
+                {
+                  "disabled": false,
+                  "key": "flags[]",
+                  "value": "<string>",
+                  "description": "Updated flags for the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "flags[]",
+                  "value": "<string>",
+                  "description": "Updated flags for the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "silenceNotification",
+                  "value": "<string>",
+                  "description": "Set to suppress email notifications."
+                },
+                {
+                  "disabled": false,
+                  "key": "delayNotification",
+                  "value": "<string>",
+                  "description": "Set to delay email notifications for batching."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3a5c23d-959e-4981-8dcd-c5d837d68b3d",
+              "name": "The updated comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The comment ID."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The topic reference for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The updated comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The updated task state.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated flags for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"comment\": {\n    \"id\": \"abc123\",\n    \"attachments\": [\n      {}\n    ],\n    \"body\": \"example_value\",\n    \"context\": {\n      \"file\": \"example_value\",\n      \"leftLine\": 10,\n      \"rightLine\": 10,\n      \"content\": \"example_value\",\n      \"version\": 10\n    },\n    \"edited\": 10,\n    \"flags\": [\n      \"example_value\"\n    ],\n    \"likes\": [\n      \"example_value\"\n    ],\n    \"taskState\": \"comment\",\n    \"time\": 10,\n    \"topic\": \"example_value\",\n    \"updated\": 10,\n    \"user\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "266ce65d-9a33-4bee-ab5c-bfcef779957e",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The comment ID."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The topic reference for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The updated comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The updated task state.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated flags for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab0ce129-bb63-4c47-bb61-da5216bef20e",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The comment ID."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The topic reference for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The updated comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The updated task state.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated flags for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2994ec12-361f-404d-b831-9bb84a875a81",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The comment ID."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The topic reference for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The updated comment body text.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The updated task state.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskState",
+                      "value": "comment"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated flags for the comment.",
+                        "type": "text/plain"
+                      },
+                      "key": "flags[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to suppress email notifications.",
+                        "type": "text/plain"
+                      },
+                      "key": "silenceNotification",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to delay email notifications for batching.",
+                        "type": "text/plain"
+                      },
+                      "key": "delayNotification",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2a14ee8-14fd-4fa6-98de-3584e150436b",
+          "name": "Perforce Send Comment Notification",
+          "request": {
+            "name": "Perforce Send Comment Notification",
+            "description": {
+              "content": "Sends or previews a notification for pending comments on a topic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                "notify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "(Required) The target topic for the notification."
+                },
+                {
+                  "disabled": false,
+                  "key": "preview",
+                  "value": "<string>",
+                  "description": "Set to true to preview the notification without sending."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd5789a2-5bbe-41be-b87d-d7d5889d9da5",
+              "name": "Notification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "notify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The target topic for the notification.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to true to preview the notification without sending.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isValid\": \"500123\",\n  \"message\": \"example_value\",\n  \"code\": 10,\n  \"preview\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd4cb2e0-4489-4dde-b6fe-dac5b0f1dcdf",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "notify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The target topic for the notification.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to true to preview the notification without sending.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "544104e9-35de-4746-8230-158bed38426e",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "notify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The target topic for the notification.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set to true to preview the notification without sending.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "example_value"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The protocol scheme. (This can only be one of https,http)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "The hostname of your Helix Swarm instance.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "swarm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{host}}/api/v9",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e8b34e19-4957-4051-b3e6-6766a7fe8a35",
+    "name": "Perforce Helix Swarm Activity Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+      "type": "text/plain"
+    }
+  }
+}

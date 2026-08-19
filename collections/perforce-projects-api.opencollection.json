@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm Activity Projects API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/projects/",
+            "params": [
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              },
+              {
+                "name": "workflow",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter projects using a specific workflow."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Swarm projects with their configuration, branches, members, and settings."
+        },
+        {
+          "info": {
+            "name": "Perforce Create a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/projects/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "members",
+                  "value": ""
+                },
+                {
+                  "name": "subgroups",
+                  "value": ""
+                },
+                {
+                  "name": "owners",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "private",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new Swarm project with the specified configuration."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Project Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information for a specific Swarm project."
+        },
+        {
+          "info": {
+            "name": "Perforce Update a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "members",
+                  "value": ""
+                },
+                {
+                  "name": "owners",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "private",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an existing Swarm project's configuration."
+        },
+        {
+          "info": {
+            "name": "Perforce Delete a Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{scheme}://{host}/api/v9/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The project identifier."
+              }
+            ]
+          },
+          "docs": "Deletes a Swarm project. Only project owners or administrators can perform this action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

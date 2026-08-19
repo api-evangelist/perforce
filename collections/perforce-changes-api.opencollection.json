@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm Activity Changes API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Changes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce Get Projects Affected by Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:change/affectsprojects",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "path",
+                "description": "The changelist number."
+              }
+            ]
+          },
+          "docs": "Retrieves the projects and branches that are affected by a given changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Get Default Reviewers for Change",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:change/defaultreviewers",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "path",
+                "description": "The changelist number."
+              }
+            ]
+          },
+          "docs": "Retrieves the default reviewers configured for the branches and projects affected by a changelist."
+        },
+        {
+          "info": {
+            "name": "Perforce Check Change Against Workflow Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/changes/:id/check",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The changelist number."
+              },
+              {
+                "name": "type",
+                "value": "enforced",
+                "type": "query",
+                "description": "The type of check to perform."
+              }
+            ]
+          },
+          "docs": "Performs configured workflow checks on a changelist, validating it against enforced, strict, or shelve rules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

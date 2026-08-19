@@ -1,0 +1,167 @@
+{
+  "item": [
+    {
+      "id": "221416f5-fff5-4128-a819-06eed8dcfd9d",
+      "name": "Version",
+      "description": {
+        "content": "Endpoints for retrieving Swarm server version information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ee9c7e9-4202-4571-9eb2-82dd9f2ac4c1",
+          "name": "Perforce Get Server Version",
+          "request": {
+            "name": "Perforce Get Server Version",
+            "description": {
+              "content": "Retrieves the installed Helix Swarm version, release year, and available API versions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a46ed19d-1461-4bc5-8816-5980b77ac213",
+              "name": "Server version information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"example_value\",\n  \"year\": \"example_value\",\n  \"apiVersions\": [\n    10\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The protocol scheme. (This can only be one of https,http)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "The hostname of your Helix Swarm instance.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "swarm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{host}}/api/v9",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48b68b1c-c75b-4e28-ab56-66b5c53c8d6c",
+    "name": "Perforce Helix Swarm Activity Version API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+      "type": "text/plain"
+    }
+  }
+}

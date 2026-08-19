@@ -1,0 +1,1791 @@
+{
+  "item": [
+    {
+      "id": "825cbb31-9894-40c3-91a6-b919e71506c0",
+      "name": "Projects",
+      "description": {
+        "content": "Endpoints for managing Swarm projects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f5f9d16-902b-4827-8542-e7ca364ce62b",
+          "name": "Perforce List Projects",
+          "request": {
+            "name": "Perforce List Projects",
+            "description": {
+              "content": "Retrieves a list of Swarm projects with their configuration, branches, members, and settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "workflow",
+                  "value": "<string>",
+                  "description": "Filter projects using a specific workflow."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a41b7220-08b3-4d9b-9048-cdbcd6325706",
+              "name": "A list of projects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "workflow",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"members\": [\n        {}\n      ],\n      \"owners\": [\n        {}\n      ],\n      \"subgroups\": [\n        {}\n      ],\n      \"branches\": [\n        {}\n      ],\n      \"deleted\": true,\n      \"deploy\": \"example_value\",\n      \"emailFlags\": \"user@example.com\",\n      \"jobview\": \"example_value\",\n      \"minimumUpVotes\": 10,\n      \"private\": true,\n      \"retainDefaultReviewers\": true,\n      \"tests\": \"example_value\",\n      \"workflow\": \"example_value\",\n      \"defaults\": \"example_value\",\n      \"readme\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d488fdd-820c-4cbd-9dd4-b684df67d477",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "workflow",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2e631ee-20dd-402e-b7f9-a6bf9c193e9c",
+          "name": "Perforce Create a Project",
+          "request": {
+            "name": "Perforce Create a Project",
+            "description": {
+              "content": "Creates a new Swarm project with the specified configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The project name."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "<string>",
+                  "description": "(Required) Array of project member usernames."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "<string>",
+                  "description": "(Required) Array of project member usernames."
+                },
+                {
+                  "disabled": false,
+                  "key": "subgroups",
+                  "value": "<string>",
+                  "description": "Array of subgroup names."
+                },
+                {
+                  "disabled": false,
+                  "key": "subgroups",
+                  "value": "<string>",
+                  "description": "Array of subgroup names."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "Array of project owner usernames."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "Array of project owner usernames."
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "The project description."
+                },
+                {
+                  "disabled": false,
+                  "key": "private",
+                  "value": "false",
+                  "description": "Whether the project is private."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "100ef23e-1f59-4eca-a8b3-458c24e6ed00",
+              "name": "The newly created project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Array of project member usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of subgroup names.",
+                        "type": "text/plain"
+                      },
+                      "key": "subgroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of project owner usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the project is private.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"members\": [\n      \"example_value\"\n    ],\n    \"owners\": [\n      \"example_value\"\n    ],\n    \"subgroups\": [\n      \"example_value\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"abc123\",\n        \"name\": \"Example Title\",\n        \"paths\": {},\n        \"moderators\": {}\n      }\n    ],\n    \"deleted\": true,\n    \"deploy\": \"example_value\",\n    \"emailFlags\": \"user@example.com\",\n    \"jobview\": \"example_value\",\n    \"minimumUpVotes\": 10,\n    \"private\": true,\n    \"retainDefaultReviewers\": true,\n    \"tests\": \"example_value\",\n    \"workflow\": \"example_value\",\n    \"defaults\": \"example_value\",\n    \"readme\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5897d461-2851-4cf5-8d1a-15a063c50caa",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Array of project member usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of subgroup names.",
+                        "type": "text/plain"
+                      },
+                      "key": "subgroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of project owner usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the project is private.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e596924d-5129-4d73-a318-0740b2ed0f20",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Array of project member usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of subgroup names.",
+                        "type": "text/plain"
+                      },
+                      "key": "subgroups",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of project owner usernames.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the project is private.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a389373e-2a83-4e21-bcf8-0c43a5f50450",
+          "name": "Perforce Get Project Details",
+          "request": {
+            "name": "Perforce Get Project Details",
+            "description": {
+              "content": "Retrieves detailed information for a specific Swarm project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to include in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project identifier."
+                },
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5da3003-e108-4404-8c7a-e1717f0b81ef",
+              "name": "Project details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"members\": [\n      \"example_value\"\n    ],\n    \"owners\": [\n      \"example_value\"\n    ],\n    \"subgroups\": [\n      \"example_value\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"abc123\",\n        \"name\": \"Example Title\",\n        \"paths\": {},\n        \"moderators\": {}\n      }\n    ],\n    \"deleted\": true,\n    \"deploy\": \"example_value\",\n    \"emailFlags\": \"user@example.com\",\n    \"jobview\": \"example_value\",\n    \"minimumUpVotes\": 10,\n    \"private\": true,\n    \"retainDefaultReviewers\": true,\n    \"tests\": \"example_value\",\n    \"workflow\": \"example_value\",\n    \"defaults\": \"example_value\",\n    \"readme\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3eb8931-f95b-4208-9186-b4783b0cc1a4",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11ba0849-8609-4584-8416-54332770922f",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "890c8a40-661c-4df6-887d-6b8ab95ce4c5",
+          "name": "Perforce Update a Project",
+          "request": {
+            "name": "Perforce Update a Project",
+            "description": {
+              "content": "Updates an existing Swarm project's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project identifier."
+                },
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Updated project name."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "<string>",
+                  "description": "Updated list of project members."
+                },
+                {
+                  "disabled": false,
+                  "key": "members",
+                  "value": "<string>",
+                  "description": "Updated list of project members."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "Updated list of project owners."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "Updated list of project owners."
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Updated project description."
+                },
+                {
+                  "disabled": false,
+                  "key": "private",
+                  "value": "<boolean>",
+                  "description": "Updated privacy setting."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "aab2b384-3b77-4811-8d38-151c5f44a1aa",
+              "name": "The updated project.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project members.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project owners.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated privacy setting.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"members\": [\n      \"example_value\"\n    ],\n    \"owners\": [\n      \"example_value\"\n    ],\n    \"subgroups\": [\n      \"example_value\"\n    ],\n    \"branches\": [\n      {\n        \"id\": \"abc123\",\n        \"name\": \"Example Title\",\n        \"paths\": {},\n        \"moderators\": {}\n      }\n    ],\n    \"deleted\": true,\n    \"deploy\": \"example_value\",\n    \"emailFlags\": \"user@example.com\",\n    \"jobview\": \"example_value\",\n    \"minimumUpVotes\": 10,\n    \"private\": true,\n    \"retainDefaultReviewers\": true,\n    \"tests\": \"example_value\",\n    \"workflow\": \"example_value\",\n    \"defaults\": \"example_value\",\n    \"readme\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75a4a9d9-b574-4a40-9c82-5349928f59f4",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project members.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project owners.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated privacy setting.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cecc4b2-b36a-41ee-9b01-e28dde815cf2",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project members.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project owners.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated privacy setting.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e503cf0-ffd7-41ac-8fe5-886b38f6a111",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project name.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Example Title"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project members.",
+                        "type": "text/plain"
+                      },
+                      "key": "members",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated list of project owners.",
+                        "type": "text/plain"
+                      },
+                      "key": "owners",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated project description.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated privacy setting.",
+                        "type": "text/plain"
+                      },
+                      "key": "private",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c42b918e-d2ef-4773-8f1a-87d8e9287145",
+          "name": "Perforce Delete a Project",
+          "request": {
+            "name": "Perforce Delete a Project",
+            "description": {
+              "content": "Deletes a Swarm project. Only project owners or administrators can perform this action.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The project identifier."
+                },
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5061dca-90da-4abc-84a1-ab3b0123dfd6",
+              "name": "Deletion confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d316f7b0-8078-47a4-b3e6-fea6d8be9d0f",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9edadfaa-7e5f-4724-90c1-2f3229a3dd15",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The project identifier."
+                    },
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The protocol scheme. (This can only be one of https,http)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "The hostname of your Helix Swarm instance.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "swarm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{host}}/api/v9",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9bcfd5ff-0341-4963-a004-1ca5fa2c11b1",
+    "name": "Perforce Helix Swarm Activity Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+      "type": "text/plain"
+    }
+  }
+}

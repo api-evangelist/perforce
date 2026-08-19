@@ -1,0 +1,850 @@
+{
+  "item": [
+    {
+      "id": "487cdd75-a79d-4234-9e89-0b9d04099697",
+      "name": "Activity",
+      "description": {
+        "content": "Endpoints for viewing and creating activity stream entries.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1947c4ef-5e50-4d31-9a23-f7b0b13f8e53",
+          "name": "Perforce List Activity Entries",
+          "request": {
+            "name": "Perforce List Activity Entries",
+            "description": {
+              "content": "Retrieves a list of activity entries from the activity stream, optionally filtered by changelist, stream, or type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "change",
+                  "value": "<integer>",
+                  "description": "Filter activity by changelist ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<string>",
+                  "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by activity type."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "An activity ID to seek past for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "100",
+                  "description": "Maximum number of entries to return. Defaults to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to include in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a605e51-2b18-4bc3-ba83-06a9fbeba908",
+              "name": "A list of activity entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "change",
+                      "value": "10"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "type",
+                      "value": "change"
+                    },
+                    {
+                      "key": "after",
+                      "value": "10"
+                    },
+                    {
+                      "key": "max",
+                      "value": "10"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activity\": [\n    {\n      \"id\": \"abc123\",\n      \"action\": \"example_value\",\n      \"change\": 10,\n      \"date\": \"2026-01-15T10:30:00Z\",\n      \"description\": \"A sample description.\",\n      \"link\": \"https://www.example.com\",\n      \"streams\": [\n        {}\n      ],\n      \"target\": \"example_value\",\n      \"topic\": \"example_value\",\n      \"type\": \"example_value\",\n      \"user\": \"example_value\"\n    }\n  ],\n  \"lastSeen\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad6d5b2-d45f-435a-92dd-d94e51b0db85",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "change",
+                      "value": "10"
+                    },
+                    {
+                      "key": "stream",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "type",
+                      "value": "change"
+                    },
+                    {
+                      "key": "after",
+                      "value": "10"
+                    },
+                    {
+                      "key": "max",
+                      "value": "10"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e738fc6-6467-4e88-9a1c-2109d3dee9db",
+          "name": "Perforce Create Activity Entry",
+          "request": {
+            "name": "Perforce Create Activity Entry",
+            "description": {
+              "content": "Creates a new entry in the activity stream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The protocol scheme. (This can only be one of https,http)",
+                  "type": "any",
+                  "value": "{{scheme}}",
+                  "key": "scheme"
+                },
+                {
+                  "description": "The hostname of your Helix Swarm instance.",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) The activity classification type."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) The username of the user performing the action."
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) A past-tense description of the activity."
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "(Required) The object receiving the action."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "An optional comment thread identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Contextual information about the activity."
+                },
+                {
+                  "disabled": false,
+                  "key": "change",
+                  "value": "<integer>",
+                  "description": "A related changelist ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "streams[]",
+                  "value": "<string>",
+                  "description": "Stream names where the activity should appear."
+                },
+                {
+                  "disabled": false,
+                  "key": "streams[]",
+                  "value": "<string>",
+                  "description": "Stream names where the activity should appear."
+                },
+                {
+                  "disabled": false,
+                  "key": "link",
+                  "value": "<uri>",
+                  "description": "A URL for the activity target."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69029763-78ff-4357-9e83-d72051d6289e",
+              "name": "The newly created activity entry.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The activity classification type.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The username of the user performing the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A past-tense description of the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "action",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The object receiving the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "target",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An optional comment thread identifier.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contextual information about the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A related changelist ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "change",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Stream names where the activity should appear.",
+                        "type": "text/plain"
+                      },
+                      "key": "streams[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A URL for the activity target.",
+                        "type": "text/plain"
+                      },
+                      "key": "link",
+                      "value": "https://www.example.com"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activity\": {\n    \"id\": \"abc123\",\n    \"action\": \"example_value\",\n    \"change\": 10,\n    \"date\": \"2026-01-15T10:30:00Z\",\n    \"description\": \"A sample description.\",\n    \"link\": \"https://www.example.com\",\n    \"streams\": [\n      \"example_value\"\n    ],\n    \"target\": \"example_value\",\n    \"topic\": \"example_value\",\n    \"type\": \"example_value\",\n    \"user\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49048c8b-2a8e-4d2b-a4c7-b02f624e0cfa",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The activity classification type.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The username of the user performing the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A past-tense description of the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "action",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The object receiving the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "target",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An optional comment thread identifier.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contextual information about the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A related changelist ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "change",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Stream names where the activity should appear.",
+                        "type": "text/plain"
+                      },
+                      "key": "streams[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A URL for the activity target.",
+                        "type": "text/plain"
+                      },
+                      "key": "link",
+                      "value": "https://www.example.com"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19a96dff-38d7-43df-b7cd-61330674bad4",
+              "name": "Authentication is required or the provided credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The protocol scheme. (This can only be one of https,http)",
+                      "type": "any",
+                      "value": "{{scheme}}",
+                      "key": "scheme"
+                    },
+                    {
+                      "description": "The hostname of your Helix Swarm instance.",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The activity classification type.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The username of the user performing the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A past-tense description of the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "action",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The object receiving the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "target",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An optional comment thread identifier.",
+                        "type": "text/plain"
+                      },
+                      "key": "topic",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contextual information about the activity.",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "A sample description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A related changelist ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "change",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Stream names where the activity should appear.",
+                        "type": "text/plain"
+                      },
+                      "key": "streams[]",
+                      "value": "example_value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A URL for the activity target.",
+                        "type": "text/plain"
+                      },
+                      "key": "link",
+                      "value": "https://www.example.com"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The protocol scheme. (This can only be one of https,http)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "https",
+      "key": "scheme"
+    },
+    {
+      "description": {
+        "content": "The hostname of your Helix Swarm instance.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "swarm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "{{scheme}}://{{host}}/api/v9",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3fe6935-5c1a-404e-ad3a-8e4520cc328e",
+    "name": "Perforce Helix Swarm Activity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic\naccess to code reviews, changelists, comments, activity streams, and project\nmanagement. Helix Swarm enables collaborative code review workflows\nintegrated with Helix Core version control.\n\nThe API uses HTTP Basic authentication with Perforce credentials or API\ntickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,\nAPI versions older than v9 are no longer supported. Version v11 extends\nthe API but does not yet cover all features, so v9 is recommended for\nfull functionality.\n\nContact Support:\n Name: Perforce Support",
+      "type": "text/plain"
+    }
+  }
+}

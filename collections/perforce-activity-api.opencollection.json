@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm Activity API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Activity Entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/activity",
+            "params": [
+              {
+                "name": "change",
+                "value": "10",
+                "type": "query",
+                "description": "Filter activity by changelist ID."
+              },
+              {
+                "name": "stream",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter by activity stream name, such as user-alice, review-1234, or project-myproject."
+              },
+              {
+                "name": "type",
+                "value": "change",
+                "type": "query",
+                "description": "Filter by activity type."
+              },
+              {
+                "name": "after",
+                "value": "10",
+                "type": "query",
+                "description": "An activity ID to seek past for pagination."
+              },
+              {
+                "name": "max",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of entries to return. Defaults to 100."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of activity entries from the activity stream, optionally filtered by changelist, stream, or type."
+        },
+        {
+          "info": {
+            "name": "Perforce Create Activity Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/activity",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "user",
+                  "value": ""
+                },
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "target",
+                  "value": ""
+                },
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "change",
+                  "value": ""
+                },
+                {
+                  "name": "streams[]",
+                  "value": ""
+                },
+                {
+                  "name": "link",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new entry in the activity stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

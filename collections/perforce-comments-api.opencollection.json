@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Perforce Helix Swarm Activity Comments API",
+    "version": "9"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perforce List Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{scheme}://{host}/api/v9/comments/",
+            "params": [
+              {
+                "name": "after",
+                "value": "10",
+                "type": "query",
+                "description": "A comment ID to seek past for pagination."
+              },
+              {
+                "name": "max",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of comments to return. Defaults to 100."
+              },
+              {
+                "name": "topic",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter comments by topic, such as reviews/1234 for a specific review."
+              },
+              {
+                "name": "context[version]",
+                "value": "10",
+                "type": "query",
+                "description": "Filter by a specific review version."
+              },
+              {
+                "name": "ignoreArchived",
+                "value": "true",
+                "type": "query",
+                "description": "Exclude comments on archived reviews."
+              },
+              {
+                "name": "tasksOnly",
+                "value": "true",
+                "type": "query",
+                "description": "Return only comments flagged as tasks."
+              },
+              {
+                "name": "taskStates",
+                "value": "",
+                "type": "query",
+                "description": "Filter by task state. Valid values include open, closed, verified, and comment."
+              },
+              {
+                "name": "fields",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of comments, optionally filtered by topic, version, task state, or archive status."
+        },
+        {
+          "info": {
+            "name": "Perforce Add a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/comments/",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "body",
+                  "value": ""
+                },
+                {
+                  "name": "silenceNotification",
+                  "value": ""
+                },
+                {
+                  "name": "delayNotification",
+                  "value": ""
+                },
+                {
+                  "name": "taskState",
+                  "value": ""
+                },
+                {
+                  "name": "flags[]",
+                  "value": ""
+                },
+                {
+                  "name": "context[file]",
+                  "value": ""
+                },
+                {
+                  "name": "context[leftLine]",
+                  "value": ""
+                },
+                {
+                  "name": "context[rightLine]",
+                  "value": ""
+                },
+                {
+                  "name": "context[content]",
+                  "value": ""
+                },
+                {
+                  "name": "context[version]",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new comment on a topic such as a review or changelist. Comments can include inline file context and task flags."
+        },
+        {
+          "info": {
+            "name": "Perforce Edit a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{scheme}://{host}/api/v9/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "The comment ID."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "body",
+                  "value": ""
+                },
+                {
+                  "name": "taskState",
+                  "value": ""
+                },
+                {
+                  "name": "flags[]",
+                  "value": ""
+                },
+                {
+                  "name": "silenceNotification",
+                  "value": ""
+                },
+                {
+                  "name": "delayNotification",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates an existing comment's body, task state, or flags."
+        },
+        {
+          "info": {
+            "name": "Perforce Send Comment Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{scheme}://{host}/api/v9/comments/notify",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "topic",
+                  "value": ""
+                },
+                {
+                  "name": "preview",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Sends or previews a notification for pending comments on a topic."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
