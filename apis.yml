@@ -259,6 +259,8 @@ apis:
   humanURL: https://www.perforce.com/products/helix-core
   baseURL: https://api.perforce.com/helix-core/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
