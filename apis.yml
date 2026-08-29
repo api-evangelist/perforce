@@ -3,6 +3,20 @@ name: Perforce
 description: >-
   Perforce Software provides enterprise-scale development tools, including version control, application lifecycle
   management, agile planning, and static analysis solutions for development teams.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -334,6 +348,12 @@ apis:
   - type: JSONLD
     url: json-ld/perforce-context.jsonld
 common:
+- type: IssueTracker
+  url: https://github.com/perforce/helix-authentication-service/issues
+- type: Releases
+  url: https://github.com/perforce/helix-authentication-service/releases
+- type: CodeOfConduct
+  url: https://github.com/perforce/helix-authentication-service/blob/main/CODE_OF_CONDUCT.md
 - type: License
   name: MIT
   url: https://github.com/perforce/helix-authentication-service/blob/main/LICENSE
