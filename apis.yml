@@ -33,7 +33,7 @@ accessModel:
 image: https://www.perforce.com/sites/default/files/perforce-logo.png
 url: https://www.perforce.com
 type: Index
-position: Consumer
+position: Consuming
 access: 3rd-Party
 created: '2024-01-01'
 modified: '2026-05-19'
