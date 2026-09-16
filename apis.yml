@@ -1,8 +1,7 @@
 aid: perforce
 name: Perforce
-description: >-
-  Perforce Software provides enterprise-scale development tools, including version control, application lifecycle
-  management, agile planning, and static analysis solutions for development teams.
+description: Perforce Software provides enterprise-scale development tools, including version control,
+  application lifecycle management, agile planning, and static analysis solutions for development teams.
 deliveryModel:
   model: open-core
   license: MIT
@@ -36,17 +35,15 @@ type: Index
 position: Consuming
 access: 3rd-Party
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - name: Perforce P4 REST API
-  description: >-
-    Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate workflows
-    and integrate P4 with other tools via standard HTTP endpoints for server info, depots, files, and
-    changelists.
+  description: Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate
+    workflows and integrate P4 with other tools via standard HTTP endpoints for server info, depots, files,
+    and changelists.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
-  humanURL: >-
-    https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
+  humanURL: https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
   baseURL: https://p4server.example.com/api/v0
   tags:
   - Automation
@@ -55,15 +52,12 @@ apis:
   - Version Control
   properties:
   - type: Documentation
-    url: >-
-      https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
+    url: https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html
   - type: ChangeLog
-    url: >-
-      https://help.perforce.com/helix-core/server-apps/cmdref/2025.2/Content/CmdRef/whats-new-2025-2.html
+    url: https://help.perforce.com/helix-core/server-apps/cmdref/2025.2/Content/CmdRef/whats-new-2025-2.html
 - name: Perforce Hansoft API
-  description: >-
-    API for Hansoft agile project management, providing access to project planning, tracking, and reporting
-    capabilities.
+  description: API for Hansoft agile project management, providing access to project planning, tracking,
+    and reporting capabilities.
   image: https://www.perforce.com/sites/default/files/hansoft-icon.png
   humanURL: https://www.perforce.com/products/hansoft
   baseURL: https://hansoft.example.com/api
@@ -77,9 +71,8 @@ apis:
   - type: SDKs
     url: https://www.perforce.com/downloads/hansoft-sdk
 - name: Perforce P4 Plan API
-  description: >-
-    GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting queries,
-    mutations, and real-time subscriptions for planning views, sprints, tasks, and user management.
+  description: GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting
+    queries, mutations, and real-time subscriptions for planning views, sprints, tasks, and user management.
   image: https://www.perforce.com/sites/default/files/hansoft-icon.png
   humanURL: https://www.perforce.com/products/hansoft
   baseURL: https://p4plan.example.com/api
@@ -98,9 +91,8 @@ apis:
   - url: graphql/perforce-graphql.md
     type: GraphQL
 - name: Perforce Helix ALM REST API
-  description: >-
-    REST API for Helix ALM application lifecycle management platform, enabling automation of tasks and
-    development of integrations for requirements management, issue tracking, and test case management.
+  description: REST API for Helix ALM application lifecycle management platform, enabling automation of
+    tasks and development of integrations for requirements management, issue tracking, and test case management.
   image: https://www.perforce.com/sites/default/files/helix-alm-icon.png
   humanURL: https://www.perforce.com/products/helix-alm
   baseURL: https://helixalm.example.com/helix-alm/api/v0
@@ -115,12 +107,11 @@ apis:
   - type: APIReference
     url: https://help.perforce.com/helix-alm/helixalm/current/rest-api/index.html
   - type: GettingStarted
-    url: >-
-      https://help.perforce.com/helix-alm/helixalm/2019.3.0/restapi/Content/RESTAPI/GettingStarted.htm
+    url: https://help.perforce.com/helix-alm/helixalm/2019.3.0/restapi/Content/RESTAPI/GettingStarted.htm
 - name: Perforce Helix TeamHub API
-  description: >-
-    REST API for Helix TeamHub source code repository management platform, providing access to repositories,
-    projects, users, and company resources across Git, Mercurial, Subversion, and other repository types.
+  description: REST API for Helix TeamHub source code repository management platform, providing access
+    to repositories, projects, users, and company resources across Git, Mercurial, Subversion, and other
+    repository types.
   image: https://www.perforce.com/sites/default/files/helix-teamhub-icon.png
   humanURL: https://www.perforce.com/products/helix-teamhub
   baseURL: https://teamhub.example.com/api/v1
@@ -133,12 +124,10 @@ apis:
   - type: Documentation
     url: https://help.perforce.com/helix-core/helix-teamhub/current/Content/HTH-API/api-v1.html
   - type: GettingStarted
-    url: >-
-      https://help.perforce.com/helix-core/helix-teamhub/2025.5.0/Content/HTH-API/getting-started.html
+    url: https://help.perforce.com/helix-core/helix-teamhub/2025.5.0/Content/HTH-API/getting-started.html
 - name: Perforce P4 DAM REST API
-  description: >-
-    REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset workflows
-    for finding, reviewing, sharing, and managing versioned assets stored in Helix Core.
+  description: REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset
+    workflows for finding, reviewing, sharing, and managing versioned assets stored in Helix Core.
   image: https://www.perforce.com/sites/default/files/helix-dam-icon.png
   humanURL: https://www.perforce.com/products/helix-dam
   baseURL: https://dam.example.com/api
@@ -151,12 +140,10 @@ apis:
   - type: Documentation
     url: https://help.perforce.com/helix-core/helix-dam/current/api/
 - name: Perforce P4 Search API
-  description: >-
-    REST API for P4 Search, providing indexing and search capabilities across Helix Core servers to support
-    code review, file content search, and changelist description search.
+  description: REST API for P4 Search, providing indexing and search capabilities across Helix Core servers
+    to support code review, file content search, and changelist description search.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
-  humanURL: >-
-    https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html
+  humanURL: https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html
   baseURL: https://p4search.example.com/api
   tags:
   - Code Search
@@ -164,15 +151,13 @@ apis:
   - Search
   properties:
   - type: Documentation
-    url: >-
-      https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-endpoints.html
+    url: https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-endpoints.html
   - type: Authentication
-    url: >-
-      https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-authentication.html
+    url: https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-authentication.html
 - name: Perforce Helix Authentication Service API
-  description: >-
-    REST API for the Helix Authentication Service, a Node.js based authentication protocol integration
-    service supporting OpenID Connect and SAML 2.0 for authenticating users across Perforce products.
+  description: REST API for the Helix Authentication Service, a Node.js based authentication protocol
+    integration service supporting OpenID Connect and SAML 2.0 for authenticating users across Perforce
+    products.
   image: https://www.perforce.com/sites/default/files/helix-core-icon.png
   humanURL: https://help.perforce.com/helix-core/integrations-plugins/helix-auth-svc/current/
   baseURL: https://auth.example.com
@@ -394,49 +379,50 @@ common:
 - type: Features
   data:
   - name: Code Review
-    description: >-
-      Collaborative code review workflows with Helix Swarm supporting inline comments, voting, tasks, and approval
-      gates.
+    description: Collaborative code review workflows with Helix Swarm supporting inline comments, voting,
+      tasks, and approval gates.
   - name: Version Control
-    description: >-
-      Enterprise-scale version control with Helix Core supporting large binary files, distributed development, and
-      atomic changelists.
+    description: Enterprise-scale version control with Helix Core supporting large binary files, distributed
+      development, and atomic changelists.
   - name: Digital Asset Management
-    description: >-
-      Versioned digital asset workflows with P4 DAM for reviewing, sharing, and managing creative assets stored in
-      Helix Core.
+    description: Versioned digital asset workflows with P4 DAM for reviewing, sharing, and managing creative
+      assets stored in Helix Core.
   - name: Application Lifecycle Management
-    description: End-to-end ALM with Helix ALM for requirements traceability, issue tracking, and test case management.
+    description: End-to-end ALM with Helix ALM for requirements traceability, issue tracking, and test
+      case management.
   - name: Agile Planning
-    description: Agile project management with P4 Plan supporting sprints, backlogs, Gantt charts, and resource planning.
+    description: Agile project management with P4 Plan supporting sprints, backlogs, Gantt charts, and
+      resource planning.
   - name: Authentication Services
-    description: >-
-      Single sign-on across Perforce products with Helix Authentication Service supporting OpenID Connect and SAML
-      2.0.
+    description: Single sign-on across Perforce products with Helix Authentication Service supporting
+      OpenID Connect and SAML 2.0.
 - type: UseCases
   data:
   - name: Game Development
-    description: >-
-      Manage large game assets and source code with Helix Core providing fast file transfers and atomic changelists
-      for game studios.
+    description: Manage large game assets and source code with Helix Core providing fast file transfers
+      and atomic changelists for game studios.
   - name: Semiconductor Design
-    description: Version control for chip design files with support for large binary IP blocks and strict access controls.
+    description: Version control for chip design files with support for large binary IP blocks and strict
+      access controls.
   - name: Automotive Software
-    description: >-
-      Manage safety-critical automotive software with full traceability from requirements through testing using
-      Helix ALM.
+    description: Manage safety-critical automotive software with full traceability from requirements through
+      testing using Helix ALM.
   - name: DevOps Automation
     description: Automate CI/CD pipelines with Helix Core triggers, Swarm review gates, and REST API integrations.
 - type: Integrations
   data:
   - name: Jenkins
-    description: Trigger builds and report results through Helix Core and Swarm integration plugins for Jenkins CI/CD.
+    description: Trigger builds and report results through Helix Core and Swarm integration plugins for
+      Jenkins CI/CD.
   - name: Visual Studio
-    description: Native Visual Studio integration with P4VS plugin for source control operations from within the IDE.
+    description: Native Visual Studio integration with P4VS plugin for source control operations from
+      within the IDE.
   - name: Unity
-    description: Helix Core plugin for Unity game engine enabling version control of game projects directly within the editor.
+    description: Helix Core plugin for Unity game engine enabling version control of game projects directly
+      within the editor.
   - name: Unreal Engine
-    description: Native Helix Core integration with Unreal Engine for versioning game assets and source code.
+    description: Native Helix Core integration with Unreal Engine for versioning game assets and source
+      code.
 - name: MCP Server
   url: https://github.com/perforce/p4mcp-server
   type: MCPServer
@@ -449,3 +435,9 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
   url: https://apievangelist.com
+tags:
+- Version Control
+- Project Management
+- Automation
+- DevOps
+- REST API
