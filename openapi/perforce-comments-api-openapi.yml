@@ -1,25 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Perforce Helix Swarm Activity Comments API
+  title: Perforce Helix Swarm Comments API
   version: '9'
   description: 'REST API for Perforce Helix Swarm (P4 Code Review), providing programmatic
 
     access to code reviews, changelists, comments, activity streams, and project
 
-    management. Helix Swarm enables collaborative code review workflows
-
-    integrated with Helix Core version control.
-
-
-    The API uses HTTP Basic authentication with Perforce credentials or API
-
-    tickets. All endpoints are prefixed with /api/v9. As of Swarm 2022.2,
-
-    API versions older than v9 are no longer supported. Version v11 extends
-
-    the API but does not yet cover all features, so v9 is recommended for
-
-    full functionality.'
+    management.'
   contact:
     name: Perforce Support
     url: https://www.perforce.com/support
@@ -440,16 +427,6 @@ components:
               error:
                 type: string
                 description: A human-readable error message.
-    Unauthorized:
-      description: Authentication is required or the provided credentials are invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: A human-readable error message.
     BadRequest:
       description: The request was malformed or missing required parameters.
       content:
@@ -463,6 +440,16 @@ components:
               details:
                 type: object
                 description: Additional details about the validation error.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
   schemas:
     Comment:
       type: object

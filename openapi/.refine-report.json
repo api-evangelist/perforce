@@ -1,12 +1,7 @@
 {
   "provider": "perforce",
   "sources": [
-    "perforce-activity-api-openapi.yml",
-    "perforce-changes-api-openapi.yml",
-    "perforce-comments-api-openapi.yml",
-    "perforce-projects-api-openapi.yml",
-    "perforce-reviews-api-openapi.yml",
-    "perforce-version-api-openapi.yml"
+    "_original/perforce-helix-swarm-openapi.yml"
   ],
   "outputs": [
     "perforce-activity-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "perforce-helix-swarm-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "perforce-activity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "perforce-changes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "perforce-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "perforce-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "perforce-reviews-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "perforce-version-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
