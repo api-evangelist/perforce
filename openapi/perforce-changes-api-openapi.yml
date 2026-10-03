@@ -218,8 +218,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
       content:
         application/json:
           schema:
@@ -228,8 +228,8 @@ components:
               error:
                 type: string
                 description: A human-readable error message.
-    Unauthorized:
-      description: Authentication is required or the provided credentials are invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
