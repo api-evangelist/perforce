@@ -1,0 +1,47 @@
+slug: perforce
+provider: Perforce
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Reviews
+  spec_file: perforce-reviews-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.9
+  evidence: POST /reviews/ createReview, PATCH /reviews/{id}/state/ transitionReviewState, POST /reviews/{id}/vote/
+    setReviewVote — 'Perforce Helix Swarm (P4 Code Review)'
+  reason: Operations create, transition and vote on code reviews attached to changelists — squarely the
+    code review practice within software construction management.
+- tag: Changes
+  spec_file: perforce-changes-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.82
+  evidence: '"Perforce Get Default Reviewers for Change", "Perforce Check Change Against Workflow Rules",
+    "programmatic access to code reviews, changelists"'
+  reason: Operations resolve reviewers and workflow rules for version-control changelists — squarely source
+    control and code review, i.e. software construction management. Not production change authorisation,
+    since these are pre-merge VCS changelists, not deployments.
+- tag: Comments
+  spec_file: perforce-comments-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.75
+  evidence: POST /comments/ createComment 'Perforce Add a Comment' within 'REST API for Perforce Helix
+    Swarm (P4 Code Review), providing programmatic access to code reviews, changelists, comments'
+  reason: Comments here are inline/contextual commentary on code reviews and changelists in a code-review
+    tool, i.e. the collaborative code review discipline of software construction, not general customer
+    feedback.

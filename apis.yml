@@ -333,6 +333,9 @@ apis:
   - type: JSONLD
     url: json-ld/perforce-context.jsonld
 common:
+- type: CapabilityMap
+  url: capabilities/perforce-capability-edges.yml
+  name: Perforce Business Capability Map
 - type: Website
   url: https://www.perforce.com/
 - type: IssueTracker
