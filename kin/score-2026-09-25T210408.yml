@@ -1,24 +1,22 @@
-# Kin Score artifact — perforce — 2026-08-27T123021
+# Kin Score artifact — perforce — 2026-09-25T210408
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: perforce
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T123021
-  composite: 50.5
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T210408
+  composite: 48.2
   band: developing
   facets:
-    discoverability: 63.0
-    contract_quality: 65.2
-    governance: 13.6
-    operational_transparency: 39.5
-    developer_ergonomics: 69.0
-    commercial_clarity: 36.8
+    discoverability: 63.3
+    contract_quality: 59.2
     contract_governance: 13.6
+    operational_transparency: 39.5
+    developer_ergonomics: 65.5
     access_clarity: 36.8
   agent_readiness:
-    score: 31.2
+    score: 30.8
     band: agent-ready
     dimensions:
       spec_presence: true
@@ -41,9 +39,14 @@ kin_score:
       dynamic_client_registration: false
       agentic_commerce: false
   regulatory:
-    applies: false
-    undetermined: true
-    note: provider carries no tags; regime could not be determined
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 24.5
+    matched_via: fallback
+  open_source:
+    applies: true
+    score: 40.0
   provenance:
     agentic_access: derived
     contracts:
