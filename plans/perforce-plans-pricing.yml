@@ -190,3 +190,59 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - seat
+  - subscription
+  units:
+  - data
+  - object
+  - seat
+  plans:
+  - name: P4 (Helix Core) - Free
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - object
+    - other
+    - seat
+    periods:
+    - per-use
+  - name: P4 Cloud
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - data
+    - seat
+    periods:
+    - month
+    - per-use
+  - name: P4 Scale
+    access: enterprise
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - year
+  - name: P4 Platform
+    access: enterprise
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - year
+  - name: Other Perforce Products (Hansoft, Helix ALM, TeamHub, Helix Authentication, P4 S
+    access: enterprise
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - year
