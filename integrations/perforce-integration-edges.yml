@@ -1,0 +1,62 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- https://github.com/marketplace?type=actions
+- https://marketplace.atlassian.com/
+- https://plugins.jetbrains.com/
+marketplace_apps: []
+edges:
+- partner_name: GitHub Marketplace (actions)
+  partner: github-actions
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-actions
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/actions/perforce-helix-core-actions
+  listing_count: 1
+  apps:
+  - Perforce Helix Core Actions
+  publisher_name: Perforce Software
+  badges:
+  - Verified creator
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: Atlassian Marketplace
+  partner: atlassian
+  partner_match: aggregator
+  type: marketplace
+  marketplace: atlassian
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.atlassian.com/vendors/1214285/perforce-software
+  listing_count: 2
+  apps:
+  - Perforce ALM for Jira
+  - Perforce IPLM for Jira Cloud
+  publisher_name: Perforce Software
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+- partner_name: JetBrains Marketplace
+  partner: jetbrains
+  partner_match: aggregator
+  type: marketplace
+  marketplace: jetbrains
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://plugins.jetbrains.com/vendor/Perforce
+  listing_count: 1
+  apps:
+  - JRebel and XRebel
+  publisher_name: Perforce Software
+  badges:
+  - Verified vendor
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
+source:
+- https://github.com/marketplace?type=actions
+- https://marketplace.atlassian.com/
+- https://plugins.jetbrains.com/
