@@ -222,16 +222,6 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Unauthorized:
-      description: Authentication is required or the provided credentials are invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: A human-readable error message.
     BadRequest:
       description: The request was malformed or missing required parameters.
       content:
@@ -245,6 +235,16 @@ components:
               details:
                 type: object
                 description: Additional details about the validation error.
+    Unauthorized:
+      description: Authentication is required or the provided credentials are invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: A human-readable error message.
   schemas:
     Activity:
       type: object
