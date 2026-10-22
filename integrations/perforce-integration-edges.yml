@@ -12,6 +12,9 @@ checked:
 - https://pypi.org/pypi
 - https://registry.npmjs.org
 - digital-ocean/integrations/digital-ocean-integration-edges.yml
+- https://api.first.org/data/v1/teams
+- https://raw.githubusercontent.com/CVEProject/cve-website/dev/src/assets/data/CNAsList.json
+- https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
 marketplace_apps: []
 edges:
 - partner_name: GitHub Marketplace (actions)
@@ -121,6 +124,44 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: Databases
+- partner_name: CVE Program (CVE Numbering Authorities)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.cve.org/PartnerInformation/ListofPartners/partner/Perforce
+  category: Vulnerability disclosure (CVE Numbering Authority)
+  contract_reference:
+    register: CVE Program CNA list (github.com/CVEProject/cve-website CNAsList.json @ 239d3d9b68e0)
+    standard: CVE Program CNA Operational Rules (CVE Numbering Authority)
+    spec_file: null
+    role: cve-numbering-authority
+    registered_name: Perforce
+    matched_domain: perforce.com
+    matched_by: domain+name-among-holders
+    cna_id: CNA-2016-0023
+    cna_short_name: Perforce
+    cna_types:
+    - Vendor
+    - Open Source
+    cna_roles:
+    - CNA
+    scope: All Perforce products.
+    top_level_root: MITRE Corporation
+    root: n/a
+    security_advisories:
+    - https://portal.perforce.com/s/cve-dashboard
+    disclosure_policy:
+    - https://www.perforce.com/company/security-compliance-policies
+    country: USA
+    signal_note: listing as a CVE Numbering Authority = participation (a public commitment to assign CVE IDs and
+      publish advisories for its scope); never a count of CVEs
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  detected_by: sweep-vulnerability-disclosure-cna.py
+  first_seen: '2026-10-22'
 source:
 - https://github.com/marketplace?type=actions
 - https://marketplace.atlassian.com/
