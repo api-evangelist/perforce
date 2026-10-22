@@ -39,3 +39,57 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: perforce-homebrew
+  label: Homebrew
+  partner: homebrew
+  partner_name: Homebrew
+  category: official CLI (Homebrew)
+  type: register
+  channel: package-registry
+  evidence: https://formulae.brew.sh/cask/p4
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Homebrew (public package index)
+    spec_file: null
+    packages:
+    - name: p4
+      kind: cask
+      version: 2026.1,3089746
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/cask/p4
+      cli: cask binary artifact
+      repo_leg: domain:perforce.com
+      publisher_leg: artifact-domain:perforce.com
+      matched_by: domain+name-among-holders
+    - name: perforce
+      kind: cask
+      version: 2026.1,3089746
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/cask/perforce
+      cli: cask binary artifact
+      repo_leg: domain:perforce.com
+      publisher_leg: artifact-domain:perforce.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: perforce-digital-ocean-own
+  label: Digital Ocean (own)
+  partner: digital-ocean
+  partner_name: Digital Ocean (own)
+  category: Databases
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.digitalocean.com/apps/perforce-p4-helix-core
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
