@@ -119,6 +119,11 @@ apis:
   - Collaboration
   - Git
   - Repositories
+  - Version Control
+  tags_raw:
+  - Collaboration
+  - Git
+  - Repositories
   - Source Code Management
   properties:
   - type: Documentation
