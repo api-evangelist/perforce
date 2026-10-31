@@ -1,4 +1,4 @@
-# Perforce (perforce)
+# Perforce
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,258 +66,232 @@
 
 Perforce Software provides enterprise-scale development tools, including version control, application lifecycle management, agile planning, and static analysis solutions for development teams.
 
-**APIs.json:** [https://www.perforce.com](https://www.perforce.com)
+**Areas:** Version Control · Project Management · Automation · DevOps · REST API
 
-## Scope
+## Perforce on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Perforce is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/perforce/](https://apis.io/providers/perforce/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (14)
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+- [Perforce P4 REST API](https://apis.io/apis/perforce/perforce-p4-rest-api/) — Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate workflows and integrate P4 with other tools via standard HTTP…
+- [Perforce Hansoft API](https://apis.io/apis/perforce/perforce-hansoft-api/) — API for Hansoft agile project management, providing access to project planning, tracking, and reporting capabilities.
+- [Perforce P4 Plan API](https://apis.io/apis/perforce/perforce-p4-plan-api/) — GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting queries, mutations, and real-time subscriptions for planning views,…
+- [Perforce Helix ALM REST API](https://apis.io/apis/perforce/perforce-helix-alm-rest-api/) — REST API for Helix ALM application lifecycle management platform, enabling automation of tasks and development of integrations for requirements management,…
+- [Perforce Helix TeamHub API](https://apis.io/apis/perforce/perforce-helix-teamhub-api/) — REST API for Helix TeamHub source code repository management platform, providing access to repositories, projects, users, and company resources across Git,…
+- [Perforce P4 DAM REST API](https://apis.io/apis/perforce/perforce-p4-dam-rest-api/) — REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset workflows for finding, reviewing, sharing, and managing versioned…
+- [Perforce P4 Search API](https://apis.io/apis/perforce/perforce-p4-search-api/) — REST API for P4 Search, providing indexing and search capabilities across Helix Core servers to support code review, file content search, and changelist…
+- [Perforce Helix Authentication Service API](https://apis.io/apis/perforce/perforce-helix-authentication-service-api/) — REST API for the Helix Authentication Service, a Node.js based authentication protocol integration service supporting OpenID Connect and SAML 2.0 for…
+- [Perforce Activity API](https://apis.io/apis/perforce/perforce-activity-api/) — Endpoints for viewing and creating activity stream entries.
+- [Perforce Changes API](https://apis.io/apis/perforce/perforce-changes-api/) — Endpoints for inspecting changelists and their relationships.
+- [Perforce Comments API](https://apis.io/apis/perforce/perforce-comments-api/) — Endpoints for managing review and changelist comments.
+- [Perforce Projects API](https://apis.io/apis/perforce/perforce-projects-api/) — Endpoints for managing Swarm projects.
+- [Perforce Reviews API](https://apis.io/apis/perforce/perforce-reviews-api/) — Endpoints for managing code reviews.
+- [Perforce Version API](https://apis.io/apis/perforce/perforce-version-api/) — Endpoints for retrieving Swarm server version information.
 
-## APIs
+### Published properties
 
-### Perforce Helix Core API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST API for Helix Core version control system, providing programmatic access to repository operations, file management, and versioning capabilities.
+#### GraphQL (1)
 
-- **Human URL:** [https://www.perforce.com/products/helix-core](https://www.perforce.com/products/helix-core)
-- **Base URL:** `https://api.perforce.com/helix-core/v1`
+GraphQL schemas.
 
-#### Tags
+- [Perforce GraphQL API](https://apis.io/graphqls/perforce/perforce-graphql/)
 
-- DevOps
-- SCM
-- Source Control
-- Version Control
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://www.perforce.com/manuals/p4api/)
-- [OpenAPI](https://api.perforce.com/helix-core/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://www.perforce.com/manuals/p4api/Content/P4API/authentication.html)
-- [Getting Started](https://www.perforce.com/products/helix-core/learning-resources)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [MCP Server](https://apis.io/servers/perforce/mcp-server/)
 
-### Perforce P4 REST API
+#### Agentic access (1)
 
-Technology Preview REST API introduced with P4 Server 2025.2, providing a new way to automate workflows and integrate P4 with other tools via standard HTTP endpoints for server info, depots, files, and changelists.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html](https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html)
-- **Base URL:** `https://p4server.example.com/api/v0`
+- [Perforce Agentic Access](https://apis.io/agentic-access/perforce/perforce-agentic-access/)
 
-#### Tags
+#### JSON Schema (8)
 
-- Automation
-- DevOps
-- REST API
-- Version Control
+The data models the API reads and writes.
 
-#### Properties
+- [Activity](https://apis.io/schemas/perforce/perforce-activity/)
+- [Comment](https://apis.io/schemas/perforce/perforce-comment/)
+- [Activity](https://apis.io/schemas/perforce/perforce-helix-swarm-activity/)
+- [Comment](https://apis.io/schemas/perforce/perforce-helix-swarm-comment/)
+- [Project](https://apis.io/schemas/perforce/perforce-helix-swarm-project/)
+- [Review](https://apis.io/schemas/perforce/perforce-helix-swarm-review/)
+- [Project](https://apis.io/schemas/perforce/perforce-project/)
+- [Perforce Helix Swarm Review](https://apis.io/schemas/perforce/perforce-review/)
 
-- [Documentation](https://help.perforce.com/helix-core/server-apps/p4sag/current/Content/P4SAG/p4-rest-api.html)
-- [Changelog](https://help.perforce.com/helix-core/server-apps/cmdref/2025.2/Content/CmdRef/whats-new-2025-2.html)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Structure (5)
 
-### Perforce Helix Swarm API
+Data models expressed in JSON Structure.
 
-REST API for Helix Swarm code review and collaboration platform, enabling automated code review workflows and team collaboration.
+- [Perforce Helix Swarm Activity Structure](https://apis.io/json-structure/perforce/perforce-helix-swarm-activity-structure/)
+- [Perforce Helix Swarm Comment Structure](https://apis.io/json-structure/perforce/perforce-helix-swarm-comment-structure/)
+- [Perforce Helix Swarm Project Structure](https://apis.io/json-structure/perforce/perforce-helix-swarm-project-structure/)
+- [Perforce Helix Swarm Review Structure](https://apis.io/json-structure/perforce/perforce-helix-swarm-review-structure/)
+- [Perforce Structure](https://apis.io/json-structure/perforce/perforce-structure/)
 
-- **Human URL:** [https://www.perforce.com/products/helix-swarm](https://www.perforce.com/products/helix-swarm)
-- **Base URL:** `https://swarm.example.com/api/v10`
+#### JSON-LD (2)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- Code Review
-- Collaboration
-- Workflow
+- [Perforce Context](https://apis.io/jsonld/perforce/perforce-context/)
+- [Perforce Helix Swarm Context](https://apis.io/jsonld/perforce/perforce-helix-swarm-context/)
 
-#### Properties
+#### Vocabulary (1)
 
-- [Documentation](https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc.html)
-- [API Reference](https://www.perforce.com/manuals/swarm/api/index.html)
-- [Authentication](https://www.perforce.com/manuals/swarm/Content/Swarm/swarm-apidoc_endpoints.html)
-- [OpenAPI](openapi/perforce-helix-swarm-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/perforce-review-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/perforce-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The provider's domain terms, defined.
 
-### Perforce Hansoft API
+- [Perforce Domain Vocabulary](https://apis.io/vocabularies/perforce/perforce-vocabulary/)
 
-API for Hansoft agile project management, providing access to project planning, tracking, and reporting capabilities.
+#### Examples (31)
 
-- **Human URL:** [https://www.perforce.com/products/hansoft](https://www.perforce.com/products/hansoft)
-- **Base URL:** `https://hansoft.example.com/api`
+Example requests and responses.
 
-#### Tags
+- [Perforce Addchangetoreview Example](https://apis.io/examples/perforce/perforce-addchangetoreview-example/)
+- [Perforce Archiveinactivereviews Example](https://apis.io/examples/perforce/perforce-archiveinactivereviews-example/)
+- [Perforce Checkchange Example](https://apis.io/examples/perforce/perforce-checkchange-example/)
+- [Perforce Cleanupreview Example](https://apis.io/examples/perforce/perforce-cleanupreview-example/)
+- [Perforce Createactivity Example](https://apis.io/examples/perforce/perforce-createactivity-example/)
+- [Perforce Createcomment Example](https://apis.io/examples/perforce/perforce-createcomment-example/)
+- [Perforce Createproject Example](https://apis.io/examples/perforce/perforce-createproject-example/)
+- [Perforce Createreview Example](https://apis.io/examples/perforce/perforce-createreview-example/)
+- [Perforce Deleteproject Example](https://apis.io/examples/perforce/perforce-deleteproject-example/)
+- [Perforce Editcomment Example](https://apis.io/examples/perforce/perforce-editcomment-example/)
+- [Perforce Getactiondashboard Example](https://apis.io/examples/perforce/perforce-getactiondashboard-example/)
+- [Perforce Getchangeaffectsprojects Example](https://apis.io/examples/perforce/perforce-getchangeaffectsprojects-example/)
+- [Perforce Getchangedefaultreviewers Example](https://apis.io/examples/perforce/perforce-getchangedefaultreviewers-example/)
+- [Perforce Getproject Example](https://apis.io/examples/perforce/perforce-getproject-example/)
+- [Perforce Getreview Example](https://apis.io/examples/perforce/perforce-getreview-example/)
+- [Perforce Getreviewtransitions Example](https://apis.io/examples/perforce/perforce-getreviewtransitions-example/)
+- [Perforce Getversion Example](https://apis.io/examples/perforce/perforce-getversion-example/)
+- [Perforce Helix Swarm Activity Example](https://apis.io/examples/perforce/perforce-helix-swarm-activity-example/)
+- [Perforce Helix Swarm Comment Example](https://apis.io/examples/perforce/perforce-helix-swarm-comment-example/)
+- [Perforce Helix Swarm Project Example](https://apis.io/examples/perforce/perforce-helix-swarm-project-example/)
+- [Perforce Helix Swarm Review Example](https://apis.io/examples/perforce/perforce-helix-swarm-review-example/)
+- [Perforce Listactivity Example](https://apis.io/examples/perforce/perforce-listactivity-example/)
+- [Perforce Listcomments Example](https://apis.io/examples/perforce/perforce-listcomments-example/)
+- [Perforce Listprojects Example](https://apis.io/examples/perforce/perforce-listprojects-example/)
+- [Perforce Listreviews Example](https://apis.io/examples/perforce/perforce-listreviews-example/)
+- …and 6 more published on APIs.io
 
-- Agile
-- Planning
-- Project Management
+#### Collections (12)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://www.perforce.com/manuals/hansoft-sdk/)
-- [SDK](https://www.perforce.com/downloads/hansoft-sdk)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Perforce Helix Swarm Activity API](https://apis.io/collections/perforce/open-perforce-activity-api/)
+- [Perforce Helix Swarm Activity Changes API](https://apis.io/collections/perforce/open-perforce-changes-api/)
+- [Perforce Helix Swarm Activity Comments API](https://apis.io/collections/perforce/open-perforce-comments-api/)
+- [Perforce Helix Swarm API](https://apis.io/collections/perforce/open-perforce-helix-swarm/)
+- [Perforce Helix Swarm Activity Projects API](https://apis.io/collections/perforce/open-perforce-projects-api/)
+- [Perforce Helix Swarm Activity Version API](https://apis.io/collections/perforce/open-perforce-version-api/)
+- [Perforce Helix Swarm Activity API](https://apis.io/collections/perforce/postman-perforce-activity-api/)
+- [Perforce Helix Swarm Activity Changes API](https://apis.io/collections/perforce/postman-perforce-changes-api/)
+- [Perforce Helix Swarm Activity Comments API](https://apis.io/collections/perforce/postman-perforce-comments-api/)
+- [Perforce Helix Swarm Activity Projects API](https://apis.io/collections/perforce/postman-perforce-projects-api/)
+- [Perforce Helix Swarm Activity Reviews API](https://apis.io/collections/perforce/postman-perforce-reviews-api/)
+- [Perforce Helix Swarm Activity Version API](https://apis.io/collections/perforce/postman-perforce-version-api/)
 
-### Perforce P4 Plan API
+#### Governance rules (2)
 
-GraphQL and REST API for P4 Plan (formerly Hansoft) agile project management, supporting queries, mutations, and real-time subscriptions for planning views, sprints, tasks, and user management.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://www.perforce.com/products/hansoft](https://www.perforce.com/products/hansoft)
-- **Base URL:** `https://p4plan.example.com/api`
+- [Perforce — jsonschema rules](https://apis.io/rules/perforce/perforce-jsonschema-spectral-rules/)
+- [Perforce API Rules](https://apis.io/rules/perforce/perforce-spectral-rules/)
 
-#### Tags
+#### Security (2)
 
-- Agile
-- GraphQL
-- Planning
-- Project Management
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Perforce Authentication](https://apis.io/security/perforce/perforce-authentication/)
+- [Perforce Domain Security](https://apis.io/security/perforce/perforce-domain-security/)
 
-- [Documentation](https://help.perforce.com/hansoft/current/Content/hansoftapi/index.html)
-- [SDK](https://www.perforce.com/downloads/helix-plan-sdk)
-- [Release Notes](https://cache.hansoft.com/releasenotes/helix-plan-api.html)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Perforce Helix ALM REST API
+Published plans, tiers and prices.
 
-REST API for Helix ALM application lifecycle management platform, enabling automation of tasks and development of integrations for requirements management, issue tracking, and test case management.
+- [Perforce Plans Pricing](https://apis.io/plans/perforce/perforce-plans-pricing/)
 
-- **Human URL:** [https://www.perforce.com/products/helix-alm](https://www.perforce.com/products/helix-alm)
-- **Base URL:** `https://helixalm.example.com/helix-alm/api/v0`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Application Lifecycle Management
-- Issue Tracking
-- Requirements Management
-- Test Management
+- [Perforce Rate Limits](https://apis.io/rate-limits/perforce/perforce-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://help.perforce.com/helix-alm/helixalm/current/restapi/Default.htm)
-- [API Reference](https://help.perforce.com/helix-alm/helixalm/current/rest-api/index.html)
-- [Getting Started](https://help.perforce.com/helix-alm/helixalm/2019.3.0/restapi/Content/RESTAPI/GettingStarted.htm)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Perforce Helix TeamHub API
+- [Perforce Finops](https://apis.io/finops/perforce/perforce-finops/)
 
-REST API for Helix TeamHub source code repository management platform, providing access to repositories, projects, users, and company resources across Git, Mercurial, Subversion, and other repository types.
+## Where to find this API
 
-- **Human URL:** [https://www.perforce.com/products/helix-teamhub](https://www.perforce.com/products/helix-teamhub)
-- **Base URL:** `https://teamhub.example.com/api/v1`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Collaboration
-- Git
-- Repositories
-- Source Code Management
-
-#### Properties
-
-- [Documentation](https://help.perforce.com/helix-core/helix-teamhub/current/Content/HTH-API/api-v1.html)
-- [Getting Started](https://help.perforce.com/helix-core/helix-teamhub/2025.5.0/Content/HTH-API/getting-started.html)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Perforce P4 DAM REST API
-
-REST API for P4 DAM (Digital Asset Management), enabling integration with digital asset workflows for finding, reviewing, sharing, and managing versioned assets stored in Helix Core.
-
-- **Human URL:** [https://www.perforce.com/products/helix-dam](https://www.perforce.com/products/helix-dam)
-- **Base URL:** `https://dam.example.com/api`
-
-#### Tags
-
-- Asset Management
-- Digital Asset Management
-- Media
-- Version Control
-
-#### Properties
-
-- [Documentation](https://help.perforce.com/helix-core/helix-dam/current/api/)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Perforce P4 Search API
-
-REST API for P4 Search, providing indexing and search capabilities across Helix Core servers to support code review, file content search, and changelist description search.
-
-- **Human URL:** [https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html](https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/overview.html)
-- **Base URL:** `https://p4search.example.com/api`
-
-#### Tags
-
-- Code Search
-- Indexing
-- Search
-
-#### Properties
-
-- [Documentation](https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-endpoints.html)
-- [Authentication](https://help.perforce.com/helix-core/integrations-plugins/p4search/current/Content/P4Search/api-authentication.html)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Perforce Helix Authentication Service API
-
-REST API for the Helix Authentication Service, a Node.js based authentication protocol integration service supporting OpenID Connect and SAML 2.0 for authenticating users across Perforce products.
-
-- **Human URL:** [https://help.perforce.com/helix-core/integrations-plugins/helix-auth-svc/current/](https://help.perforce.com/helix-core/integrations-plugins/helix-auth-svc/current/)
-- **Base URL:** `https://auth.example.com`
-
-#### Tags
-
-- Authentication
-- Identity
-- OpenID Connect
-- SAML
-- SSO
-
-#### Properties
-
-- [Documentation](https://help.perforce.com/helix-core/integrations-plugins/helix-auth-svc/current/)
-- [API Reference](https://github.com/perforce/helix-authentication-service/blob/main/docs/REST_API.md)
-- [GitHub Repository](https://github.com/perforce/helix-authentication-service)
-- [Postman Collection](collections/perforce-helix-swarm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/perforce-helix-swarm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/perforce)
-- [Portal](https://www.perforce.com/support/developers)
-- [Getting Started](https://www.perforce.com/support/self-service-resources)
+- [Website](https://www.perforce.com/)
 - [Documentation](https://www.perforce.com/support/self-service-resources/documentation)
-- [Blog](https://www.perforce.com/blog)
+- [Getting started](https://www.perforce.com/support/self-service-resources)
 - [Support](https://www.perforce.com/support)
-- [Status Page](https://status.perforce.com)
-- [Integrations](https://www.perforce.com/plugins-integrations)
-- [GitHub Organization](https://github.com/perforce)
-- [Terms of Service](https://www.perforce.com/terms-use)
-- [Privacy Policy](https://www.perforce.com/privacy-policy)
-- [Contact](https://www.perforce.com/contact-us)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [M C P Server](https://github.com/perforce/p4mcp-server)
+- [Blog](https://www.perforce.com/blog)
+- [Terms of service](https://www.perforce.com/terms-use)
+- [Privacy policy](https://www.perforce.com/privacy-policy)
+- [GitHub](https://github.com/perforce)
+- [Status](https://status.perforce.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 46.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 63.3 |
+| Contract quality | 59.2 |
+| Contract governance | 13.6 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 65.5 |
+| Access clarity | 28.9 |
+
+**Agent readiness 30.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | yes |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/perforce/](https://apis.io/providers/perforce/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Perforce: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/perforce/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
